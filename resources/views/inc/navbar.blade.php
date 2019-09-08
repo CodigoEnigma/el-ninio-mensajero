@@ -11,7 +11,7 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a href="/letters">Cartas</a></li>
+                {{--<li><a href="/letters">Cartas</a></li>--}}
             </ul>
         </div>
     </div>
