@@ -12,3 +12,5 @@
 */
 
 Route::get('/', 'PagesController@index');
+
+Route::resource('letters', 'LetterController');
