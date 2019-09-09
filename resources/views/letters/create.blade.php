@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="alert alert-warning" role="alert">
+        <strong>RECUERDA! Por tu seguridad no utilices nombres, ubicaciones, y demas que podrian ponerte en riesgo.</strong>
+    </div>
     <h1>Escribir carta</h1>
     {!! Form::open(['action' => 'LetterController@store', 'method' => 'LETTER', 'enctype' => 'multipart/form-data']) !!}
         <div class="form-group">
