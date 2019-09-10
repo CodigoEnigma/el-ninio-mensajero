@@ -4,7 +4,7 @@
     <div class="jumbotron text-center">
         <h1>BIENVENIDO NIÑO MENSAJERO</h1>
         <p>Aca podras escribir tus experiencias, historias, curiosidades o lo que prefieras compartir a tu cartero.</p>
-        <p><a class="btn btn-primary btn-lg" href="/letters/create" role="button" {{--data-toggle="modal" data-target="#myModal"--}}>Escribir</a>  {{--<a class="btn btn-success btn-lg" href="/login" role="button">Acceder</a>--}}</p>
+        <p><a id= "botonEscribir"class="btn btn-primary btn-lg" href="/letters/create" role="button" {{--data-toggle="modal" data-target="#myModal"--}}>Escribir</a>  {{--<a class="btn btn-success btn-lg" href="/login" role="button">Acceder</a>--}}</p>
     </div>
     {{--<div class="modal fade" id="myModal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">

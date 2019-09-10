@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="{{asset('css/app.css')}}">
-        <title>{{config('app.name', 'CEAPP')}}</title>
+        <title>CEAPP</title>
     </head>
     <body>
         @include('inc.navbar')
