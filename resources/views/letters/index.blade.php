@@ -6,7 +6,7 @@
         @foreach ($letters as $letter)
             <div class="well">
                 <div class="row">
-                        <small><a href="/letters/{{$letter->id}}">{{$letter->body}}</a></small>
+                        <small><a href="/letters/{{$cartaRecivida->id}}">{{$cartaRecivida->TEXTO_CARTA}}</a></small>
                 </div>
             </div>
         @endforeach

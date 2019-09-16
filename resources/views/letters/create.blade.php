@@ -5,10 +5,10 @@
         <strong>RECUERDA! Por tu seguridad no utilices nombres, ubicaciones, y demas que podrian ponerte en riesgo.</strong>
     </div>
     <h1>Escribir carta</h1>
-    {!! Form::open(['action' => 'LetterController@store', 'method' => 'LETTER', 'enctype' => 'multipart/form-data']) !!}
+    {!! Form::open(['action' => 'CartaRecividaController@store', 'method' => 'LETTER', 'enctype' => 'multipart/form-data']) !!}
         <div class="form-group">
-            {{Form::label('body', 'Carta')}}
-            {{Form::textarea('body', '', ['id' => 'article-ckeditor', 'class' => 'form-control', 'placeholder' => 'Contenido de la carta'])}}
+            {{Form::label('TEXTO_CARTA', 'Carta')}}
+            {{Form::textarea('TEXTO_CARTA', '', ['id' => 'article-ckeditor', 'class' => 'form-control', 'placeholder' => 'Contenido de la carta'])}}
         </div>
         <div class="form-group">
             {{Form::file('cover_image')}}

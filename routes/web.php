@@ -13,4 +13,6 @@
 
 Route::get('/', 'PagesController@index');
 
-Route::resource('letters', 'LetterController');
+//Route::resource('letters', 'LetterController');
+
+Route::resource('cartaRecividas', 'CartaRecividaController');
