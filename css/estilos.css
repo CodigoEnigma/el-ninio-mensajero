@@ -43,3 +43,7 @@ form.formularioLogin{
   height: 360px;
   width: 340px;
 }
+img#btn-back{
+  width: 60px;
+  height: 60px;
+}

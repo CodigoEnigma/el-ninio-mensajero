@@ -6,7 +6,11 @@
 <?php include('inc/header.php'); ?>
 
     <div class="container">
-    <h1>Inicio de sesión de usuario</h1>
+      <a href="<?=$_SERVER['HTTP_REFERER'] ?>" role = "button" style="float:left; margin:10px;">
+         <img src="https://image.flaticon.com/icons/svg/137/137623.svg" class="img-fluid" alt="Responsive image" id="btn-back">
+      </a> <br> 
+      <h1>Inicio de sesión de usuario</h1>
+           
         <section class="container-fluid ">
             <section class="row justify-content-center">
                 <section class="col-12 col-sm-6 col-md-3">

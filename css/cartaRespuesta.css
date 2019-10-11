@@ -1,12 +1,12 @@
 
 .contenidoCarta{
     float: left;
-    height: 150px;
-    width: 855px;
+    width: 900px;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: left;
     align-items: unset;
+    
   }
 
 .imagenCarta{
@@ -22,11 +22,12 @@
 
 li#enviado{
     border: 1px solid black;
-    border-radius: 40px 20px 10px 1px;
+    border-radius: 40px 40px 40px 1px;
     margin-bottom: 2px;
 }
 li#respuesta{
     border: 1px solid black;
-    border-radius: 40px 20px 10px 1px;
-    margin-bottom: 5px;
+    border-radius: 40px 40px 40px 1px;
+    margin-bottom: 20px;
 }
+
