@@ -44,7 +44,7 @@
 <?php include('inc/header.php'); ?>
     <div class="container">
         <div class="alert alert-danger" role="alert">
-            <h4><strong>RECUERDA! Por tu seguridad no utilices nombres, ubicaciones, y demas que podrian ponerte en riesgo.</strong></h4>
+            <h4><strong>RECUERDA! Por tu seguridad no utilices tu nombre, ubicación, o información personal que podria ponerte en riesgo.</strong></h4>
         </div>
         <h1>Escribir carta</h1>
         <form method="POST" action="<?php $_SERVER['PHP_SELF']; ?>" enctype="multipart/form-data">
