@@ -1,0 +1,33 @@
+
+.contenidoCarta{
+    float: left;
+    width: 900px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: left;
+    align-items: unset;
+    
+  }
+
+.imagenCarta{
+    height: 150px;
+    width: 200px;
+    float: right;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: unset; 
+  }
+
+li#enviado{
+    border: 1px solid black;
+    border-radius: 40px 40px 40px 1px;
+    margin-bottom: 2px;
+}
+li#respuesta{
+    border: 1px solid black;
+    border-radius: 40px 40px 40px 1px;
+    margin-bottom: 20px;
+}
+
