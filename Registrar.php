@@ -4,13 +4,10 @@
 ?>
 
 <?php include('inc/header.php'); ?>
-		<div class="cabecera">
-
-        	<h1>REGISTRAR</h1>
-
-    	</div>
-
-        <form>
+  <div class="cabecera">
+    <h1>REGISTRAR</h1>
+  </div>
+  <form>
     <div class="input-group">
       <label>Nombre</label>
       <input type="text" name="nombre" value="">
@@ -23,12 +20,12 @@
       <label>Tipo de ususario</label>
     </div>
     <div class="input-group">
-     <select name="tipo" required>
-  <option value="">Elige una opción</option>    
-  <option value="psicologo">PSICOLOGO</option>
-  <option value="policia">POLICIA</option>
-  <option value="defensoria">DEFENSORIA</option>
-  <option value="escritor">ESCRITOR</option>
+      <select name="tipo" required>
+        <option value="">Elige una opción</option>    
+        <option value="psicologo">PSICOLOGO</option>
+        <option value="policia">POLICIA</option>
+        <option value="defensoria">DEFENSORIA</option>
+        <option value="escritor">ESCRITOR</option>
       </select> 
     </div>
     <div class="input-group">
@@ -50,4 +47,3 @@
       Already a member? <a href="">Sign in</a>
     </p>
   </form>
-
