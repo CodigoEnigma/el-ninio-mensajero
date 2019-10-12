@@ -8,5 +8,8 @@
                 <li class="nav-item"><a class="nav-link" href="?php echo ROOT_URL; ?>login.php">Iniciar sesion</a></li>
             </ul>
         </div>
+        <div>
+            <a class="btn btn-primary btn-lg" href="<?php echo ROOT_URL; ?>logear.php" role="button" id = "log">Iniciar sesion</a>
+        </div>
     </div>
 </nav>
