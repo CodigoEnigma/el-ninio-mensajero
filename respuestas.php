@@ -1,6 +1,6 @@
 <?php
-	//require('config/config.php');
-	//require('config/db.php');
+	require('config/config.php');
+	require('config/db.php');
 
 	$query = 'SELECT * FROM carta_recivida where RESPUESTA IS NOT NULL ORDER BY ID_CARTA_RECIVIDA ASC';
 

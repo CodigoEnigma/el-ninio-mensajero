@@ -22,7 +22,15 @@
         
         exit();
     }
-    
+    //prueba
+            $mysqli = new MySQLi("localhost", "root","", "academ");
+        if ($mysqli -> connect_errno) {
+            die( "Fallo la conexión a MySQL: (" . $mysqli -> mysqli_connect_errno() 
+                . ") " . $mysqli -> mysqli_connect_error());
+        }
+        else
+    //FIN
+
     mysqli_select_db($conexion,$nombredb) or die ("NO SE ENCUENTRA LA BASE DE DATOS");//RECONOCE ERRORE EN CASO DE QUE EL NOMBRE DE LA BASE DE DATOS NO SEA CORRECTO
     
     mysqli_set_charset($conexion,"utf8");//incluye caracteres latinos
