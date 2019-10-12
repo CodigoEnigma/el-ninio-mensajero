@@ -35,13 +35,13 @@
         }
 
         if (empty($errorNick) && empty($errorPass)) {
-            $query = sprintf("SELECT * FROM administrador WHERE NOMBRE_USUARIO_ADMIN='%s'AND CONTRASENIA_USUARIO='%s'", mysqli_real_escape_string($conn, $nick), mysqli_real_escape_string($conn, $pass));
+            $query = sprintf("SELECT CONTRASENIA_ADMIN FROM administrador WHERE NOMBRE_USUARIO_ADMIN ='%S'", mysqli_real_escape_string($conn, $nick));
             $result = mysqli_query($conn, $query);
-            $usuario = mysqli_fetch_all($result, MYSQLI_ASSOC);
-            if($count==1) {
+            $clave = mysqli_fetch_all($result, MYSQLI_ASSOC);
+            if(password_verify($pass, $clave)) {
                 header("location:$ROOT_URL");
             } else {
-                $error = "No se pudo iniciar sesion.";
+                $error = "Contraseña incorrecta. Intente de nuevo.";
             }
             mysqli_free_result($result);
 	        mysqli_close($conn);
