@@ -18,10 +18,8 @@
 	//la variable  $mysqli viene de connect_db que lo traigo con el require("connect_db.php");
 		$ressql=mysqli_query($conn,$sql);
 		while ($row=mysqli_fetch_row ($ressql)){
-		    	$ci=$row[0];
-		    	$nombre=$row[1];
-		    	$apellido=$row[2];
-		    	$tipo=$row[3];
+		    	$email=$row[4];
+
 		    }
 
 
@@ -29,12 +27,12 @@
 		?>
 
 		<form action="ejecutaactualizar.php" method="post">
-				CI<br><input type="text" name="ci" value= "<?php echo $ci ?>" readonly="readonly"><br>
-				Nombre<br> <input type="text" name="nombre" value="<?php echo $nombre?>"><br>
-				Apellido<br> <input type="text" name="apellido" value="<?php echo $apellido?>"><br>
-				Tipo<br> <input type="text" name="tipo" value="<?php echo $tipo?>"><br>
-				
+				EMAIL<br><input type="text" name="email" value= "<?php echo $email?>">
 				<br>
+				NUEVO EMAIL<BR>
+				      <input type="contraseña" name="password_1"><br>
+				INGRESE CONTRASEÑA<BR>
+				      <input type="contraseña" name="password_1"><br>
 				<input type="submit" value="Guardar" class="btn btn-success btn-primary">
 			</form>
 
@@ -47,5 +45,4 @@
 		</div>	
 		<br/>
 		</div>
-
 

@@ -19,7 +19,6 @@
 						echo "<td>Apellido</td>";
 						echo "<td>Tipo de Usuario</td>";
 						echo "<td>Correo</td>";
-						echo "<td>Contraseña</td>";
 						echo "<td>Editar</td>";
 						echo "<td>Borrar</td>";
 					echo "</tr>";
@@ -35,7 +34,7 @@
 				    	echo "<td>$arreglo[2]</td>";
 				    	echo "<td>$arreglo[3]</td>";
 				    	echo "<td>$arreglo[4]</td>";
-				    	echo "<td>$arreglo[5]</td>";
+				    	//echo "<td>$arreglo[5]</td>";
 
 				    	echo "<td><a href='actualizar.php?id=$arreglo[0]'><img src='images/actualizar.gif' class='img-rounded'></td>";
 						echo "<td><a href='Administrar.php?id=$arreglo[0]&idborrar=2'><img src='images/eliminar.png' class='img-rounded'/></a></td>";
