@@ -10,25 +10,23 @@
          <img src="https://image.flaticon.com/icons/svg/137/137623.svg" class="img-fluid" alt="Responsive image" id="btn-back">
       </a> <br> 
       <h1>Inicio de sesión de usuario</h1>
-           
-        <section class="container-fluid ">
-            <section class="row justify-content-center">
-                <section class="col-12 col-sm-6 col-md-3">
-                    <form class="formularioLogin">
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Usuario</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ingrese usuario">
-                            <small id="emailHelp" class="form-text text-muted">No se compartira su información.</small>
-                        </div>
-                        <div class="form-group">
-                            <label for="">Contraseña</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                            <small id="emailHelp" class="form-text text-muted">No comparta su contraseña.</small>
-                        </div>
-                        
-                        <button type="submit" class="btn btn-primary btn-block">Enviar</button>
-                    </form>
-                </section>
-            </section>
-        </section>   
+      <div class="cabecera">
+        	<h2>Iniciar sesión</h2>
+      </div>
+
+        <form class="login">
+            <div class="input-group">
+            <label>Usuario</label>
+            <input type="text" name="usuario" placeholder="Ingrese usuario">
+            <small id="emailHelp" class="form-text text-muted">No se compartira su información.</small>
+            </div>
+            <div class="input-group">
+            <label>Contraseña</label>
+            <input type="text" name="password" placeholder="Contraseña">
+            <small id="emailHelp" class="form-text text-muted">No comparta su contraseña.</small>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Enviar</button>
+            
+        </form>
+        
     </div> 
