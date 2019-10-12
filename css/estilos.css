@@ -54,3 +54,17 @@
   justify-content: center;
   align-items: unset;
 }
+
+.placeholder {
+  font-size: 1.125rem;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  }
+
+  @media (width: 768px) {
+    .placeholder {
+      font-size: 3.5rem;
+    }
+  }

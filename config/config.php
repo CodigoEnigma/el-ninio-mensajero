@@ -1,5 +1,5 @@
 <?php
-	define('ROOT_URL', 'http://localhost/ceapphp/');
+	define('ROOT_URL', 'http://localhost/ceapp/');
 	define('DB_HOST', 'localhost');
 	define('DB_USER', 'root');
 	define('DB_PASS', '');
