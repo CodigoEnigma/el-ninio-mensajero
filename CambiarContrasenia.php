@@ -14,16 +14,9 @@
 		<?php
 		extract($_GET);
 
-		$sql="SELECT * FROM login WHERE id=$id";
+		$sql="SELECT * FROM usuario WHERE ID_USUARIO=$id";
 	//la variable  $mysqli viene de connect_db que lo traigo con el require("connect_db.php");
 		$ressql=mysqli_query($conn,$sql);
-		while ($row=mysqli_fetch_row ($ressql)){
-		    	$email=$row[4];
-
-		    }
-
-
-
 		?>
 
 		<form action="ejecutaactualizar.php" method="post">
@@ -31,9 +24,9 @@
 				INGRESE ANTIGUA CONTRASEÑA<BR>
 				      <input type="contraseña" name="password_1"><br>
 				INGRESE NUEVA CONTRASEÑA<BR>
-				      <input type="contraseña" name="password_1"><br>
+				      <input type="contraseña" name="password_2"><br>
 				CONFIRMAR CONTRASEÑA				<br>
-				      <input type="contraseña" name="password_1">
+				      <input type="contraseña" name="password_3">
 				
 				<br>
 				<input type="submit" value="Guardar" class="btn btn-success btn-primary">

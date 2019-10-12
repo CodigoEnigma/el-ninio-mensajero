@@ -14,14 +14,14 @@
 		<?php
 		extract($_GET);
 
-		$sql="SELECT * FROM login WHERE id=$id";
+		$sql="SELECT * FROM usuario WHERE ID_USUARIO=$id";
 	//la variable  $mysqli viene de connect_db que lo traigo con el require("connect_db.php");
 		$ressql=mysqli_query($conn,$sql);
 		while ($row=mysqli_fetch_row ($ressql)){
 		    	$ci=$row[0];
-		    	$nombre=$row[1];
-		    	$apellido=$row[2];
-		    	$tipo=$row[3];
+		    	$nombre=$row[3];
+		    	$apellido=$row[4];
+		    	$tipo=$row[7];
 		    }
 
 
