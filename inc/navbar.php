@@ -9,7 +9,7 @@
             </ul>
         </div>
         <div>
-            <a class="btn btn-primary btn-lg" href="<?php echo ROOT_URL; ?>logear.php" role="button" id = "log">Iniciar sesion</a>
+            <a class="btn btn-primary btn-lg" href="<?php echo ROOT_URL; ?>login.php" role="button" id = "log">Iniciar sesion</a>
         </div>
     </div>
 </nav>

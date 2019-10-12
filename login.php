@@ -45,23 +45,35 @@
 
     }
 ?>
-
 <?php include('inc/header.php'); ?>
-    <div class="text-center">
-        <div class="container d-flex justify-content-center">
-            <div class="col-4">
-                <form method="POST" action="<?php $_SERVER['PHP_SELF']; ?>" class="form-signin">
-                    <h1 class="h3 mb-3 font-weight-normal">Inicie su sesion</h1>
-                    <label for="inputName" class="sr-only">Nombre de usuario</label>
-                    <input type="text" id="inputName" name="nick" class="form-control" placeholder="Nombre de usuario" value="<?php if(isset($nick)) echo $nick?>" required autofocus>
-                    <div style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorNick)) echo $errorNick ?></div>
-                    <label for="inputPassword" class="sr-only">Contraseña</label>
-                    <input type="password" id="inputPassword" name="pass" class="form-control" placeholder="Contraseña" value="<?php if(isset($pass)) echo $pass?>" required>
-                    <div style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorPass)) echo $errorPass ?></div>
-                    <br>
-                    <button class="btn btn-lg btn-primary btn-block" type="submit" name="submit">Acceder</button>
-                </form>
-                <div style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($error)) echo $error ?></div>
-            </div>
-        </div>
-    </div>
+
+    <div class="container">
+      <a href="<?=$_SERVER['HTTP_REFERER'] ?>" role = "button" style="float:left; margin:10px;">
+         <img src="https://image.flaticon.com/icons/svg/137/137623.svg" class="img-fluid" alt="Responsive image" id="btn-back">
+      </a> <br> 
+      <h1>Inicio de sesión de usuario</h1>
+           
+        <section class="container-fluid ">
+            <section class="row justify-content-center">
+                <section class="col-12 col-sm-6 col-md-3">
+                    <form class="formularioLogin">
+                        <div class="form-group">
+                            <label for="inpitName">Usuario</label>
+                            <input type="text" id="inputName" name="nick" class="form-control" placeholder="Nombre de usuario" value="<?php if(isset($nick)) echo $nick?>" required autofocus>
+                            <!--small id="emailHelp" class="form-text text-muted">No se compartira su información.</small-->
+                            <div style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorNick)) echo $errorNick ?></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword">Contraseña</label>
+                            <input type="password" id="inputPassword" name="pass" class="form-control" placeholder="Password" value="<?php if(isset($pass)) echo $pass?>" required>
+                            <!--small id="emailHelp" class="form-text text-muted">No comparta su contraseña.</small-->
+                            <div style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorPass)) echo $errorPass ?></div>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-block" name="submit">Enviar</button>
+                    </form>
+                    <div style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($error)) echo $error ?></div>
+                </section>
+            </section>
+        </section>   
+    </div> 
