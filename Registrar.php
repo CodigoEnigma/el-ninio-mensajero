@@ -77,7 +77,7 @@
         $resultDup = mysqli_query($conn,$queryDup);
         $duplicado = mysqli_fetch_all($resultDup, MYSQLI_ASSOC);
       } else {
-        $queryDup = sprintf("SELECT NOMBRE_USUARIO FROM administrador WHERE ID_USUARIO='%S'", $ciR);
+        $queryDup = sprintf("SELECT NOMBRE_USUARIO FROM usuario WHERE ID_USUARIO='%S'", $ciR);
         $resultDup = mysqli_query($conn,$queryDup);
         $duplicado = mysqli_fetch_all($resultDup, MYSQLI_ASSOC);
       }
@@ -99,7 +99,7 @@
         }
 
         if ($resultReg) {
-          header('Location: '.ROOT_URL.'');
+          header("location:$ROOT_URL");
         } else {
           $errorR = "No se pudo realizar el registro. Intente de nuevo.";
         }

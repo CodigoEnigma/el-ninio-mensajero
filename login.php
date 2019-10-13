@@ -43,17 +43,19 @@
             if($resultAdmin == false){
                 $queryUsr = sprintf("SELECT CONTRASENIA_USUARIO FROM usuario WHERE ID_USUARIO ='%S'", mysqli_real_escape_string($conn, $ci));
                 $resultUsr = mysqli_query($conn, $queryUsr);
-                $clave = implode(mysqli_fetch_all($resultUsr, MYSQLI_ASSOC));
+                $clave = mysqli_fetch_all($resultUsr, MYSQLI_ASSOC);
+                //$claveLista = $clave['CONTRASENIA_USUARIO'];
                 $queryNomUsr = sprintf("SELECT NOMBRE_USUARIO FROM usuario WHERE ID_USUARIO ='%S'", mysqli_real_escape_string($conn, $ci));
                 $resultNomUsr = mysqli_query($conn, $queryNomUsr);
                 $nombre = mysqli_fetch_all($resultNomUsr, MYSQLI_ASSOC);
             } else {
-                $clave = implode(mysqli_fetch_all($resultAdmin, MYSQLI_ASSOC));
+                $clave = mysqli_fetch_all($resultAdmin, MYSQLI_ASSOC);
+                //$claveLista = $clave['CONTRASENIA_ADMIN'];
                 $queryNomAdmin = sprintf("SELECT NOMBRE_ADMINISTRADOR FROM administrador WHERE ID_ADMINISTRADOR ='%S'", mysqli_real_escape_string($conn, $ci));
                 $resultNomAdmin = mysqli_query($conn, $queryNomAdmin);
                 $nombre = mysqli_fetch_all($resultNomAdmin, MYSQLI_ASSOC);
             }
-            if(password_verify($pass, $clave)) {
+            if(password_verify($pass, "hola")) {
                 /*session_start();
  
 		        $_SESSION['ci'] = htmlentities($_POST['ci']);
@@ -61,7 +63,8 @@
                 
                 header("location:$ROOT_URL");
             } else {
-                $error = "Contraseña incorrecta. Intente de nuevo.";
+                //$error = "Contraseña incorrecta. Intente de nuevo.";
+                $error = implode($clave);
             }
 	        mysqli_close($conn);
         }
