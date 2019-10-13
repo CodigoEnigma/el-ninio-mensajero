@@ -1,7 +1,10 @@
 <?php
 	require('config/config.php');
 	require('config/db.php');
-	
+	/*session_start();
+
+	$ci = isset($_SESSION['ci']) ? $_SESSION['ci'] : 'Cliente';
+	$nombre = isset($_SESSION['nombre']) ? $_SESSION['nombre'] : 'No Registrado';*/
 ?>
 
 <?php include('inc/header.php'); ?>
@@ -27,5 +30,5 @@
         	<div class="boletin">
 		    	<img src="https://i.pinimg.com/564x/50/57/35/5057358a687cf88a6d7c0b01aa753144.jpg" class="img-fluid" alt="Responsive image" id = "cartaBoletin">
          	</div>
-    	</div>
+		</div>
 	</div> 

@@ -35,29 +35,37 @@
 
 		if(mysqli_query($conn, $query)){
 			header('Location: '.ROOT_URL.'');
+			
 		} else {
 			echo 'ERROR: '. mysqli_error($conn);
 		}
 	}
+	
 ?>
 
 <?php include('inc/header.php'); ?>
+
+
     <div class="container">
-		
+	<script type="text/javascript">
+		/*function abrir(){
+			alert('Su carta ha sido enviada con exito :)');
+		}*/
+	</script>
         <div class="alert alert-danger" role="alert">
             <h4><strong>RECUERDA! Por tu seguridad no utilices tu nombre, ubicación, o información personal que podria ponerte en riesgo.</strong></h4>
 		</div>
 		<a href="<?=$_SERVER['HTTP_REFERER'] ?>" role = "button" style="float:left; margin:10px;">
          	<img src="https://image.flaticon.com/icons/svg/137/137623.svg" class="img-fluid" alt="Responsive image" id="btn-back">
 		  </a>
-		<br>
+		  <br>
         <h1>Escribir carta</h1>
         <form method="POST" action="<?php $_SERVER['PHP_SELF']; ?>" enctype="multipart/form-data">
 			<div class="form-group">
 				<textarea name="TEXTO_CARTA" class="form-control" style="height: 20rem;"></textarea><br>
 
-				<input type="file" name="imagen" id="imagenExaminada" size="20" class="btn btn-info"> <br><br>
-
-				<input type="submit" name="submit" value="Enviar carta" class="btn btn-success" >
-			</div>
+				<input type="file" name="imagen" id="imagen" size="20" class="btn btn-info"> 
+			
+				<input type="submit" name="submit" id="enviar" value="Enviar carta" class="btn">
+						
     </div>

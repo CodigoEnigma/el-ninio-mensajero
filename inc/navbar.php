@@ -9,7 +9,8 @@
             </ul>
         </div>
         <div>
-            <a class="btn btn-primary btn-lg" href="<?php echo ROOT_URL; ?>login.php" role="button" id = "log">Iniciar sesion</a>
+            <a class="btn btn-primary btn-lg" href="<?php echo ROOT_URL; ?>login.php" role="button" id = "logIn">Iniciar sesion</a>
+            <a class="btn btn-primary btn-lg" href="<?php echo ROOT_URL; ?>Registrar.php" role="button" id = "registrar">Registrar usuario</a>
         </div>
     </div>
 </nav>

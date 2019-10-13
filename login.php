@@ -1,49 +1,71 @@
 <?php
 	require('config/config.php');
     require('config/db.php');
-
+    
     if(isset($_POST['submit'])){
-        $nick = $_POST['nick'];
+        $ci = $_POST['ci'];
         $pass = $_POST['pass'];
 
-        if (!empty($nick)) {
-            if (!filter_var($nick, FILTER_VALIDATE_EMAIL)) {
-                if (strlen($nick) > 15) {
-                    $errorNick = "El nombre de usuario es demasiado largo.";
+        if (!empty($ci)) {
+            if (filter_var($ci, FILTER_VALIDATE_INT)) {
+                if (strlen($ci) > 10) {
+                    $errorCi = "La cédula de identidad es demasiado larga.";
                 }
         
-                if (strlen($nick) < 6) {
-                    $errorNick = "El nombre de usuario es demasiado corto.";
+                if (strlen($ci) < 5) {
+                    $errorCi = "La cédula de identidad es demasiado corta.";
                 }
             } else {
-                $errorNick = "El nombre de usuario no puede ser una direccion de correo.";
+                $errorCi = "Verifique que la cédula de identidad contenga solamente números.";
             }
         }
 
         if (!empty($pass)) {
-            if (!filter_var($nick, FILTER_VALIDATE_EMAIL)) {
-                if(strlen($pass) > 15){
-                    $errorPass = "La contraseña es demasiado larga.";
-                }
-        
-                if(strlen($pass) < 6){
-                    $errorPass = "La contraseña es demasiado corta.";
+            if (!filter_var($pass, FILTER_VALIDATE_EMAIL)) {
+                if(!filter_var($pass, FILTER_VALIDATE_URL)){
+                    if(strlen($pass) > 15){
+                        $errorPass = "La contraseña es demasiado larga.";
+                    }
+                    if(strlen($pass) < 8){
+                        $errorPass = "La contraseña es demasiado corta.";
+                    }
+                } else {
+                    $errorPass = "Valor invalido.";
                 }
             } else {
-                $errorPass = "La contraseña no puede ser una direccion de correo.";
-            }
+                $errorPass = "Valor invalido.";
+            } 
         }
 
-        if (empty($errorNick) && empty($errorPass)) {
-            $query = sprintf("SELECT CONTRASENIA_ADMIN FROM administrador WHERE NOMBRE_USUARIO_ADMIN ='%S'", mysqli_real_escape_string($conn, $nick));
-            $result = mysqli_query($conn, $query);
-            $clave = mysqli_fetch_all($result, MYSQLI_ASSOC);
-            if(password_verify($pass, $clave)) {
+        if (empty($errorCi) && empty($errorPass)) {
+            $queryAdmin = sprintf("SELECT CONTRASENIA_ADMIN FROM administrador WHERE ID_ADMINISTRADOR ='%S'", mysqli_real_escape_string($conn, $ci));
+            $resultAdmin = mysqli_query($conn, $queryAdmin);
+            if($resultAdmin == false){
+                $queryUsr = sprintf("SELECT CONTRASENIA_USUARIO FROM usuario WHERE ID_USUARIO ='%S'", mysqli_real_escape_string($conn, $ci));
+                $resultUsr = mysqli_query($conn, $queryUsr);
+                $clave = mysqli_fetch_all($resultUsr, MYSQLI_ASSOC);
+                //$claveLista = $clave['CONTRASENIA_USUARIO'];
+                $queryNomUsr = sprintf("SELECT NOMBRE_USUARIO FROM usuario WHERE ID_USUARIO ='%S'", mysqli_real_escape_string($conn, $ci));
+                $resultNomUsr = mysqli_query($conn, $queryNomUsr);
+                $nombre = mysqli_fetch_all($resultNomUsr, MYSQLI_ASSOC);
+            } else {
+                $clave = mysqli_fetch_all($resultAdmin, MYSQLI_ASSOC);
+                //$claveLista = $clave['CONTRASENIA_ADMIN'];
+                $queryNomAdmin = sprintf("SELECT NOMBRE_ADMINISTRADOR FROM administrador WHERE ID_ADMINISTRADOR ='%S'", mysqli_real_escape_string($conn, $ci));
+                $resultNomAdmin = mysqli_query($conn, $queryNomAdmin);
+                $nombre = mysqli_fetch_all($resultNomAdmin, MYSQLI_ASSOC);
+            }
+            if(password_verify($pass, "hola")) {
+                /*session_start();
+ 
+		        $_SESSION['ci'] = htmlentities($_POST['ci']);
+                $_SESSION['nombre'] = htmlentities($nombre);*/
+                
                 header("location:$ROOT_URL");
             } else {
-                $error = "Contraseña incorrecta. Intente de nuevo.";
+                //$error = "Contraseña incorrecta. Intente de nuevo.";
+                $error = implode($clave);
             }
-            mysqli_free_result($result);
 	        mysqli_close($conn);
         }
 
@@ -52,32 +74,28 @@
 <?php include('inc/header.php'); ?>
 
     <div class="container">
-      <a href="<?=$_SERVER['HTTP_REFERER'] ?>" role = "button" style="float:left; margin:10px;">
-         <img src="https://image.flaticon.com/icons/svg/137/137623.svg" class="img-fluid" alt="Responsive image" id="btn-back">
-      </a> <br> 
-      <h1>Inicio de sesión de usuario</h1>
-           
-        <section class="container-fluid ">
-            <section class="row justify-content-center">
-                <section class="col-12 col-sm-6 col-md-3">
-                    <form method="POST" action="<?php $_SERVER['PHP_SELF']; ?>" class="formularioLogin">
-                        <div class="form-group">
-                            <label for="inpitName">Usuario</label>
-                            <input type="text" id="inputName" name="nick" class="form-control" placeholder="Nombre de usuario" value="<?php if(isset($nick)) echo $nick?>" required autofocus>
-                            <!--small id="emailHelp" class="form-text text-muted">No se compartira su información.</small-->
-                            <p style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorNick)) echo $errorNick ?></p>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputPassword">Contraseña</label>
-                            <input type="password" id="inputPassword" name="pass" class="form-control" placeholder="Password" value="<?php if(isset($pass)) echo $pass?>" required>
-                            <!--small id="emailHelp" class="form-text text-muted">No comparta su contraseña.</small-->
-                            <p style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorPass)) echo $errorPass ?></p>
-                        </div>
-                        
-                        <button type="submit" class="btn btn-primary btn-block" name="submit">Enviar</button>
-                        <p style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($error)) echo $error ?></p>
-                    </form>
-                </section>
-            </section>
-        </section>   
+        <a href="<?php echo ROOT_URL; ?>" role = "button" style="float:left; margin:10px;">
+            <img src="https://image.flaticon.com/icons/svg/137/137623.svg" class="img-fluid" alt="Responsive image" id="btn-back">
+        </a> <br> 
+        <h3>Página principal</h3>
+        <div class="cabecera">
+        	<h2>INICIAR SESION</h2>
+        </div>
+        <form method="POST" action="<?php $_SERVER['PHP_SELF']; ?>" class="login">
+            <div class="input-group">
+                <label>Usuario</label>
+                <input type="text" name="ci" placeholder="Cédula de identidad" value="<?php if(isset($ci)) echo $ci?>" required autofocus>
+                <!--small id="emailHelp" class="form-text text-muted">No se compartira su información.</small-->
+                <small style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorCi)) echo $errorCi ?></small>
+            </div>
+            <div class="input-group">
+                <label>Contraseña</label>
+                <input type="password" name="pass" placeholder="Contraseña" required>
+                <!--small id="emailHelp" class="form-text text-muted">No comparta su contraseña.</small-->
+                <small style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorPass)) echo $errorPass ?></small>
+            </div>
+            
+            <button type="submit" class="btn btn-primary btn-block" name="submit">Enviar</button>
+            <p style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($error)) echo $error ?></p>
+        </form>
     </div> 
