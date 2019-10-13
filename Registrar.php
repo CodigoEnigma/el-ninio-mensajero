@@ -11,14 +11,104 @@
   $especs = mysqli_fetch_all($resultEspec, MYSQLI_ASSOC);
 
   if (isset($_POST['registrar'])) {
-    $nombreR = $_POST['nombre'];
-    $ApellidoR = $_POST['apellido'];
-    $tipoR = $_POST['tipo'];
+    $ciR = mysqli_real_escape_string($conn, $_POST['ci']);
+    $nombreR = mysqli_real_escape_string($conn, $_POST['nombre']);
+    $apellidoR = mysqli_real_escape_string($conn, $_POST['apellido']);
+    $tipoR = mysqli_real_escape_string($conn, $_POST['tipo']);
     $emailR = $_POST['email'];
     $passR1 = $_POST['password_1'];
     $passR2 = $_POST['password_2'];
 
-    
+    if(!empty($ciR) &&!empty($nombreR) && !empty($apellidoR) && !empty($tipoR) && !empty($emailR) && !empty($passR1) && !empty($passR2)){
+
+      if (filter_var($ciR, FILTER_VALIDATE_INT)) {
+        if(strlen($ciR) < 5 && strlen($ciR) > 10){
+          $errorCiR = "La cédula de identidad solo tiene entre 5 y 10 numeros.";
+        }
+      } else {
+        $errorCiR = "Solo se permiten numeros.";
+      }
+
+      if (!filter_var($nombreR, FILTER_VALIDATE_EMAIL)) {
+        if(!filter_var($nombreR, FILTER_VALIDATE_URL)){
+          if(strlen($nombreR) < 1 && strlen($nombreR) > 15){
+            $errorNombreR = "El nombre no puede tener mas de 15 caracteres.";
+          }
+        } else {
+          $errorNombreR = "No se permite ese tipo de contenido.";
+        }
+      } else {
+        $errorNombreR = "No se permite ese tipo de contenido.";
+      }
+
+      if (!filter_var($apellidoR, FILTER_VALIDATE_EMAIL)) {
+        if(!filter_var($apellidoR, FILTER_VALIDATE_URL)){
+          if(strlen($apellidoR) < 1 && strlen($apellidoR) > 15){
+            $errorApellidoR = "El apellido no puede tener mas de 15 caracteres.";
+          }
+        } else {
+          $errorApellidoR = "No se permite ese tipo de contenido.";
+        }
+      } else {
+        $errorApellidoR = "No se permite ese tipo de contenido.";
+      }
+
+      if (!filter_var($passR1, FILTER_VALIDATE_EMAIL)) {
+        if(!filter_var($passR1, FILTER_VALIDATE_URL)){
+          if(strlen($passR1) < 8 && strlen($passR1) > 15){
+            $errorPassR1 = "Introduzca un valor entre 8 y 15 caracteres.";
+          }
+        } else {
+          $errorPassR1 = "No se permite ese tipo de contenido.";
+        }
+      } else {
+        $errorPassR1 = "No se permite ese tipo de contenido.";
+      }
+
+      if ($passR2 != $passR1) {
+        $errorPassR2 = "Las contraseñas no coinciden.";
+      }
+
+    }
+
+    if (empty($errorNombreR) && empty($errorApellidoR) && empty($errorPassR1) && empty($errorPassR2)) {
+      if ($tipoR == "Admin") {
+        $queryDup = sprintf("SELECT NOMBRE_ADMINISTRADOR FROM administrador WHERE CI_ADMINISTRADOR='%S'", $ciR);
+        $resultDup = mysqli_query($conn,$queryDup);
+        $duplicado = mysqli_fetch_all($resultDup, MYSQLI_ASSOC);
+      } else {
+        $queryDup = sprintf("SELECT NOMBRE_USUARIO FROM administrador WHERE ID_USUARIO='%S'", $ciR);
+        $resultDup = mysqli_query($conn,$queryDup);
+        $duplicado = mysqli_fetch_all($resultDup, MYSQLI_ASSOC);
+      }
+
+      if ($duplicado == false) {
+
+        $pass_cifrada=password_hash($passR1, PASSWORD_DEFAULT);
+
+        $queryEspecNom = sprintf("SELECT NOMBRE_ESPECIALIDAD FROM especialidad WHERE ID_ESPECIALIDAD = '%S'", $tipoR);
+        $resultEspecNom = mysqli_query($conn,$queryEspecNom);
+        $especNom = mysqli_fetch_all($resultEspec, MYSQLI_ASSOC);
+
+        if ($tipoR == "Admin") {
+          $queryReg = "INSERT INTO administrador(ID_ADMINISTRADOR, NOMBRE_ADMINISTRADOR, APELLIDOS_ADMINISTRADOR, CORREO_ADMINISTRADOR, CONTRASENIA_ADMIN) VALUES('$ciR', '$nombreR', '$apellidoR', '$emailR', '$pass_cifrada')";
+          $resultReg = mysqli_query($conn,$queryReg);
+        } else {
+          $queryReg = "INSERT INTO usuario(ID_USUARIO, ID_ESPECIALIDAD, NOMBRE_USUARIO, APELLIDOS_USUARIO, CORREO_USUARIO, CONTRASENIA_USUARIO, ESPECIALIDAD_USUARIO) VALUES('$ciR', '$tipoR', '$nombreR', '$apellidoR', '$emailR', '$pass_cifrada', '$especNom')";
+          $resultReg = mysqli_query($conn,$queryDup);
+        }
+
+        if ($resultReg) {
+          header('Location: '.ROOT_URL.'');
+        } else {
+          $errorR = "No se pudo realizar el registro. Intente de nuevo.";
+        }
+
+      } else {
+        $errorR = "No se pudo registrar el usuario. Verifique si ya está registrado.";
+      }
+    }
+
   }
 
 ?>
@@ -32,13 +122,21 @@
     <h1>REGISTRAR USUARIO</h1>
   </div>
   <form method="POST" action="<?php $_SERVER['PHP_SELF']; ?>">
+    <small style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorR)) echo $errorR?></small>
+    <div class="input-group">
+      <label>Cédula de identidad</label>
+      <input type="text" name="ci" value="<?php if(isset($ciR)) echo $ciR?>" required autofocus>
+      <small style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorCiR)) echo $errorCiR ?></small>
+    </div>
     <div class="input-group">
       <label>Nombre</label>
-      <input type="text" name="nombre" value="" required autofocus>
+      <input type="text" name="nombre" value="<?php if(isset($nombreR)) echo $nombreR?>" required>
+      <small style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorNombreR)) echo $errorNombreR ?></small>
     </div>
     <div class="input-group">
       <label>Apellido</label>
-      <input type="text" name="apellido" value="" required>
+      <input type="text" name="apellido" value="<?php if(isset($apellidoR)) echo $apellidoR?>" required>
+      <small style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorApellidoR)) echo $errorApellidoR ?></small>
     </div>
     <div class="input-group">
       <label>Tipo de ususario</label>
@@ -47,21 +145,23 @@
       <select name="tipo" required>
         <option value="">Elige una opción</option>    
         <?php foreach($especs as $espec) : ?>
-          <option value="<?php echo $espec['NOMBRE_ESPECIALIDAD']; ?>"><?php echo $espec['NOMBRE_ESPECIALIDAD']; ?></option>
+          <option value="<?php echo $espec['ID_ESPECIALIDAD']; ?>"><?php echo $espec['NOMBRE_ESPECIALIDAD']; ?></option>
         <?php endforeach;?>
       </select> 
     </div>
     <div class="input-group">
       <label>Email</label>
-      <input type="email" name="email" value="" required>
+      <input type="email" name="email" value="<?php if(isset($emailR)) echo $emailR?>" required>
     </div>
     <div class="input-group">
       <label>Contraseña</label>
-      <input type="contraseña" name="password_1" required>
+      <input type="password" name="password_1" required>
+      <small style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorPassR1)) echo $errorPassR1?></small>
     </div>
     <div class="input-group">
       <label>Confirmar Contraseña</label>
-      <input type="confirmar" name="password_2" required>
+      <input type="password" name="password_2" required>
+      <small style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorPassR2)) echo $errorPassR2?></small>
     </div>
     <div class="input-group">
       <button type="submit" class="btn btn-primary" name="registrar">Registrar</button>

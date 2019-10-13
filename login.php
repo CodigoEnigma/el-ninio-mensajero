@@ -8,7 +8,7 @@
 
         if (!empty($ci)) {
             if (filter_var($ci, FILTER_VALIDATE_INT)) {
-                if (strlen($ci) > 15) {
+                if (strlen($ci) > 10) {
                     $errorCi = "La cédula de identidad es demasiado larga.";
                 }
         
@@ -26,13 +26,14 @@
                     if(strlen($pass) > 15){
                         $errorPass = "La contraseña es demasiado larga.";
                     }
-            
-                    if(strlen($pass) < 6){
+                    if(strlen($pass) < 8){
                         $errorPass = "La contraseña es demasiado corta.";
                     }
+                } else {
+                    $errorPass = "Valor invalido.";
                 }
             } else {
-                $errorPass = "La contraseña no puede ser una direccion de correo.";
+                $errorPass = "Valor invalido.";
             } 
         }
 
@@ -42,21 +43,21 @@
             if($resultAdmin == false){
                 $queryUsr = sprintf("SELECT CONTRASENIA_USUARIO FROM usuario WHERE ID_USUARIO ='%S'", mysqli_real_escape_string($conn, $ci));
                 $resultUsr = mysqli_query($conn, $queryUsr);
-                $clave = implode("",mysqli_fetch_all($resultUsr, MYSQLI_ASSOC));
+                $clave = implode(mysqli_fetch_all($resultUsr, MYSQLI_ASSOC));
                 $queryNomUsr = sprintf("SELECT NOMBRE_USUARIO FROM usuario WHERE ID_USUARIO ='%S'", mysqli_real_escape_string($conn, $ci));
                 $resultNomUsr = mysqli_query($conn, $queryNomUsr);
                 $nombre = mysqli_fetch_all($resultNomUsr, MYSQLI_ASSOC);
             } else {
-                $clave = implode("",mysqli_fetch_all($resultAdmin, MYSQLI_ASSOC));
+                $clave = implode(mysqli_fetch_all($resultAdmin, MYSQLI_ASSOC));
                 $queryNomAdmin = sprintf("SELECT NOMBRE_ADMINISTRADOR FROM administrador WHERE ID_ADMINISTRADOR ='%S'", mysqli_real_escape_string($conn, $ci));
                 $resultNomAdmin = mysqli_query($conn, $queryNomAdmin);
                 $nombre = mysqli_fetch_all($resultNomAdmin, MYSQLI_ASSOC);
             }
             if(password_verify($pass, $clave)) {
-                session_start();
+                /*session_start();
  
 		        $_SESSION['ci'] = htmlentities($_POST['ci']);
-                $_SESSION['nombre'] = htmlentities($nombre);
+                $_SESSION['nombre'] = htmlentities($nombre);*/
                 
                 header("location:$ROOT_URL");
             } else {
