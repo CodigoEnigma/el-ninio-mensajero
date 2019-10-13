@@ -44,6 +44,6 @@
       <button type="submit" class="btn btn-primary" name="registrar">Register</button>
     </div>
     <p>
-      Already a member? <a href="">Sign in</a>
+      ¿Ya está registrado?<a href="<?php echo ROOT_URL; ?>login.php">Iniciar sesion</a>
     </p>
   </form>

@@ -9,7 +9,8 @@
             </ul>
         </div>
         <div>
-            <a class="btn btn-primary btn-lg" href="<?php echo ROOT_URL; ?>login.php" role="button" id = "log">Iniciar sesion</a>
+            <a class="btn btn-primary btn-lg" *ngIf="<?php $_SESSION['ci']=='Cliente';?>" href="<?php echo ROOT_URL; ?>login.php" role="button" id = "logIn">Iniciar sesion</a>
+            <a class="btn btn-primary btn-lg" *ngIf="<?php $_SESSION['ci']!='Cliente';?>" (click)="<?php session_destroy(); header("location:$ROOT_URL"); ?>" role="button" id = "logOut">Cerrar sesion</a>
         </div>
     </div>
 </nav>

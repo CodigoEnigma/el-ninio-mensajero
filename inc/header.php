@@ -21,4 +21,10 @@
 			<link href="signin.css" rel="stylesheet">
 		</head>
 	<body background="http://www.wallpaperk.com/wallpapers/fondos-para-ninos-7681.jpg">
-	<?php include('navbar.php'); ?>
+	<?php 
+		include('navbar.php'); 
+		session_start();
+
+		$ci = isset($_SESSION['ci']) ? $_SESSION['ci'] : 'Cliente';
+		$nombre = isset($_SESSION['nombre']) ? $_SESSION['nombre'] : 'No Registrado';
+	?>
