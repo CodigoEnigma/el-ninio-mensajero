@@ -1,13 +1,13 @@
 <?php
 	require('config/config.php');
     require('config/db.php');
-
+    
     if(isset($_POST['submit'])){
         $ci = $_POST['ci'];
         $pass = $_POST['pass'];
 
-        if (!empty($nick)) {
-            if (!filter_var($ci, FILTER_VALIDATE_EMAIL)) {
+        if (!empty($ci)) {
+            if (filter_var($ci, FILTER_VALIDATE_INT)) {
                 if (strlen($ci) > 15) {
                     $errorCi = "La cédula de identidad es demasiado larga.";
                 }
@@ -16,22 +16,24 @@
                     $errorCi = "La cédula de identidad es demasiado corta.";
                 }
             } else {
-                $errorCi = "La cédula de identidad no puede ser una direccion de correo.";
+                $errorCi = "Verifique que la cédula de identidad contenga solamente números.";
             }
         }
 
         if (!empty($pass)) {
-            if (!filter_var($nick, FILTER_VALIDATE_EMAIL)) {
-                if(strlen($pass) > 15){
-                    $errorPass = "La contraseña es demasiado larga.";
-                }
-        
-                if(strlen($pass) < 6){
-                    $errorPass = "La contraseña es demasiado corta.";
+            if (!filter_var($pass, FILTER_VALIDATE_EMAIL)) {
+                if(!filter_var($pass, FILTER_VALIDATE_URL)){
+                    if(strlen($pass) > 15){
+                        $errorPass = "La contraseña es demasiado larga.";
+                    }
+            
+                    if(strlen($pass) < 6){
+                        $errorPass = "La contraseña es demasiado corta.";
+                    }
                 }
             } else {
                 $errorPass = "La contraseña no puede ser una direccion de correo.";
-            }
+            } 
         }
 
         if (empty($errorCi) && empty($errorPass)) {
@@ -53,9 +55,9 @@
 
             if(password_verify($pass, $clave)) {
                 session_start();
-
-		        $_SESSION['ci'] = htmlentities($_POST['ci']);
-                $_SESSION['nombre'] = htmlentities($nombre);
+ 
+		        $_SESSION['ci'] = $_POST['ci'];
+                $_SESSION['nombre'] = $nombre;
                 
                 header("location:$ROOT_URL");
             } else {
@@ -81,7 +83,7 @@
                     <form method="POST" action="<?php $_SERVER['PHP_SELF']; ?>" class="formularioLogin">
                         <div class="form-group">
                             <label for="inpitCi">Usuario</label>
-                            <input type="number" id="inputCi" name="ci" class="form-control" placeholder="Cédula de identidad" value="<?php if(isset($ci)) echo $ci?>" required autofocus>
+                            <input type="text" id="inputCi" name="ci" class="form-control" placeholder="Cédula de identidad" value="<?php if(isset($ci)) echo $ci?>" required autofocus>
                             <!--small id="emailHelp" class="form-text text-muted">No se compartira su información.</small-->
                             <p style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorCi)) echo $errorCi ?></p>
                         </div>
