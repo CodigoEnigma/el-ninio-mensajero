@@ -73,9 +73,9 @@
         <a href="<?php echo ROOT_URL; ?>" role = "button" style="float:left; margin:10px;">
             <img src="https://image.flaticon.com/icons/svg/137/137623.svg" class="img-fluid" alt="Responsive image" id="btn-back">
         </a> <br> 
-        <h1>Inicio de sesión de usuario</h1>
+        <h3>Página principal</h3>
         <div class="cabecera">
-        	<h2>Iniciar sesión</h2>
+        	<h2>INICIAR SESION</h2>
         </div>
         <form method="POST" action="<?php $_SERVER['PHP_SELF']; ?>" class="login">
             <div class="input-group">
@@ -88,7 +88,7 @@
                 <label>Contraseña</label>
                 <input type="password" name="pass" placeholder="Contraseña" required>
                 <!--small id="emailHelp" class="form-text text-muted">No comparta su contraseña.</small-->
-                <p style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorPass)) echo $errorPass ?></p>
+                <small style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorPass)) echo $errorPass ?></small>
             </div>
             
             <button type="submit" class="btn btn-primary btn-block" name="submit">Enviar</button>

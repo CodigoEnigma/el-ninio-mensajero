@@ -6,15 +6,30 @@
   $ci = isset($_SESSION['ci']) ? $_SESSION['ci'] : 'Cliente';
   $nombre = isset($_SESSION['nombre']) ? $_SESSION['nombre'] : 'No Registrado';*/
 
-  if (isset($_POST['submit'])) {
+  $queryEspec = 'SELECT * FROM especialidad';
+  $resultEspec = mysqli_query($conn,$queryEspec);
+  $especs = mysqli_fetch_all($resultEspec, MYSQLI_ASSOC);
+
+  if (isset($_POST['registrar'])) {
+    $nombreR = $_POST['nombre'];
+    $ApellidoR = $_POST['apellido'];
+    $tipoR = $_POST['tipo'];
+    $emailR = $_POST['email'];
+    $passR1 = $_POST['password_1'];
+    $passR2 = $_POST['password_2'];
+
     
   }
 
 ?>
 
 <?php include('inc/header.php'); ?>
+  <a href="<?php echo ROOT_URL; ?>" role = "button" style="float:left; margin:10px;">
+    <img src="https://image.flaticon.com/icons/svg/137/137623.svg" class="img-fluid" alt="Responsive image" id="btn-back">
+  </a><br> 
+  <h3>Página principal</h3>
   <div class="cabecera">
-    <h1>REGISTRAR</h1>
+    <h1>REGISTRAR USUARIO</h1>
   </div>
   <form method="POST" action="<?php $_SERVER['PHP_SELF']; ?>">
     <div class="input-group">
@@ -31,10 +46,9 @@
     <div class="input-group">
       <select name="tipo" required>
         <option value="">Elige una opción</option>    
-        <option value="psicologo">PSICOLOGO</option>
-        <option value="policia">POLICIA</option>
-        <option value="defensoria">DEFENSORIA</option>
-        <option value="escritor">ESCRITOR</option>
+        <?php foreach($especs as $espec) : ?>
+          <option value="<?php echo $espec['NOMBRE_ESPECIALIDAD']; ?>"><?php echo $espec['NOMBRE_ESPECIALIDAD']; ?></option>
+        <?php endforeach;?>
       </select> 
     </div>
     <div class="input-group">
@@ -53,6 +67,6 @@
       <button type="submit" class="btn btn-primary" name="registrar">Registrar</button>
     </div>
     <p>
-      ¿Ya está registrado?<a href="<?php echo ROOT_URL; ?>login.php">Iniciar sesion</a>
+      ¿Ya está registrado?. Inicie sesion<a href="<?php echo ROOT_URL; ?>login.php">AQUI</a>
     </p>
   </form>
