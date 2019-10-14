@@ -1,6 +1,12 @@
 <?php
 	require('config/config.php');
 	require('config/db.php');
+
+	session_start();
+
+	$ciSession = isset($_SESSION['ci']) ? $_SESSION['ci'] : 'Cliente';
+	$nameSession = isset($_SESSION['nombre']) ? $_SESSION['nombre'] : 'No registrado';
+	$rollSession = isset($_SESSION['roll']) ? $_SESSION['roll'] : 'No registrado';
 ?>
 
 <?php include('inc/header.php'); ?>
@@ -8,9 +14,9 @@
 		<div class="text-center">
         	<h1>BIENVENIDO NIÑO MENSAJERO</h1>
         	<h4>Aca podras escribir tus experiencias, historias, curiosidades o lo que prefieras compartir a tu cartero.</h4>
-			<h3><?php echo $_SESSION['ci'] ;?></h3>
-			<h3><?php echo $_SESSION['nombre'] ;?></h3>
-			<h3><?php echo $_SESSION['roll'] ;?></h3>
+			<h2><?php echo $ciSession; ?></h2>
+			<h2><?php echo $nameSession; ?></h2>
+			<h2><?php echo $rollSession; ?></h2>
 			<div class="iconos">
             	<div>
             		<a class="btn btn-primary btn-lg" href="<?php echo ROOT_URL; ?>carta.php" role="button" id = "iconos">

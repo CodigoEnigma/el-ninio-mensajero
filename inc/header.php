@@ -4,8 +4,6 @@
 	define('CSSPATH', 'css/');
 	$cssItem = 'estilos.css';
 
-	session_start();
-
 ?>
 	<html>
 		<head>

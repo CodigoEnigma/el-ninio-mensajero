@@ -40,7 +40,9 @@
         if (empty($errorCi) && empty($errorPass)) {
             $queryAdmin = "SELECT CONTRASENIA_ADMIN FROM administrador WHERE ID_ADMINISTRADOR ='$ci'";
             $resultAdmin = mysqli_query($conn, $queryAdmin);
-            if($resultAdmin == false){
+            $arrayCount = mysqli_fetch_row($resultAdmin);
+            $count = $arrayCount[0];
+            if(strlen($count) == 0){
                 $queryUsr = "SELECT CONTRASENIA_USUARIO FROM usuario WHERE ID_USUARIO ='$ci'";
                 $resultUsr = mysqli_query($conn, $queryUsr);
                 $clave = mysqli_fetch_row($resultUsr);
@@ -50,8 +52,7 @@
                 $nombre = mysqli_fetch_row($resultNomUsr);
                 $nombreListo = $nombre[0];
             } else {
-                $clave = mysqli_fetch_row($resultAdmin);
-                $claveLista = $clave[0];
+                $claveLista = $count;
                 $queryNomAdmin = "SELECT NOMBRE_ADMINISTRADOR FROM administrador WHERE ID_ADMINISTRADOR ='$ci'";
                 $resultNomAdmin = mysqli_query($conn, $queryNomAdmin);
                 $nombre = mysqli_fetch_row($resultNomAdmin);
@@ -62,17 +63,16 @@
  
 		        $_SESSION['ci'] = $ci;
                 $_SESSION['nombre'] = $nombreListo;
-                if ($resultAdmin == false) {
-                    $_SESSION['roll'] = "usuario";
+                if (strlen($count) == 0) {
+                    $_SESSION['roll'] = 'usuario';
                 } else {
-                    $_SESSION['roll'] = "administrador";
+                    $_SESSION['roll'] = 'administrador';
                 }
                 
                 header('Location: '.ROOT_URL.'');
             } else {
                 $error = "Contraseña incorrecta. Intente de nuevo.";
             }
-	        mysqli_close($conn);
         }
 
     }
