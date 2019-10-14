@@ -1,10 +1,12 @@
 <?php
 	require('config/config.php');
 	require('config/db.php');
-	/*session_start();
 
-	$ci = isset($_SESSION['ci']) ? $_SESSION['ci'] : 'Cliente';
-	$nombre = isset($_SESSION['nombre']) ? $_SESSION['nombre'] : 'No Registrado';*/
+	session_start();
+
+	$ciSession = isset($_SESSION['ci']) ? $_SESSION['ci'] : 'Cliente';
+	$nameSession = isset($_SESSION['nombre']) ? $_SESSION['nombre'] : 'No registrado';
+	$rollSession = isset($_SESSION['roll']) ? $_SESSION['roll'] : 'No registrado';
 ?>
 
 <?php include('inc/header.php'); ?>

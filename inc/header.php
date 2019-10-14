@@ -2,7 +2,7 @@
 	<link href="css/cartaRespuesta.css" rel="stylesheet" type="text/css" /> 
 <?php
 	define('CSSPATH', 'css/');
-	  $cssItem = 'estilos.css';
+	$cssItem = 'estilos.css';
 
 ?>
 	<html>

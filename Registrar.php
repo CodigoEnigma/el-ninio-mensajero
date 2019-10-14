@@ -1,10 +1,7 @@
 <?php
 	require('config/config.php');
   require('config/db.php');
-  /*session_start();
-
-  $ci = isset($_SESSION['ci']) ? $_SESSION['ci'] : 'Cliente';
-  $nombre = isset($_SESSION['nombre']) ? $_SESSION['nombre'] : 'No Registrado';*/
+  session_start();
 
   $queryEspec = 'SELECT * FROM especialidad';
   $resultEspec = mysqli_query($conn,$queryEspec);
@@ -12,12 +9,13 @@
 
   if (isset($_POST['registrar'])) {
     $ciR = mysqli_real_escape_string($conn, $_POST['ci']);
+    $ciAdmin = mysqli_real_escape_string($conn, $_SESSION['ci']);
+    $tipoR = mysqli_real_escape_string($conn, $_POST['tipo']);
     $nombreR = mysqli_real_escape_string($conn, $_POST['nombre']);
     $apellidoR = mysqli_real_escape_string($conn, $_POST['apellido']);
-    $tipoR = mysqli_real_escape_string($conn, $_POST['tipo']);
-    $emailR = $_POST['email'];
-    $passR1 = $_POST['password_1'];
-    $passR2 = $_POST['password_2'];
+    $emailR = mysqli_real_escape_string($conn, $_POST['email']);
+    $passR1 = mysqli_real_escape_string($conn, $_POST['password_1']);
+    $passR2 = mysqli_real_escape_string($conn, $_POST['password_2']);
 
     if(!empty($ciR) &&!empty($nombreR) && !empty($apellidoR) && !empty($tipoR) && !empty($emailR) && !empty($passR1) && !empty($passR2)){
 
@@ -73,33 +71,32 @@
 
     if (empty($errorNombreR) && empty($errorApellidoR) && empty($errorPassR1) && empty($errorPassR2)) {
       if ($tipoR == "Admin") {
-        $queryDup = sprintf("SELECT NOMBRE_ADMINISTRADOR FROM administrador WHERE CI_ADMINISTRADOR='%S'", $ciR);
+        $queryDup = "SELECT ID_ADMINISTRADOR FROM administrador WHERE ID_ADMINISTRADOR='$ciR'";
         $resultDup = mysqli_query($conn,$queryDup);
         $duplicado = mysqli_fetch_all($resultDup, MYSQLI_ASSOC);
       } else {
-        $queryDup = sprintf("SELECT NOMBRE_USUARIO FROM usuario WHERE ID_USUARIO='%S'", $ciR);
+        $queryDup = "SELECT ID_USUARIO FROM usuario WHERE ID_USUARIO='$ciR'";
         $resultDup = mysqli_query($conn,$queryDup);
         $duplicado = mysqli_fetch_all($resultDup, MYSQLI_ASSOC);
       }
 
-      if ($duplicado == false) {
+      if ($resultDup != false) {
 
         $pass_cifrada=password_hash($passR1, PASSWORD_DEFAULT);
 
-        $queryEspecNom = sprintf("SELECT NOMBRE_ESPECIALIDAD FROM especialidad WHERE ID_ESPECIALIDAD = '%S'", $tipoR);
+        $queryEspecNom = "SELECT NOMBRE_ESPECIALIDAD FROM especialidad WHERE ID_ESPECIALIDAD = '$tipoR'";
         $resultEspecNom = mysqli_query($conn,$queryEspecNom);
-        $especNom = mysqli_fetch_all($resultEspec, MYSQLI_ASSOC);
+        $especNomArray = mysqli_fetch_row($resultEspecNom);
+        $especNom = mysqli_real_escape_string($conn, $especNomArray[0]);
 
         if ($tipoR == "Admin") {
           $queryReg = "INSERT INTO administrador(ID_ADMINISTRADOR, NOMBRE_ADMINISTRADOR, APELLIDOS_ADMINISTRADOR, CORREO_ADMINISTRADOR, CONTRASENIA_ADMIN) VALUES('$ciR', '$nombreR', '$apellidoR', '$emailR', '$pass_cifrada')";
-          $resultReg = mysqli_query($conn,$queryReg);
         } else {
-          $queryReg = "INSERT INTO usuario(ID_USUARIO, ID_ESPECIALIDAD, NOMBRE_USUARIO, APELLIDOS_USUARIO, CORREO_USUARIO, CONTRASENIA_USUARIO, ESPECIALIDAD_USUARIO) VALUES('$ciR', '$tipoR', '$nombreR', '$apellidoR', '$emailR', '$pass_cifrada', '$especNom')";
-          $resultReg = mysqli_query($conn,$queryDup);
+          $queryReg = "INSERT INTO usuario(ID_USUARIO, ID_ADMINISTRADOR, ID_ESPECIALIDAD, NOMBRE_USUARIO, APELLIDOS_USUARIO, CORREO_USUARIO, CONTRASENIA_USUARIO, ESPECIALIDAD_USUARIO) VALUES('$ciR', '$ciAdmin', '$tipoR', '$nombreR', '$apellidoR', '$emailR', '$pass_cifrada', '$especNom')";
         }
 
-        if ($resultReg) {
-          header("location:$ROOT_URL");
+        if (mysqli_query($conn,$queryReg)) {
+          header('Location: '.ROOT_URL.'');
         } else {
           $errorR = "No se pudo realizar el registro. Intente de nuevo.";
         }
