@@ -19,13 +19,13 @@
         <div>
             <?php if(isset($_SESSION['roll'])): ?>
                 <?php if($_SESSION['roll'] == 'administrador'): ?>
-                    <a class="btn btn-primary btn-lg" href="<?php echo ROOT_URL; ?>Registrar.php" role="button" id = "registrar">Registrar usuario</a>
-                    <button class="btn btn-primary btn-lg" onclick="cerrarSesion()">Cerrar sesion</button>
+                    <a class="btn btn-primary" href="<?php echo ROOT_URL; ?>Registrar.php" role="button" id = "registrar">Registrar usuario</a>
+                    <button class="btn btn-primary" onclick="cerrarSesion()">Cerrar sesion</button>
                 <?php elseif ($_SESSION['roll'] == 'usuario'): ?>
-                    <button class="btn btn-primary btn-lg" onclick="cerrarSesion()">Cerrar sesion</button>
+                    <button class="btn btn-primary" onclick="cerrarSesion()">Cerrar sesion</button>
                 <?php endif; ?>
             <?php else: ?>
-                <a class="btn btn-primary btn-lg" href="<?php echo ROOT_URL; ?>login.php" role="button" id = "login">Iniciar sesion</a>
+                <a class="btn btn-primary" href="<?php echo ROOT_URL; ?>login.php" role="button" id = "login">Iniciar sesion</a>
             <?php endif; ?>
 
             <script>
