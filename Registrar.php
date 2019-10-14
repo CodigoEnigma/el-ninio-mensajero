@@ -1,7 +1,6 @@
 <?php
 	require('config/config.php');
   require('config/db.php');
-  session_start();
 
   $queryEspec = 'SELECT * FROM especialidad';
   $resultEspec = mysqli_query($conn,$queryEspec);
