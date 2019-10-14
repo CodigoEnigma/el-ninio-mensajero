@@ -4,9 +4,6 @@
 
 	session_start();
 
-	$ciSession = isset($_SESSION['ci']) ? $_SESSION['ci'] : 'Cliente';
-	$nameSession = isset($_SESSION['nombre']) ? $_SESSION['nombre'] : 'No registrado';
-	$rollSession = isset($_SESSION['roll']) ? $_SESSION['roll'] : 'No registrado';
 ?>
 
 <?php include('inc/header.php'); ?>
@@ -14,6 +11,7 @@
 		<div class="text-center">
         	<h1>BIENVENIDO NIÑO MENSAJERO</h1>
         	<h4>Aca podras escribir tus experiencias, historias, curiosidades o lo que prefieras compartir a tu cartero.</h4>
+			<h3><?php print_r($_SESSION) ;?></h3>
 			<div class="iconos">
             	<div>
             		<a class="btn btn-primary btn-lg" href="<?php echo ROOT_URL; ?>carta.php" role="button" id = "iconos">

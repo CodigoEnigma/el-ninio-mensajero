@@ -1,51 +1,52 @@
 <?php
 	require('config/config.php');
 	require('config/db.php');
-?>
 
- <?php include('inc/header.php'); ?>
+	session_start();
 
-		<h2> Administración de usuarios registrados</h2>	
-		<div class="well well-small">
-		<hr class="soft"/>
-		<h4>Edición de usuarios</h4>
-		<div class="row-fluid">
-		
-		<?php
-		extract($_GET);
+	extract($_GET);
 
 		$sql="SELECT * FROM usuario WHERE ID_USUARIO=$id";
-	//la variable  $mysqli viene de connect_db que lo traigo con el require("connect_db.php");
 		$ressql=mysqli_query($conn,$sql);
-		while ($row=mysqli_fetch_row ($ressql)){
-		    	$ci=$row[0];
-		    	$nombre=$row[3];
-		    	$apellido=$row[4];
-		    	$tipo=$row[7];
-		    }
+		$row=mysqli_fetch_row ($ressql);
 
+	if (isset($_POST['editar'])) {
+		$ciR = mysqli_real_escape_string($conn, $_POST['ci']);
+		$tipoR = substr(mysqli_real_escape_string($conn, $_POST['tipo']),0,3);
+		$nombreR = mysqli_real_escape_string($conn, $_POST['nombre']);
+		$apellidoR = mysqli_real_escape_string($conn, $_POST['apellido']);
 
+	$query = "UPDATE usuario SET ID_ESPECIALIDAD='$tipoR', NOMBRE_USUARIO='$nombreR', APELLIDOS_USUARIO='$apellidoR' WHERE ID_USUARIO=$ciR";
+	if(mysqli_query($conn, $query)){
+		header('Location: '.ROOT_URL.'Administrar.php');
+	}
+		$error = "No se pudieron guardar sus cambios.";
+	}
+?>
 
-		?>
+<?php include('inc/header.php'); ?>
 
-		<form action="ejecutaactualizar.php" method="post">
-				CI<br><input type="text" name="ci" value= "<?php echo $ci ?>" readonly="readonly"><br>
-				Nombre<br> <input type="text" name="nombre" value="<?php echo $nombre?>"><br>
-				Apellido<br> <input type="text" name="apellido" value="<?php echo $apellido?>"><br>
-				Tipo<br> <input type="text" name="tipo" value="<?php echo $tipo?>"><br>
-				
-				<br>
-				<input type="submit" value="Guardar" class="btn btn-success btn-primary">
-			</form>
+	<h2> Administración de usuarios registrados</h2>	
+	<div class="well well-small">
+	<hr class="soft"/>
+	<h4>Edición de usuarios</h4>
+	<div class="row-fluid">
 
-				  
-		
-		
-		<div class="span8">
-		
-		</div>	
-		</div>	
-		<br/>
-		</div>
+	<form action="<?php $_SERVER['PHP_SELF']; ?>" method="post">
+			CI<br><input type="text" name="ci" value= "<?php echo $row[0] ?>" readonly="readonly"><br>
+			Nombre<br> <input type="text" name="nombre" value="<?php echo $row[3];?>"><br>
+			Apellido<br> <input type="text" name="apellido" value="<?php echo $row[4];?>"><br>
+			Tipo<br> <input type="text" name="tipo" value="<?php echo $row[7];?>" readonly="readonly"><br>
+			
+			<br>
+			<button type="submit" name="editar" class="btn btn-success btn-primary">Guardar</button>
+		</form>
+	
+	<div class="span8">
+	
+	</div>	
+	</div>	
+	<br/>
+</div>
 
 

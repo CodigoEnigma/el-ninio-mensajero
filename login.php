@@ -65,11 +65,12 @@
                 $_SESSION['nombre'] = $nombreListo;
                 if (strlen($count) == 0) {
                     $_SESSION['roll'] = 'usuario';
+                    header('Location: '.ROOT_URL.'');
                 } else {
                     $_SESSION['roll'] = 'administrador';
+                    header('Location: '.ROOT_URL.'Administrar.php');
                 }
                 
-                header('Location: '.ROOT_URL.'');
             } else {
                 $error = "Contraseña incorrecta. Intente de nuevo.";
             }

@@ -1,6 +1,7 @@
 <?php
 	require('config/config.php');
   require('config/db.php');
+
   session_start();
 
   $queryEspec = 'SELECT * FROM especialidad';
@@ -111,10 +112,10 @@
 ?>
 
 <?php include('inc/header.php'); ?>
-  <a href="<?php echo ROOT_URL; ?>" role = "button" style="float:left; margin:10px;">
+  <a href="<?php echo ROOT_URL; ?>Administrar.php" role = "button" style="float:left; margin:10px;">
     <img src="https://image.flaticon.com/icons/svg/137/137623.svg" class="img-fluid" alt="Responsive image" id="btn-back">
   </a><br> 
-  <h3>Página principal</h3>
+  <h3>Volver</h3>
   <div class="cabecera">
     <h1>REGISTRAR USUARIO</h1>
   </div>
