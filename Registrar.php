@@ -119,7 +119,7 @@
   <div class="cabecera">
     <h1>REGISTRAR USUARIO</h1>
   </div>
-  <form method="POST" action="<?php $_SERVER['PHP_SELF']; ?>">
+  <form method="POST" action="<?php $_SERVER['PHP_SELF']; ?>" class="registrar">
     <small style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorR)) echo $errorR?></small>
     <div class="input-group">
       <label>Cédula de identidad</label>

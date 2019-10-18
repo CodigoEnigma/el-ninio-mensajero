@@ -85,7 +85,7 @@
             <img src="https://image.flaticon.com/icons/svg/137/137623.svg" class="img-fluid" alt="Responsive image" id="btn-back">
         </a> <br> 
         <h3>Página principal</h3>
-        <div class="cabecera">
+        <div class="cabeceraSesion">
         	<h2>INICIAR SESION</h2>
         </div>
         <form method="POST" action="<?php $_SERVER['PHP_SELF']; ?>" class="login">
@@ -97,7 +97,7 @@
             </div>
             <div class="input-group">
                 <label>Contraseña</label>
-                <input type="password" name="pass" placeholder="Contraseña" required>
+                <input type="password" name="pass" required>
                 <!--small id="emailHelp" class="form-text text-muted">No comparta su contraseña.</small-->
                 <small style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorPass)) echo $errorPass ?></small>
             </div>

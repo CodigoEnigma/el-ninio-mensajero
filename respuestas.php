@@ -18,6 +18,7 @@
 		<a href="<?=$_SERVER['HTTP_REFERER'] ?>" role = "button" style="float:left; margin:10px;">
          	<img src="https://image.flaticon.com/icons/svg/137/137623.svg" class="img-fluid" alt="Responsive image" id="btn-back">
 		  </a>
+		  <br><h2>Volver</h2>
 		  <br>
 		<h1>Cartas respondidas</h1>
 		<?php foreach($cartas as $carta) : ?>
