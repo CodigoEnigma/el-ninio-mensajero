@@ -164,7 +164,5 @@
     <div class="input-group">
       <button type="submit" class="btn btn-primary" name="registrar">Registrar</button>
     </div>
-    <p>
-      ¿Ya está registrado?. Inicie sesion<a href="<?php echo ROOT_URL; ?>login.php">AQUI</a>
-    </p>
+
   </form>

@@ -102,7 +102,10 @@
                 <small style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorPass)) echo $errorPass ?></small>
             </div>
             
-            <button type="submit" class="btn btn-primary btn-block" name="submit">Enviar</button>
+            <button type="submit" class="btn btn-primary btn-block" name="submit">INGRESAR</button>
             <p style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($error)) echo $error ?></p>
+            <p>
+      Olvidaste tu contraseña pulse <a href="<?php echo ROOT_URL; ?>recuperar.php">AQUI</a>
+    </p>
         </form>
     </div> 

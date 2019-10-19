@@ -20,8 +20,12 @@
 				echo "<td>Borrar</td>";
 			echo "</tr>";
 	?>
+	
+<h2> Administración de usuarios registrados</h2>
 	<?php
-		while($arreglo=mysqli_fetch_array($query)){
+
+		while($arreglo=mysqli_fetch_array($query)){	
+
 			echo "<tr class='success'>";
 				echo "<td>$arreglo[0]</td>";
 				echo "<td>$arreglo[3]</td>";
@@ -32,17 +36,30 @@
 				echo "<td><a href='actualizar.php?id=$arreglo[0]'><img src='images/actualizar.gif' class='img-rounded'></td>";
 				echo "<td><a href='Administrar.php?id=$arreglo[0]&idborrar=2'><img src='images/eliminar.png' class='img-rounded'/></a></td>";		
 			echo "</tr>";
+
 		}
 
 		echo "</table>";
 
+
+
 		extract($_GET);
-		if(@$idborrar==2){
+
+		if(@$idborrar==2){	
+		$respuesta = true;
+		$comparar = "<script type='text/javascript'>confirm('Esta seguro');</script>";
+
+
+		echo($comparar);
+		if($comparar==$respuesta){
 
 			$sqlborrar="DELETE FROM usuario WHERE ID_USUARIO=$id";
 			$resborrar=mysqli_query($conn,$sqlborrar);
 			echo '<script>alert("REGISTRO ELIMINADO")</script> ';
 			echo "<script>location.href='Administrar.php'</script>";
 		}
+		else
+		{echo '<script>alert("REGISTRO ELIMINADO")</script> ';}
+	}
 
 	?>

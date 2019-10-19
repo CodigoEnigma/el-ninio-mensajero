@@ -25,28 +25,40 @@
 ?>
 
 <?php include('inc/header.php'); ?>
+<div class="container">
 
-	<h2> Administración de usuarios registrados</h2>	
-	<div class="well well-small">
-	<hr class="soft"/>
-	<h4>Edición de usuarios</h4>
-	<div class="row-fluid">
+	
 
-	<form action="<?php $_SERVER['PHP_SELF']; ?>" method="post">
-			CI<br><input type="text" name="ci" value= "<?php echo $row[0] ?>" readonly="readonly"><br>
-			Nombre<br> <input type="text" name="nombre" value="<?php echo $row[3];?>"><br>
-			Apellido<br> <input type="text" name="apellido" value="<?php echo $row[4];?>"><br>
-			Tipo<br> <input type="text" name="tipo" value="<?php echo $row[7];?>" readonly="readonly"><br>
-			
+	<hr class="soft">
+        <div class="cabeceraSesion">
+        	<h2>EDICION DE USUARIOS</h2>
+        </div>
+
+
+	<form action="<?php $_SERVER['PHP_SELF']; ?>" method="post"  class="login">
+		CI<br>
+		<div class="input-group">
+			<input type="text" name="ci" value= "<?php echo $row[0] ?>" ><br>
+		</div>
+			Nombre<br>
+		<div class="input-group">
+			 <input type="text" name="nombre" value="<?php echo $row[3];?>">
+		</div>
+			Apellido<br> 
+		<div class="input-group">
+			<input type="text" name="apellido" value="<?php echo $row[4];?>">
+		</div>
+			Tipo<br> 
+		<div class="input-group">
+			<input type="text" name="tipo" value="<?php echo $row[7];?>">
+		</div>
 			<br>
-			<button type="submit" name="editar" class="btn btn-success btn-primary">Guardar</button>
+			<button type="submit" name="editar" class="btn btn-success btn-primary">ATRAS</button>
+			<button type="submit" name="editar" class="btn btn-success btn-primary">GUARDAR</button>
 		</form>
+	</hr>
+	</div>
 	
-	<div class="span8">
-	
-	</div>	
-	</div>	
-	<br/>
-</div>
+
 
 
