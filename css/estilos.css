@@ -154,7 +154,7 @@ img#btn-back{
   padding: 20px;
 }
 
-form, .content {
+form#formReg, .content {
   width: 30%;
   margin: 0px auto;
   padding: 20px;

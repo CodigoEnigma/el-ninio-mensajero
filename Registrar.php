@@ -54,7 +54,7 @@
 
       if (!filter_var($passR1, FILTER_VALIDATE_EMAIL)) {
         if(!filter_var($passR1, FILTER_VALIDATE_URL)){
-          if(strlen($passR1) < 8 && strlen($passR1) > 15){
+          if(strlen($passR1) < 8 || strlen($passR1) > 15){
             $errorPassR1 = "Introduzca un valor entre 8 y 15 caracteres.";
           }
         } else {
@@ -97,74 +97,95 @@
         }
 
         if (mysqli_query($conn,$queryReg)) {
+          mysqli_close($conn);
           header('Location: '.ROOT_URL.'');
         } else {
+          mysqli_close($conn);
           $errorR = "No se pudo realizar el registro. Intente de nuevo.";
         }
 
       } else {
+        mysqli_close($conn);
         $errorR = "No se pudo registrar el usuario. Verifique si ya está registrado.";
       }
     }
+
+
+    /*$toEmail = 'shiorishinobu@gmail.com';
+				$subject = 'Cuenta creada de  '.$name;
+				$body = '<h2> Aviso de cuenta </h2>
+					<h4>Name</h4><p>'.$name.'</p>
+					<h4>Email</h4><p>'.$email.'</p>
+					<h4>Message</h4><p>'.$message.'</p>
+				';
+
+				// Email Headers
+				$headers = "MIME-Version: 1.0" ."\r\n";
+				$headers .="Content-Type:text/html;charset=UTF-8" . "\r\n";
+				$headers .= "From: Admin niño mensajero <admin@gmail.com>\r\n";
+
+				mail($toEmail, $subject, $body, $headers)*/
 
   }
 
 ?>
 
 <?php include('inc/header.php'); ?>
-  <a href="<?php echo ROOT_URL; ?>Administrar.php" role = "button" style="float:left; margin:10px;">
-    <img src="https://image.flaticon.com/icons/svg/137/137623.svg" class="img-fluid" alt="Responsive image" id="btn-back">
-  </a><br> 
-  <h3>Volver</h3>
-  <div class="cabecera">
-    <h1>REGISTRAR USUARIO</h1>
+  <div class="contenedor">
+    <a href="<?php echo ROOT_URL; ?>Administrar.php" role = "button" style="float:left; margin:10px;">
+      <img src="https://image.flaticon.com/icons/svg/137/137623.svg" class="img-fluid" alt="Responsive image" id="btn-back">
+    </a><br> 
+    <h3>Volver</h3>
+    <div class="cabecera">
+      <h1>REGISTRAR USUARIO</h1>
+    </div>
+    <form method="POST" action="<?php $_SERVER['PHP_SELF']; ?>" id="formReg">
+      <small style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorR)) echo $errorR?></small>
+      <div class="input-group">
+        <label>Cédula de identidad</label>
+        <input type="text" name="ci" value="<?php if(isset($ciR)) echo $ciR?>" required autofocus>
+        <small style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorCiR)) echo $errorCiR ?></small>
+      </div>
+      <div class="input-group">
+        <label>Nombre</label>
+        <input type="text" name="nombre" value="<?php if(isset($nombreR)) echo $nombreR?>" required>
+        <small style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorNombreR)) echo $errorNombreR ?></small>
+      </div>
+      <div class="input-group">
+        <label>Apellido</label>
+        <input type="text" name="apellido" value="<?php if(isset($apellidoR)) echo $apellidoR?>" required>
+        <small style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorApellidoR)) echo $errorApellidoR ?></small>
+      </div>
+      <div class="input-group">
+        <label>Tipo de ususario</label>
+      </div>
+      <div class="input-group">
+        <select name="tipo" required>
+          <option value="">Elige una opción</option>    
+          <?php foreach($especs as $espec) : ?>
+            <option value="<?php echo $espec['ID_ESPECIALIDAD']; ?>"><?php echo $espec['NOMBRE_ESPECIALIDAD']; ?></option>
+          <?php endforeach;?>
+        </select> 
+      </div>
+      <div class="input-group">
+        <label>Email</label>
+        <input type="email" name="email" value="<?php if(isset($emailR)) echo $emailR?>" required>
+      </div>
+      <div class="input-group">
+        <label>Contraseña</label>
+        <input type="password" name="password_1" required>
+        <small style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorPassR1)) echo $errorPassR1?></small>
+      </div>
+      <div class="input-group">
+        <label>Confirmar Contraseña</label>
+        <input type="password" name="password_2" required>
+        <small style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorPassR2)) echo $errorPassR2?></small>
+      </div>
+      <div class="input-group">
+        <button type="submit" class="btn btn-primary" name="registrar">Registrar</button>
+      </div>
+      <p>
+        ¿Ya está registrado?. Inicie sesion<a href="<?php echo ROOT_URL; ?>login.php">AQUI</a>
+      </p>
+    </form>
   </div>
-  <form method="POST" action="<?php $_SERVER['PHP_SELF']; ?>">
-    <small style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorR)) echo $errorR?></small>
-    <div class="input-group">
-      <label>Cédula de identidad</label>
-      <input type="text" name="ci" value="<?php if(isset($ciR)) echo $ciR?>" required autofocus>
-      <small style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorCiR)) echo $errorCiR ?></small>
-    </div>
-    <div class="input-group">
-      <label>Nombre</label>
-      <input type="text" name="nombre" value="<?php if(isset($nombreR)) echo $nombreR?>" required>
-      <small style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorNombreR)) echo $errorNombreR ?></small>
-    </div>
-    <div class="input-group">
-      <label>Apellido</label>
-      <input type="text" name="apellido" value="<?php if(isset($apellidoR)) echo $apellidoR?>" required>
-      <small style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorApellidoR)) echo $errorApellidoR ?></small>
-    </div>
-    <div class="input-group">
-      <label>Tipo de ususario</label>
-    </div>
-    <div class="input-group">
-      <select name="tipo" required>
-        <option value="">Elige una opción</option>    
-        <?php foreach($especs as $espec) : ?>
-          <option value="<?php echo $espec['ID_ESPECIALIDAD']; ?>"><?php echo $espec['NOMBRE_ESPECIALIDAD']; ?></option>
-        <?php endforeach;?>
-      </select> 
-    </div>
-    <div class="input-group">
-      <label>Email</label>
-      <input type="email" name="email" value="<?php if(isset($emailR)) echo $emailR?>" required>
-    </div>
-    <div class="input-group">
-      <label>Contraseña</label>
-      <input type="password" name="password_1" required>
-      <small style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorPassR1)) echo $errorPassR1?></small>
-    </div>
-    <div class="input-group">
-      <label>Confirmar Contraseña</label>
-      <input type="password" name="password_2" required>
-      <small style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorPassR2)) echo $errorPassR2?></small>
-    </div>
-    <div class="input-group">
-      <button type="submit" class="btn btn-primary" name="registrar">Registrar</button>
-    </div>
-    <p>
-      ¿Ya está registrado?. Inicie sesion<a href="<?php echo ROOT_URL; ?>login.php">AQUI</a>
-    </p>
-  </form>

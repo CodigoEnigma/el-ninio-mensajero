@@ -18,6 +18,7 @@
 
 	$query = "UPDATE usuario SET ID_ESPECIALIDAD='$tipoR', NOMBRE_USUARIO='$nombreR', APELLIDOS_USUARIO='$apellidoR' WHERE ID_USUARIO=$ciR";
 	if(mysqli_query($conn, $query)){
+		mysqli_close($conn);
 		header('Location: '.ROOT_URL.'Administrar.php');
 	}
 		$error = "No se pudieron guardar sus cambios.";

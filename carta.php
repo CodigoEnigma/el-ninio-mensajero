@@ -33,6 +33,8 @@
 
 		$query = "INSERT INTO carta_recivida (TEXTO_CARTA, FECHA_RECEPCION, IMAGEN) VALUES('$body', '$fecha', '$contenido')";
 
+		mysqli_close($conn);
+
 		if(mysqli_query($conn, $query)){
 			header('Location: '.ROOT_URL.'');
 			
@@ -46,7 +48,7 @@
 <?php include('inc/header.php'); ?>
 
 
-    <div class="container">
+    <div class="contenedor">
 	<script type="text/javascript">
 		/*function abrir(){
 			alert('Su carta ha sido enviada con exito :)');
@@ -60,7 +62,7 @@
 		  </a>
 		  <br>
         <h1>Escribir carta</h1>
-        <form method="POST" action="<?php $_SERVER['PHP_SELF']; ?>" enctype="multipart/form-data">
+        <form method="POST" action="<?php $_SERVER['PHP_SELF']; ?>" enctype="multipart/form-data" style="width: 900px; height: 800px; margin-left:200px;">
 			<div class="form-group">
 				<textarea name="TEXTO_CARTA" class="form-control" style="height: 20rem;"></textarea><br>
 

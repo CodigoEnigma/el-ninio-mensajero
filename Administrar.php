@@ -41,6 +41,7 @@
 
 			$sqlborrar="DELETE FROM usuario WHERE ID_USUARIO=$id";
 			$resborrar=mysqli_query($conn,$sqlborrar);
+			mysqli_close($conn);
 			echo '<script>alert("REGISTRO ELIMINADO")</script> ';
 			echo "<script>location.href='Administrar.php'</script>";
 		}

@@ -59,15 +59,18 @@
                 $nombreListo = $nombre[0];
             }
             if(password_verify($pass, $claveLista)) {
+                mysqli_close($conn);
                 session_start();
  
 		        $_SESSION['ci'] = $ci;
                 $_SESSION['nombre'] = $nombreListo;
                 if (strlen($count) == 0) {
                     $_SESSION['roll'] = 'usuario';
+                    setcookie('nombreUsuario', $_SESSION['nombre'], time() + (86400 * 30));
                     header('Location: '.ROOT_URL.'');
                 } else {
                     $_SESSION['roll'] = 'administrador';
+                    setcookie('nombreUsuario', $_SESSION['nombre'], time() + (86400 * 30));
                     header('Location: '.ROOT_URL.'Administrar.php');
                 }
                 
@@ -81,7 +84,7 @@
 <?php include('inc/header.php'); ?>
 
     <div class="container">
-        <a href="<?php echo ROOT_URL; ?>" role = "button" style="float:left; margin:10px;">
+        <a href="<?php echo ROOT_URL; ?>" role = "button" style="float:left; margin:10px;" id="formReg">
             <img src="https://image.flaticon.com/icons/svg/137/137623.svg" class="img-fluid" alt="Responsive image" id="btn-back">
         </a> <br> 
         <h3>Página principal</h3>
