@@ -3,6 +3,9 @@
 	require('config/db.php');
 
 	session_start();
+	if(!isset($_COOKIE)){
+		header('Location: '.ROOT_URL.'');
+	} else {
 
 	extract($_GET);
 
@@ -23,6 +26,7 @@
 	}
 		$error = "No se pudieron guardar sus cambios.";
 	}
+}
 ?>
 
 <?php include('inc/header.php'); ?>

@@ -1,39 +1,20 @@
 #iconos{
-  height: 235px;
-  width: 275px;
+  height: 120px;
+  width: 170px;
   border: 1px solid black;
   border-radius: 10px;
   box-shadow: 0px 10px 20px black;
+  margin-right: 50px;
 }
-#iconos1{
-  margin-right: 100px;
-  height: 50px;
-  width: 200px;
-  border: 1px solid black;
-  border-radius: 10px;
-  box-shadow: 0px 10px 20px blac 
+
+.imgCarta{
+  height: 100px;
+  width: 150px;
 }
-#cartaBoletin{
-  height: 450px;
-  width: 350px;
-  border: 1px solid black;
-  border-radius: 1px;
-}
-.boletin{
-  float: left;
-  height: 380px;
-  width: 555px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: unset;
-}
- 
+
 .iconos{
-  height: 550px;
-  width: 500px;
-  float: right;
+  margin-left: 250px;
+  float: left;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -41,17 +22,7 @@
   align-items: unset;
 }
 
-form.formularioLogin{
-  position: absolute;
-  top: 10vh;
-  background: #fff;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px 0px #000;
-  height: 360px;
-  width: 340px;
-}
-.cabecera {
+.cabeceraSesion {
   width: 30%;
   margin: 50px auto 0px;
   color: white;
@@ -154,7 +125,7 @@ img#btn-back{
   padding: 20px;
 }
 
-form#formReg, .content {
+form.registrar, .content {
   width: 30%;
   margin: 0px auto;
   padding: 20px;

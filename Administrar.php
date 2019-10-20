@@ -2,6 +2,10 @@
 	require('config/config.php');
 	require('config/db.php');
 	session_start();
+
+	if(!isset($_COOKIE)){
+		header('Location: '.ROOT_URL.'');
+	} 
 	
 ?>
 
