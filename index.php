@@ -9,26 +9,37 @@
 <?php include('inc/header.php'); ?>
 	<div class="container">
 		<div class="text-center">
-        	<h1>BIENVENIDO NIÑO MENSAJERO</h1>
-        	<h4>Aca podras escribir tus experiencias, historias, curiosidades o lo que prefieras compartir a tu cartero.</h4>
-			<h3><?php print_r($_SESSION) ;?></h3>
+			<div class="contenedorBienvenida">
+				<div class="bienvenida">
+					<img src="images/icono-bienvenida.png" style="height: 300px; width: 300px;">
+				</div>
+				<div class="burbuja">
+					<img src="images/burbuja-mensaje.png" class="img-fluid" alt="Responsive image" style = "height: 300px; width: 400px; ">
+					<div class="texto-encima"></div>
+				<div class ="centrado"><h5>HOLA AMIGUITO MENSAJERO AQUÍ PODRAS CONTARNOS TUS AVENTURAS Y LEER LAS AVENTURAS DE OTROS MESAJEROS</h5></div>
+				</div>
+			</div>
 			<div class="iconos">
+						
             	<div>
-            		<a class="btn btn-primary btn-lg" href="<?php echo ROOT_URL; ?>carta.php" role="button" id = "iconos">
-						Escribe tu cartita
-              			<img src="https://image.flaticon.com/icons/svg/138/138801.svg" class="img-fluid" alt="Responsive image">
+					<p class="cartasParrafo"> CUENTANOS TUS AVENTURAS</p>
+					<a class="btn btn-info btn-lg" href="<?php echo ROOT_URL; ?>carta.php" role="button" id = "iconos">
+              			<img class="imgCarta" src="images/ICONO_ENVIAR_CARTA.png" class="img-fluid" alt="Responsive image">
            			</a>
             	</div>
             	<div>
-            		<a class="btn btn-primary btn-lg" href="<?php echo ROOT_URL; ?>respuestas.php" role="button" id = "iconos">
-						Cartas respondidas
-              			<img src="https://image.flaticon.com/icons/svg/138/138701.svg" class="img-fluid" alt="Responsive image">
+					<p class="cartasParrafo">LEE LAS CARTTITAS DE OTROS NIÑOS</p>
+            		<a class="btn btn-info btn-lg" href="<?php echo ROOT_URL; ?>respuestas.php" role="button" id = "iconos">
+						<!---->
+              			<img class="imgCarta" src="images/icono_leer_carta.png" class="img-fluid" alt="Responsive image">
            			</a>
-            	</div>
+				</div>
+				<div class="boletin" >
+					<p class="cartasParrafo">BOLETINES</p>
+		    		<img src="https://i.pinimg.com/564x/50/57/35/5057358a687cf88a6d7c0b01aa753144.jpg" class="btn btn-info btn-lg" alt="Responsive image"  id="iconos">
+         		</div>
         	</div>
         
-        	<div class="boletin">
-		    	<img src="https://i.pinimg.com/564x/50/57/35/5057358a687cf88a6d7c0b01aa753144.jpg" class="img-fluid" alt="Responsive image" id = "cartaBoletin">
-         	</div>
+    <!--  	-->
 		</div>
 	</div> 

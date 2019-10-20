@@ -1,7 +1,9 @@
 <?php
 	require('config/config.php');
     require('config/db.php');
-    
+    if(!isset($_COOKIE)){
+        header('Location: '.ROOT_URL.'');
+      } else {
     if(isset($_POST['submit'])){
         $ci = mysqli_real_escape_string($conn, $_POST['ci']);
         $pass = mysqli_real_escape_string($conn, $_POST['pass']);
@@ -59,15 +61,18 @@
                 $nombreListo = $nombre[0];
             }
             if(password_verify($pass, $claveLista)) {
+                mysqli_close($conn);
                 session_start();
  
 		        $_SESSION['ci'] = $ci;
                 $_SESSION['nombre'] = $nombreListo;
                 if (strlen($count) == 0) {
                     $_SESSION['roll'] = 'usuario';
+                    setcookie('nombreUsuario', $_SESSION['nombre'], time() + (86400 * 30));
                     header('Location: '.ROOT_URL.'');
                 } else {
                     $_SESSION['roll'] = 'administrador';
+                    setcookie('nombreUsuario', $_SESSION['nombre'], time() + (86400 * 30));
                     header('Location: '.ROOT_URL.'Administrar.php');
                 }
                 
@@ -77,15 +82,16 @@
         }
 
     }
+}
 ?>
 <?php include('inc/header.php'); ?>
 
     <div class="container">
-        <a href="<?php echo ROOT_URL; ?>" role = "button" style="float:left; margin:10px;">
+        <a href="<?php echo ROOT_URL; ?>" role = "button" style="float:left; margin:10px;" id="formReg">
             <img src="https://image.flaticon.com/icons/svg/137/137623.svg" class="img-fluid" alt="Responsive image" id="btn-back">
         </a> <br> 
         <h3>Página principal</h3>
-        <div class="cabecera">
+        <div class="cabeceraSesion">
         	<h2>INICIAR SESION</h2>
         </div>
         <form method="POST" action="<?php $_SERVER['PHP_SELF']; ?>" class="login">
@@ -97,7 +103,7 @@
             </div>
             <div class="input-group">
                 <label>Contraseña</label>
-                <input type="password" name="pass" placeholder="Contraseña" required>
+                <input type="password" name="pass" required>
                 <!--small id="emailHelp" class="form-text text-muted">No comparta su contraseña.</small-->
                 <small style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorPass)) echo $errorPass ?></small>
             </div>

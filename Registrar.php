@@ -3,7 +3,9 @@
   require('config/db.php');
 
   session_start();
-
+if(!isset($_COOKIE)){
+  header('Location: '.ROOT_URL.'');
+} else {
   $queryEspec = 'SELECT * FROM especialidad';
   $resultEspec = mysqli_query($conn,$queryEspec);
   $especs = mysqli_fetch_all($resultEspec, MYSQLI_ASSOC);
@@ -54,7 +56,7 @@
 
       if (!filter_var($passR1, FILTER_VALIDATE_EMAIL)) {
         if(!filter_var($passR1, FILTER_VALIDATE_URL)){
-          if(strlen($passR1) < 8 && strlen($passR1) > 15){
+          if(strlen($passR1) < 8 || strlen($passR1) > 15){
             $errorPassR1 = "Introduzca un valor entre 8 y 15 caracteres.";
           }
         } else {
@@ -97,17 +99,41 @@
         }
 
         if (mysqli_query($conn,$queryReg)) {
+          mysqli_close($conn);
+
+          $toEmail = $emailR;
+          $sujeto = 'Cuenta creada de  '.$nombreR;
+          $mensaje = '<p>Le acaban de crear una cuenta de '.$tipoR.'</p>
+                      <p>Ahora puede dirigirse al siguiente enlace: '.ROOT_URL.'</p> 
+                      <p>En donde podra acceder con las siguientes credenciales que le fueron asignadas.</p>';
+          $credenciales = 'Usuario: '.$ciR.' y contraseña: '.$passR1;
+          $body = '<h2> Aviso de cuenta </h2>
+            <h4>Name</h4><p>'.$nombreR.'</p>
+            <h4>Email</h4><p>'.$email.'</p>
+            <h4>Message</h4><p>'.$mensaje.'</p>
+            <h4>Message</h4><p>'.$credenciales.'</p>
+          ';
+
+          $headers = "MIME-Version: 1.0" ."\r\n";
+          $headers .="Content-Type:text/html;charset=UTF-8" . "\r\n";
+          $headers .= "From: Admin niño mensajero <admin@gmail.com>\r\n";
+
+          mail($toEmail, $sujeto, $body, $headers);
+
           header('Location: '.ROOT_URL.'');
         } else {
+          mysqli_close($conn);
           $errorR = "No se pudo realizar el registro. Intente de nuevo.";
         }
 
       } else {
+        mysqli_close($conn);
         $errorR = "No se pudo registrar el usuario. Verifique si ya está registrado.";
       }
     }
 
   }
+}
 
 ?>
 
@@ -119,7 +145,7 @@
   <div class="cabecera">
     <h1>REGISTRAR USUARIO</h1>
   </div>
-  <form method="POST" action="<?php $_SERVER['PHP_SELF']; ?>">
+  <form method="POST" action="<?php $_SERVER['PHP_SELF']; ?>" class="registrar">
     <small style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorR)) echo $errorR?></small>
     <div class="input-group">
       <label>Cédula de identidad</label>
@@ -164,7 +190,5 @@
     <div class="input-group">
       <button type="submit" class="btn btn-primary" name="registrar">Registrar</button>
     </div>
-    <p>
-      ¿Ya está registrado?. Inicie sesion<a href="<?php echo ROOT_URL; ?>login.php">AQUI</a>
-    </p>
-  </form>
+    </form>
+  </div>
