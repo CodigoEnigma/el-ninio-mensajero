@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+</head>
+<body>
 <?php
 	require('config/config.php');
 	require('config/db.php');
@@ -20,6 +29,8 @@
 				echo "<td>Borrar</td>";
 			echo "</tr>";
 	?>
+	
+	
 	<?php
 		while($arreglo=mysqli_fetch_array($query)){
 			echo "<tr class='success'>";
@@ -46,3 +57,11 @@
 		}
 
 	?>
+	<div class="iconos">				
+		<div>
+			<a class="btn btn-primary" href="<?php echo ROOT_URL; ?>administrar_tipos.php" role="button"
+			 id = "registrar">AGREGAR NUEVO TIPO DE USUARIO</a>
+		</div>
+	</div>
+</body>
+</html>
