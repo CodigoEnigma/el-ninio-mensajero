@@ -5,7 +5,11 @@
 
 	if(!isset($_COOKIE)){
 		header('Location: '.ROOT_URL.'');
-	} 
+	} else {
+		if($_COOKIE['roll'] != 'administrador'){
+			header('Location: '.ROOT_URL.'');
+		}
+	}
 	
 ?>
 

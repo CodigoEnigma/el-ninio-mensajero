@@ -69,10 +69,12 @@
                 if (strlen($count) == 0) {
                     $_SESSION['roll'] = 'usuario';
                     setcookie('nombreUsuario', $_SESSION['nombre'], time() + (86400 * 30));
+                    setcookie('roll', $_SESSION['roll'], time() + (86400 * 30));
                     header('Location: '.ROOT_URL.'');
                 } else {
                     $_SESSION['roll'] = 'administrador';
                     setcookie('nombreUsuario', $_SESSION['nombre'], time() + (86400 * 30));
+                    setcookie('roll', $_SESSION['roll'], time() + (86400 * 30));
                     header('Location: '.ROOT_URL.'Administrar.php');
                 }
                 

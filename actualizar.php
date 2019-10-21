@@ -6,27 +6,31 @@
 	if(!isset($_COOKIE)){
 		header('Location: '.ROOT_URL.'');
 	} else {
+		if($_COOKIE['roll'] != 'administrador'){
+			header('Location: '.ROOT_URL.'');
+		} else {
 
-	extract($_GET);
+			extract($_GET);
 
-		$sql="SELECT * FROM usuario WHERE ID_USUARIO=$id";
-		$ressql=mysqli_query($conn,$sql);
-		$row=mysqli_fetch_row ($ressql);
+				$sql="SELECT * FROM usuario WHERE ID_USUARIO=$id";
+				$ressql=mysqli_query($conn,$sql);
+				$row=mysqli_fetch_row ($ressql);
 
-	if (isset($_POST['editar'])) {
-		$ciR = mysqli_real_escape_string($conn, $_POST['ci']);
-		$tipoR = substr(mysqli_real_escape_string($conn, $_POST['tipo']),0,3);
-		$nombreR = mysqli_real_escape_string($conn, $_POST['nombre']);
-		$apellidoR = mysqli_real_escape_string($conn, $_POST['apellido']);
+			if (isset($_POST['editar'])) {
+				$ciR = mysqli_real_escape_string($conn, $_POST['ci']);
+				$tipoR = substr(mysqli_real_escape_string($conn, $_POST['tipo']),0,3);
+				$nombreR = mysqli_real_escape_string($conn, $_POST['nombre']);
+				$apellidoR = mysqli_real_escape_string($conn, $_POST['apellido']);
 
-	$query = "UPDATE usuario SET ID_ESPECIALIDAD='$tipoR', NOMBRE_USUARIO='$nombreR', APELLIDOS_USUARIO='$apellidoR' WHERE ID_USUARIO=$ciR";
-	if(mysqli_query($conn, $query)){
-		mysqli_close($conn);
-		header('Location: '.ROOT_URL.'Administrar.php');
+			$query = "UPDATE usuario SET ID_ESPECIALIDAD='$tipoR', NOMBRE_USUARIO='$nombreR', APELLIDOS_USUARIO='$apellidoR' WHERE ID_USUARIO=$ciR";
+			if(mysqli_query($conn, $query)){
+				mysqli_close($conn);
+				header('Location: '.ROOT_URL.'Administrar.php');
+			}
+				$error = "No se pudieron guardar sus cambios.";
+			}
+		}
 	}
-		$error = "No se pudieron guardar sus cambios.";
-	}
-}
 ?>
 
 <?php include('inc/header.php'); ?>

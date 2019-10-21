@@ -3,138 +3,140 @@
   require('config/db.php');
 
   session_start();
-if(!isset($_COOKIE)){
-  header('Location: '.ROOT_URL.'');
-} else {
-  $queryEspec = 'SELECT * FROM especialidad';
-  $resultEspec = mysqli_query($conn,$queryEspec);
-  $especs = mysqli_fetch_all($resultEspec, MYSQLI_ASSOC);
+  if(!isset($_COOKIE)){
+    header('Location: '.ROOT_URL.'');
+  } else {
+    if($_COOKIE['roll'] == 'administrador'){
+      $queryEspec = 'SELECT * FROM especialidad';
+      $resultEspec = mysqli_query($conn,$queryEspec);
+      $especs = mysqli_fetch_all($resultEspec, MYSQLI_ASSOC);
 
-  if (isset($_POST['registrar'])) {
-    $ciR = mysqli_real_escape_string($conn, $_POST['ci']);
-    $ciAdmin = mysqli_real_escape_string($conn, $_SESSION['ci']);
-    $tipoR = mysqli_real_escape_string($conn, $_POST['tipo']);
-    $nombreR = mysqli_real_escape_string($conn, $_POST['nombre']);
-    $apellidoR = mysqli_real_escape_string($conn, $_POST['apellido']);
-    $emailR = mysqli_real_escape_string($conn, $_POST['email']);
-    $passR1 = mysqli_real_escape_string($conn, $_POST['password_1']);
-    $passR2 = mysqli_real_escape_string($conn, $_POST['password_2']);
+      if (isset($_POST['registrar'])) {
+        $ciR = mysqli_real_escape_string($conn, $_POST['ci']);
+        $ciAdmin = mysqli_real_escape_string($conn, $_SESSION['ci']);
+        $tipoR = mysqli_real_escape_string($conn, $_POST['tipo']);
+        $nombreR = mysqli_real_escape_string($conn, $_POST['nombre']);
+        $apellidoR = mysqli_real_escape_string($conn, $_POST['apellido']);
+        $emailR = mysqli_real_escape_string($conn, $_POST['email']);
+        $passR1 = mysqli_real_escape_string($conn, $_POST['password_1']);
+        $passR2 = mysqli_real_escape_string($conn, $_POST['password_2']);
 
-    if(!empty($ciR) &&!empty($nombreR) && !empty($apellidoR) && !empty($tipoR) && !empty($emailR) && !empty($passR1) && !empty($passR2)){
+        if(!empty($ciR) &&!empty($nombreR) && !empty($apellidoR) && !empty($tipoR) && !empty($emailR) && !empty($passR1) && !empty($passR2)){
 
-      if (filter_var($ciR, FILTER_VALIDATE_INT)) {
-        if(strlen($ciR) < 5 && strlen($ciR) > 10){
-          $errorCiR = "La cédula de identidad solo tiene entre 5 y 10 numeros.";
-        }
-      } else {
-        $errorCiR = "Solo se permiten numeros.";
-      }
-
-      if (!filter_var($nombreR, FILTER_VALIDATE_EMAIL)) {
-        if(!filter_var($nombreR, FILTER_VALIDATE_URL)){
-          if(strlen($nombreR) < 1 && strlen($nombreR) > 15){
-            $errorNombreR = "El nombre no puede tener mas de 15 caracteres.";
+          if (filter_var($ciR, FILTER_VALIDATE_INT)) {
+            if(strlen($ciR) < 5 && strlen($ciR) > 10){
+              $errorCiR = "La cédula de identidad solo tiene entre 5 y 10 numeros.";
+            }
+          } else {
+            $errorCiR = "Solo se permiten numeros.";
           }
-        } else {
-          $errorNombreR = "No se permite ese tipo de contenido.";
-        }
-      } else {
-        $errorNombreR = "No se permite ese tipo de contenido.";
-      }
 
-      if (!filter_var($apellidoR, FILTER_VALIDATE_EMAIL)) {
-        if(!filter_var($apellidoR, FILTER_VALIDATE_URL)){
-          if(strlen($apellidoR) < 1 && strlen($apellidoR) > 15){
-            $errorApellidoR = "El apellido no puede tener mas de 15 caracteres.";
+          if (!filter_var($nombreR, FILTER_VALIDATE_EMAIL)) {
+            if(!filter_var($nombreR, FILTER_VALIDATE_URL)){
+              if(strlen($nombreR) < 1 && strlen($nombreR) > 15){
+                $errorNombreR = "El nombre no puede tener mas de 15 caracteres.";
+              }
+            } else {
+              $errorNombreR = "No se permite ese tipo de contenido.";
+            }
+          } else {
+            $errorNombreR = "No se permite ese tipo de contenido.";
           }
-        } else {
-          $errorApellidoR = "No se permite ese tipo de contenido.";
-        }
-      } else {
-        $errorApellidoR = "No se permite ese tipo de contenido.";
-      }
 
-      if (!filter_var($passR1, FILTER_VALIDATE_EMAIL)) {
-        if(!filter_var($passR1, FILTER_VALIDATE_URL)){
-          if(strlen($passR1) < 8 || strlen($passR1) > 15){
-            $errorPassR1 = "Introduzca un valor entre 8 y 15 caracteres.";
+          if (!filter_var($apellidoR, FILTER_VALIDATE_EMAIL)) {
+            if(!filter_var($apellidoR, FILTER_VALIDATE_URL)){
+              if(strlen($apellidoR) < 1 && strlen($apellidoR) > 15){
+                $errorApellidoR = "El apellido no puede tener mas de 15 caracteres.";
+              }
+            } else {
+              $errorApellidoR = "No se permite ese tipo de contenido.";
+            }
+          } else {
+            $errorApellidoR = "No se permite ese tipo de contenido.";
           }
-        } else {
-          $errorPassR1 = "No se permite ese tipo de contenido.";
+
+          if (!filter_var($passR1, FILTER_VALIDATE_EMAIL)) {
+            if(!filter_var($passR1, FILTER_VALIDATE_URL)){
+              if(strlen($passR1) < 8 || strlen($passR1) > 15){
+                $errorPassR1 = "Introduzca un valor entre 8 y 15 caracteres.";
+              }
+            } else {
+              $errorPassR1 = "No se permite ese tipo de contenido.";
+            }
+          } else {
+            $errorPassR1 = "No se permite ese tipo de contenido.";
+          }
+
+          if ($passR2 != $passR1) {
+            $errorPassR2 = "Las contraseñas no coinciden.";
+          }
+
         }
-      } else {
-        $errorPassR1 = "No se permite ese tipo de contenido.";
-      }
 
-      if ($passR2 != $passR1) {
-        $errorPassR2 = "Las contraseñas no coinciden.";
-      }
+        if (empty($errorNombreR) && empty($errorApellidoR) && empty($errorPassR1) && empty($errorPassR2)) {
+          if ($tipoR == "Admin") {
+            $queryDup = "SELECT ID_ADMINISTRADOR FROM administrador WHERE ID_ADMINISTRADOR='$ciR'";
+            $resultDup = mysqli_query($conn,$queryDup);
+            $duplicado = mysqli_fetch_all($resultDup, MYSQLI_ASSOC);
+          } else {
+            $queryDup = "SELECT ID_USUARIO FROM usuario WHERE ID_USUARIO='$ciR'";
+            $resultDup = mysqli_query($conn,$queryDup);
+            $duplicado = mysqli_fetch_all($resultDup, MYSQLI_ASSOC);
+          }
 
+          if ($resultDup != false) {
+
+            $pass_cifrada=password_hash($passR1, PASSWORD_DEFAULT);
+
+            $queryEspecNom = "SELECT NOMBRE_ESPECIALIDAD FROM especialidad WHERE ID_ESPECIALIDAD = '$tipoR'";
+            $resultEspecNom = mysqli_query($conn,$queryEspecNom);
+            $especNomArray = mysqli_fetch_row($resultEspecNom);
+            $especNom = mysqli_real_escape_string($conn, $especNomArray[0]);
+
+            if ($tipoR == "Admin") {
+              $queryReg = "INSERT INTO administrador(ID_ADMINISTRADOR, NOMBRE_ADMINISTRADOR, APELLIDOS_ADMINISTRADOR, CORREO_ADMINISTRADOR, CONTRASENIA_ADMIN) VALUES('$ciR', '$nombreR', '$apellidoR', '$emailR', '$pass_cifrada')";
+            } else {
+              $queryReg = "INSERT INTO usuario(ID_USUARIO, ID_ADMINISTRADOR, ID_ESPECIALIDAD, NOMBRE_USUARIO, APELLIDOS_USUARIO, CORREO_USUARIO, CONTRASENIA_USUARIO, ESPECIALIDAD_USUARIO) VALUES('$ciR', '$ciAdmin', '$tipoR', '$nombreR', '$apellidoR', '$emailR', '$pass_cifrada', '$especNom')";
+            }
+
+            if (mysqli_query($conn,$queryReg)) {
+              mysqli_close($conn);
+
+              $toEmail = $emailR;
+              $sujeto = 'Cuenta creada de  '.$nombreR;
+              $mensaje = '<p>Le acaban de crear una cuenta de '.$tipoR.'</p>
+                          <p>Ahora puede dirigirse al siguiente enlace: '.ROOT_URL.'</p> 
+                          <p>En donde podra acceder con las siguientes credenciales que le fueron asignadas.</p>';
+              $credenciales = 'Usuario: '.$ciR.' y contraseña: '.$passR1;
+              $body = '<h2> Aviso de cuenta </h2>
+                <h4>Name</h4><p>'.$nombreR.'</p>
+                <h4>Email</h4><p>'.$email.'</p>
+                <h4>Message</h4><p>'.$mensaje.'</p>
+                <h4>Message</h4><p>'.$credenciales.'</p>
+              ';
+
+              $headers = "MIME-Version: 1.0" ."\r\n";
+              $headers .="Content-Type:text/html;charset=UTF-8" . "\r\n";
+              $headers .= "From: Admin niño mensajero <admin@gmail.com>\r\n";
+
+              mail($toEmail, $sujeto, $body, $headers);
+
+              header('Location: '.ROOT_URL.'');
+            } else {
+              mysqli_close($conn);
+              $errorR = "No se pudo realizar el registro. Intente de nuevo.";
+            }
+
+          } else {
+            mysqli_close($conn);
+            $errorR = "No se pudo registrar el usuario. Verifique si ya está registrado.";
+          }
+        }
+      }
+    } else{
+      header('Location: '.ROOT_URL.'');
     }
-
-    if (empty($errorNombreR) && empty($errorApellidoR) && empty($errorPassR1) && empty($errorPassR2)) {
-      if ($tipoR == "Admin") {
-        $queryDup = "SELECT ID_ADMINISTRADOR FROM administrador WHERE ID_ADMINISTRADOR='$ciR'";
-        $resultDup = mysqli_query($conn,$queryDup);
-        $duplicado = mysqli_fetch_all($resultDup, MYSQLI_ASSOC);
-      } else {
-        $queryDup = "SELECT ID_USUARIO FROM usuario WHERE ID_USUARIO='$ciR'";
-        $resultDup = mysqli_query($conn,$queryDup);
-        $duplicado = mysqli_fetch_all($resultDup, MYSQLI_ASSOC);
-      }
-
-      if ($resultDup != false) {
-
-        $pass_cifrada=password_hash($passR1, PASSWORD_DEFAULT);
-
-        $queryEspecNom = "SELECT NOMBRE_ESPECIALIDAD FROM especialidad WHERE ID_ESPECIALIDAD = '$tipoR'";
-        $resultEspecNom = mysqli_query($conn,$queryEspecNom);
-        $especNomArray = mysqli_fetch_row($resultEspecNom);
-        $especNom = mysqli_real_escape_string($conn, $especNomArray[0]);
-
-        if ($tipoR == "Admin") {
-          $queryReg = "INSERT INTO administrador(ID_ADMINISTRADOR, NOMBRE_ADMINISTRADOR, APELLIDOS_ADMINISTRADOR, CORREO_ADMINISTRADOR, CONTRASENIA_ADMIN) VALUES('$ciR', '$nombreR', '$apellidoR', '$emailR', '$pass_cifrada')";
-        } else {
-          $queryReg = "INSERT INTO usuario(ID_USUARIO, ID_ADMINISTRADOR, ID_ESPECIALIDAD, NOMBRE_USUARIO, APELLIDOS_USUARIO, CORREO_USUARIO, CONTRASENIA_USUARIO, ESPECIALIDAD_USUARIO) VALUES('$ciR', '$ciAdmin', '$tipoR', '$nombreR', '$apellidoR', '$emailR', '$pass_cifrada', '$especNom')";
-        }
-
-        if (mysqli_query($conn,$queryReg)) {
-          mysqli_close($conn);
-
-          $toEmail = $emailR;
-          $sujeto = 'Cuenta creada de  '.$nombreR;
-          $mensaje = '<p>Le acaban de crear una cuenta de '.$tipoR.'</p>
-                      <p>Ahora puede dirigirse al siguiente enlace: '.ROOT_URL.'</p> 
-                      <p>En donde podra acceder con las siguientes credenciales que le fueron asignadas.</p>';
-          $credenciales = 'Usuario: '.$ciR.' y contraseña: '.$passR1;
-          $body = '<h2> Aviso de cuenta </h2>
-            <h4>Name</h4><p>'.$nombreR.'</p>
-            <h4>Email</h4><p>'.$email.'</p>
-            <h4>Message</h4><p>'.$mensaje.'</p>
-            <h4>Message</h4><p>'.$credenciales.'</p>
-          ';
-
-          $headers = "MIME-Version: 1.0" ."\r\n";
-          $headers .="Content-Type:text/html;charset=UTF-8" . "\r\n";
-          $headers .= "From: Admin niño mensajero <admin@gmail.com>\r\n";
-
-          mail($toEmail, $sujeto, $body, $headers);
-
-          header('Location: '.ROOT_URL.'');
-        } else {
-          mysqli_close($conn);
-          $errorR = "No se pudo realizar el registro. Intente de nuevo.";
-        }
-
-      } else {
-        mysqli_close($conn);
-        $errorR = "No se pudo registrar el usuario. Verifique si ya está registrado.";
-      }
-    }
-
   }
-}
-
 ?>
 
 <?php include('inc/header.php'); ?>
