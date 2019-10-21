@@ -1,12 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Document</title>
-</head>
-<body>
 <?php
 	require('config/config.php');
 	require('config/db.php');
@@ -24,9 +15,9 @@
 
 <?php include('inc/header.php'); ?>
 	<div class="container">
-		<a href="<?=$_SERVER['HTTP_REFERER'] ?>" role = "button" style="float:left; margin:10px;">
-         	<img src="https://image.flaticon.com/icons/svg/137/137623.svg" class="img-fluid" alt="Responsive image" id="btn-back">
-		  </a>
+		<a href="<?php echo ROOT_URL; ?>" role = "button" style="float:left; margin:10px;" id="formReg">
+            <img src="https://image.flaticon.com/icons/svg/137/137623.svg" class="img-fluid" alt="Responsive image" id="btn-back">
+        </a>
 		  <br><h2>Volver</h2>
 		  <br>
 		<h1>Cartas respondidas</h1>

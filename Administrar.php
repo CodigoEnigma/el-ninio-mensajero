@@ -1,12 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Document</title>
-</head>
-<body>
 <?php
 	require('config/config.php');
 	require('config/db.php');
@@ -50,9 +41,9 @@
 				echo "<td>$arreglo[7]</td>";
 				echo "<td>$arreglo[5]</td>";
 				//echo "<td>$arreglo[5]</td>";
-				echo "<td><a href='actualizar.php?id=$arreglo[0]'><img src='images/actualizar.gif' class='img-rounded'></td>";
+				echo "<td><a href='actualizar.php?id=$arreglo[0]'><img class='imgCarta' src='images/ICONO_ACTUALIZAR.png' class='img-sluid' alt='Responsive image' style = 'width:50px; height:50px;'></td>";
 
-				echo "<td ><a href='Administrar.php?id=$arreglo[0]&idborrar=2 ' ><img src='images/eliminar.png' class='img-rounded'/></a></td>";	
+				echo "<td><a href='Administrar.php?id=$arreglo[0]&idborrar=2'><img class='imgCarta' src='images/ICONO_ELIMINAR.png' class='img-sluid' alt='Responsive image' style = 'width:50px; height:50px;'></td>";	
 	
 			echo "</tr>";
 

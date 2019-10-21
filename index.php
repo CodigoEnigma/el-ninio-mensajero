@@ -3,6 +3,7 @@
 	require('config/db.php');
 
 	session_start();
+	
 
 ?>
 
