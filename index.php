@@ -36,9 +36,6 @@
 		    		<img src="images/boletin-icono.jpg" class="btn btn-info btn-lg" alt="Responsive image"  id="iconos">
          		</div>
         	</div>
-        	
-		  <!--	<h3><?php print_r($_SESSION) ;?></h3> -->
-			
-        	
-    <!--  	-->
 	</div> 
+</body>
+</html>
