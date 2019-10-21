@@ -27,6 +27,11 @@
 <?php include('inc/header.php'); ?>
 <div class="container">
 
+	  <a href="<?php echo ROOT_URL; ?>Administrar.php" role = "button" style="float:left; margin:10px;">
+    <img src="https://image.flaticon.com/icons/svg/137/137623.svg" class="img-fluid" alt="Responsive image" id="btn-back">
+  </a><br> 
+  <h3>Volver</h3>
+
 	
 
 	<hr class="soft">
@@ -53,7 +58,7 @@
 			<input type="text" name="tipo" value="<?php echo $row[7];?>">
 		</div>
 			<br>
-			<button type="submit" name="editar" class="btn btn-success btn-primary">ATRAS</button>
+			<a href="<?php echo ROOT_URL; ?>Administrar.php" name="cancel" style="margin-right: 70px; margin-left:10px" class="btn btn-success btn-primary">ATRAS</a>
 			<button type="submit" name="editar" class="btn btn-success btn-primary">GUARDAR</button>
 		</form>
 	</hr>
