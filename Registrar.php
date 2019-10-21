@@ -24,9 +24,17 @@
         if(!empty($ciR) &&!empty($nombreR) && !empty($apellidoR) && !empty($tipoR) && !empty($emailR) && !empty($passR1) && !empty($passR2)){
 
           if (filter_var($ciR, FILTER_VALIDATE_INT)) {
-            if(strlen($ciR) < 5){
-              $errorCiR = "La cédula de identidad debe tener entre 5 y 10 numeros.";
-            } else if (strlen($ciR) > 10) {
+            if(strlen($ciR) >= 5 && strlen($ciR) <= 10){
+              $aux = $ciR;
+              $auxArray = array();
+              while ($aux != 0) {
+                $auxArray[] = $aux % 10;
+                $aux = intval($aux/10);
+              }
+              if (count(array_unique($auxArray)) == 1) {
+                $errorCiR = "La cédula de identidad proporcionada no existe.";
+              }
+            } else {
               $errorCiR = "La cédula de identidad debe tener entre 5 y 10 numeros.";
             }
           } else {

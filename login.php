@@ -105,7 +105,7 @@
             </div>
             <div class="input-group">
                 <label>Contraseña</label>
-                <input type="password" name="pass" required>
+                <input type="password" placeholder="Contraseña" name="pass" required>
                 <!--small id="emailHelp" class="form-text text-muted">No comparta su contraseña.</small-->
                 <small style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorPass)) echo $errorPass ?></small>
             </div>
