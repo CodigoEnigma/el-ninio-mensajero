@@ -69,10 +69,12 @@
                 if (strlen($count) == 0) {
                     $_SESSION['roll'] = 'usuario';
                     setcookie('nombreUsuario', $_SESSION['nombre'], time() + (86400 * 30));
+                    setcookie('roll', $_SESSION['roll'], time() + (86400 * 30));
                     header('Location: '.ROOT_URL.'');
                 } else {
                     $_SESSION['roll'] = 'administrador';
                     setcookie('nombreUsuario', $_SESSION['nombre'], time() + (86400 * 30));
+                    setcookie('roll', $_SESSION['roll'], time() + (86400 * 30));
                     header('Location: '.ROOT_URL.'Administrar.php');
                 }
                 
@@ -103,12 +105,15 @@
             </div>
             <div class="input-group">
                 <label>Contraseña</label>
-                <input type="password" name="pass" required>
+                <input type="password" placeholder="Contraseña" name="pass" required>
                 <!--small id="emailHelp" class="form-text text-muted">No comparta su contraseña.</small-->
                 <small style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorPass)) echo $errorPass ?></small>
             </div>
             
-            <button type="submit" class="btn btn-primary btn-block" name="submit">Enviar</button>
+            <button type="submit" class="btn btn-primary btn-block" name="submit">INGRESAR</button>
             <p style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($error)) echo $error ?></p>
+            <p>
+      Olvidaste tu contraseña pulse <a href="<?php echo ROOT_URL; ?>recuperar.php">AQUI</a>
+    </p>
         </form>
     </div> 

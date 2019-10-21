@@ -12,15 +12,6 @@
   width: 150px;
 }
 
-.iconos{
-  margin-left: 250px;
-  float: left;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: unset;
-}
 
 .cabeceraSesion {
   width: 30%;
@@ -75,6 +66,7 @@ form.login, .content {
   background: #dff0d8; 
   border: 1px solid #3c763d;
   margin-bottom: 20px;
+
 }
 img#btn-back{
   
