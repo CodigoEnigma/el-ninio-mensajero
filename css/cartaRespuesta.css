@@ -1,0 +1,41 @@
+
+.contenidoCarta{
+    float: left;
+    width: 900px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: left;
+    align-items: unset;
+    
+  }
+
+.imagenCarta{
+    height: 150px;
+    width: 125px;
+    float: left;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: unset; 
+  }
+
+li#enviado{
+    border: 1px solid black;
+    border-radius: 40px 40px 40px 1px;
+    margin-bottom: 5px;
+}
+li#respuesta{
+    border: 1px solid black;
+    border-radius: 40px 40px 40px 1px;
+    margin-bottom: 30px;
+}
+.icono-advertencia{
+  float: left;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: unset;
+}
+
