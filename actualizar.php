@@ -1,21 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Document</title>
-</head>
-<body>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Document</title>
-</head>
-<body>
 <?php
 	require('config/config.php');
 	require('config/db.php');
@@ -85,8 +67,8 @@
 			<input type="text" name="tipo" value="<?php echo $row[7];?>">
 		</div>
 			<br>
-			<a href="<?php echo ROOT_URL; ?>Administrar.php" name="cancel" style="margin-right: 70px; margin-left:10px" class="btn btn-success btn-primary">ATRAS</a>
-			<button type="submit" name="editar" class="btn btn-success btn-primary">GUARDAR</button>
+			<a href="<?php echo ROOT_URL; ?>Administrar.php" name="cancel" style="margin-right: 70px; margin-left:10px" class="btn btn-success btn-primary">Cancelar</a>
+			<button type="submit" name="editar" class="btn btn-success btn-primary">Guardar</button>
 		</form>
 	</hr>
 	</div>
