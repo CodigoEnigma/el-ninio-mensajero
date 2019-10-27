@@ -28,8 +28,8 @@
 				echo "<td>Borrar</td>";
 			echo "</tr>";
 	?>
-	
-<h2> Administración de usuarios registrados</h2>
+	<br>
+<h2><strong>Administración de usuarios registrados</strong> </h2>
 	<?php
 
 		while($arreglo=mysqli_fetch_array($query)){	

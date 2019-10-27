@@ -15,12 +15,12 @@
 
 <?php include('inc/header.php'); ?>
 	<div class="container">
-		<a href="<?php echo ROOT_URL; ?>" role = "button" style="float:left; margin:10px;" id="formReg">
-            <img src="https://image.flaticon.com/icons/svg/137/137623.svg" class="img-fluid" alt="Responsive image" id="btn-back">
-        </a>
-		  <br><h2>Volver</h2>
+		<a href="<?php echo ROOT_URL; ?>" role = "button" style="float:left; margin:10px;">
+			 <img src="images/boton_volver.gif" class="img-fluid" alt="Responsive image" id="btn-back"  style = 'width:150px; height:50px;'>
+		  </a> 
 		  <br>
-		<h1>Cartas respondidas</h1>
+		  <br>
+		<h1 style="float:center"><strong>Cartas respondidas</strong></h1>
 		<?php foreach($cartas as $carta) : ?>
 		<div class = "contenidoCarta">
 				<ul class="list-group">
