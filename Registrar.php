@@ -175,10 +175,10 @@
       <small style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorApellidoR)) echo $errorApellidoR ?></small>
     </div>
     <div class="input-group">
-      <label>Tipo de ususario</label>
+      <label>Especialidad</label>
     </div>
     <div class="input-group">
-      <select name="tipo" required>
+      <select name="especialidad" required>
         <option value="">Elige una opción</option>    
         <?php foreach($especs as $espec) : ?>
           <option value="<?php echo $espec['ID_ESPECIALIDAD']; ?>"><?php echo $espec['NOMBRE_ESPECIALIDAD']; ?></option>
