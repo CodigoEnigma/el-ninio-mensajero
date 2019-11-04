@@ -14,7 +14,7 @@
       if (isset($_POST['registrar'])) {
         $ciR = mysqli_real_escape_string($conn, $_POST['ci']);
         $ciAdmin = mysqli_real_escape_string($conn, $_SESSION['ci']);
-        $tipoR = mysqli_real_escape_string($conn, $_POST['tipo']);
+        $tipoR = mysqli_real_escape_string($conn, $_POST['especialidad']);
         $nombreR = mysqli_real_escape_string($conn, $_POST['nombre']);
         $apellidoR = mysqli_real_escape_string($conn, $_POST['apellido']);
         $emailR = mysqli_real_escape_string($conn, $_POST['email']);
