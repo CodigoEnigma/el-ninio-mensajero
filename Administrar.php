@@ -80,7 +80,7 @@
 	}	 ?>
 
 </form>
-         <button type="button" class="btn btn-default" data-dismiss="modal">cancel</button>
+         <button type="button" class="btn btn-default" data-dismiss="modal">cancelar</button>
 
         </div>
       </div>
