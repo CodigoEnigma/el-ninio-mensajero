@@ -48,9 +48,9 @@
 
     <div class="container">
 	<script type="text/javascript">
-		/*function abrir(){
+		function abrir(){
 			alert('Su carta ha sido enviada con exito :)');
-		}*/
+		}
 	</script>
         <div class="alert alert-danger" role="alert">
 			<div class="icono-advertencia">
@@ -70,6 +70,6 @@
 			
 				<input type="file" name="imagen" id="imagen" size="20" class="btn btn-info"> 
 			
-				<input type="submit" name="submit" id="enviar" value="Enviar carta" class="btn">
+				<input type="submit" name="submit" id="enviar" value="Enviar carta" class="btn" onclick="abrir();">
 			</div>			
     </div>
