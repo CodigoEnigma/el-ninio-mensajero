@@ -20,8 +20,15 @@
 				echo "<td>Borrar</td>";
 			echo "</tr>";
 	?>
-	
-<h2> Administración de usuarios registrados</h2>
+
+
+
+<h2> Administración de usuarios registrados</h2> 
+<a href="ActualizarEsp.php" class="btn btn-default">Administrar especilidades</a>
+
+<button type="button" class="btn btn-default" href=''></button>
+
+
 	<?php
 
 		while($arreglo=mysqli_fetch_array($query)){	

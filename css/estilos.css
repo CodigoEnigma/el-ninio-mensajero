@@ -176,3 +176,10 @@ input#enviar{
   border-collapse: collapse;
   border: 3px solid purple;
 }
+
+.alinado{
+position: absolute;
+right: 10px;
+top: 5px;
+
+}
