@@ -12,15 +12,6 @@
   width: 150px;
 }
 
-.iconos{
-  margin-left: 250px;
-  float: left;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: unset;
-}
 
 .cabeceraSesion {
   width: 30%;
