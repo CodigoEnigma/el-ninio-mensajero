@@ -66,6 +66,7 @@ form.login, .content {
   background: #dff0d8; 
   border: 1px solid #3c763d;
   margin-bottom: 20px;
+
 }
 img#btn-back{
   
@@ -155,8 +156,9 @@ form.registrar, .content {
 .success {
   color: #3c763d; 
   background: #dff0d8; 
-  border: 1px solid #3c763d;
+  border: 10px solid #3c763d;
   margin-bottom: 20px;
+  margin-left: 20px;
 }
 input#enviar{
   width:250px; 
@@ -166,4 +168,16 @@ input#enviar{
   font-size: 30px;
   text-align: center;
   background-position: center;
+}
+
+.medio {
+width: 30%;
+  margin: 50px auto 0px;
+  color: white;
+  background: #5F9EA0;
+  text-align: center;
+  border: 1px solid #B0C4DE;
+  border-bottom: none;
+  border-radius: 10px 10px 0px 0px;
+  padding: 20px;
 }

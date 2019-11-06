@@ -162,9 +162,9 @@
       <small style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorPassR2)) echo $errorPassR2?></small>
     </div>
     <div class="input-group">
+      <a href="<?php echo ROOT_URL; ?>Administrar.php" class="btn btn-primary" style="margin-right: 160px; margin-left:20px" name="cancelar">Cancelar </a>
+
       <button type="submit" class="btn btn-primary" name="registrar">Registrar</button>
     </div>
-    <p>
-      ¿Ya está registrado?. Inicie sesion<a href="<?php echo ROOT_URL; ?>login.php">AQUI</a>
-    </p>
+
   </form>

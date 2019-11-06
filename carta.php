@@ -1,3 +1,4 @@
+
 <?php
 	require('config/config.php');
     require('config/db.php');
@@ -15,7 +16,7 @@
 		if($tamanio_imagen<=20000000){
 			if($tipo_imagen=="image/jpeg" || $tipo_imagen=="image/jpg" || $tipo_imagen=="image/png" ||
 				$tipo_imagen=="image/gif"){ 
-				$carpeta_destino=$_SERVER['ROOT_URL'];
+			//	$carpeta_destino=$_SERVER['ROOT_URL'];
 				
 					move_uploaded_file($_FILES['imagen']['tmp_name'],$nombre_imagen);
 					//echo "exito";
@@ -31,17 +32,27 @@
 
     	fclose($archivo_objetivo);
 
-		$query = "INSERT INTO carta_recivida (TEXTO_CARTA, FECHA_RECEPCION, IMAGEN) VALUES('$body', '$fecha', '$contenido')";
+	$query = "INSERT INTO carta_recivida (TEXTO_CARTA, FECHA_RECEPCION, IMAGEN) VALUES('$body', '$fecha', '$contenido')";
+			if(mysqli_query($conn, $query)){
 
-		if(mysqli_query($conn, $query)){
-			header('Location: '.ROOT_URL.'');
+				echo'<script type="text/javascript">
+        alert("Carta Enviada");
+        window.location.href="carta.php";
+        </script>';
+
+
 			
 		} else {
-			echo 'ERROR: '. mysqli_error($conn);
+		echo 'ERROR: '. mysqli_error($conn);
 		}
 	}
 	
+
+
 ?>
+
+
+
 
 <?php include('inc/header.php'); ?>
 
@@ -67,9 +78,10 @@
         <form method="POST" action="<?php $_SERVER['PHP_SELF']; ?>" enctype="multipart/form-data">
 			<div class="form-group">
 				<textarea name="TEXTO_CARTA" class="form-control" style="height: 20rem;"></textarea><br>
-			
+
 				<input type="file" name="imagen" id="imagen" size="20" class="btn btn-info"> 
 			
 				<input type="submit" name="submit" id="enviar" value="Enviar carta" class="btn" onclick="abrir();">
+
 			</div>			
     </div>
