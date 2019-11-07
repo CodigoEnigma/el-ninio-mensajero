@@ -65,9 +65,16 @@
                                 $contenido=fread($archivo_objetivo,$tamanio_imagen); 
                                 $contenido=addslashes($contenido);
                                 fclose($archivo_objetivo);
+                                
+                                $fichero = "emojis/". $id. ".png";
+                                $archivo_objetivo1=fopen($fichero,"r");
+                                $contenido1=fread($archivo_objetivo1, filesize($fichero)); 
+                                $contenido1=addslashes($contenido1);
+                                fclose($archivo_objetivo1);
+                                
                                 extract($_GET) ;
                                 require('config/db.php');
-                                $query = "INSERT INTO carta_recivida (ID_USUARIO, TEXTO_CARTA, FECHA_RECEPCION, IMAGEN, IMAGEN_AVATAR) VALUES('$usuario_asignado','$body', '$fecha', '$contenido','$id')";
+                                $query = "INSERT INTO carta_recivida (ID_USUARIO, TEXTO_CARTA, FECHA_RECEPCION, IMAGEN, IMAGEN_AVATAR) VALUES('$usuario_asignado','$body', '$fecha', '$contenido','$contenido1')";
 
                                 if(mysqli_query($conn, $query)){
                                     header('Location: '.ROOT_URL.'');
@@ -128,7 +135,12 @@
                                 }
                                 mysqli_close($conn);
                                 require('config/db.php');
-                                $query = "INSERT INTO carta_recivida (ID_USUARIO, TEXTO_CARTA, FECHA_RECEPCION, IMAGEN_AVATAR) VALUES('$usuario_asignado','$body', '$fecha', '$id')";
+                                $fichero = "emojis/". $id. ".png";
+                                $archivo_objetivo1=fopen($fichero,"r");
+                                $contenido1=fread($archivo_objetivo1, filesize($fichero)); 
+                                $contenido1=addslashes($contenido1);
+                                fclose($archivo_objetivo1);
+                                $query = "INSERT INTO carta_recivida (ID_USUARIO, TEXTO_CARTA, FECHA_RECEPCION, IMAGEN_AVATAR) VALUES('$usuario_asignado','$body', '$fecha', '$contenido1')";
                                 $estado = 1 ;
                                 if(mysqli_query($conn, $query)){
                                     header('Location: '.ROOT_URL.'');
