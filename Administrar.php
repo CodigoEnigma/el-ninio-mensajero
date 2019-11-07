@@ -22,14 +22,14 @@
 				echo "<td>ID</td>";
 				echo "<td>Nombre</td>";
 				echo "<td>Apellido</td>";
-				echo "<td>Tipo de Usuario</td>";
+				echo "<td>Especialidad</td>";
 				echo "<td>Correo</td>";
 				echo "<td>Editar</td>";
 				echo "<td>Borrar</td>";
 			echo "</tr>";
 	?>
-	
-<h2> Administración de usuarios registrados</h2>
+	<br>
+<h2><strong>Administración de usuarios registrados</strong> </h2>
 	<?php
 
 		while($arreglo=mysqli_fetch_array($query)){	

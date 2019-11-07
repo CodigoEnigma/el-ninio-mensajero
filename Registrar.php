@@ -14,7 +14,7 @@
       if (isset($_POST['registrar'])) {
         $ciR = mysqli_real_escape_string($conn, $_POST['ci']);
         $ciAdmin = mysqli_real_escape_string($conn, $_SESSION['ci']);
-        $tipoR = mysqli_real_escape_string($conn, $_POST['tipo']);
+        $tipoR = mysqli_real_escape_string($conn, $_POST['especialidad']);
         $nombreR = mysqli_real_escape_string($conn, $_POST['nombre']);
         $apellidoR = mysqli_real_escape_string($conn, $_POST['apellido']);
         $emailR = mysqli_real_escape_string($conn, $_POST['email']);
@@ -150,10 +150,10 @@
 ?>
 
 <?php include('inc/header.php'); ?>
-  <a href="<?php echo ROOT_URL; ?>Administrar.php" role = "button" style="float:left; margin:10px;" id="formReg">
-    <img src="https://image.flaticon.com/icons/svg/137/137623.svg" class="img-fluid" alt="Responsive image" id="btn-back">
-  </a> <br> 
-  <h3>Volver</h3>
+ <a href="<?php echo ROOT_URL; ?>Administrar.php" role = "button" style="float:left; margin:10px;">
+			 <img src="images/boton_volver.gif" class="img-fluid" alt="Responsive image" id="btn-back"  style = 'width:150px; height:50px;'>
+            </a> 
+  
   <div class="cabecera">
     <h1>REGISTRAR USUARIO</h1>
   </div>
@@ -175,10 +175,10 @@
       <small style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorApellidoR)) echo $errorApellidoR ?></small>
     </div>
     <div class="input-group">
-      <label>Tipo de ususario</label>
+      <label>Especialidad</label>
     </div>
     <div class="input-group">
-      <select name="tipo" required>
+      <select name="especialidad" required>
         <option value="">Elige una opción</option>    
         <?php foreach($especs as $espec) : ?>
           <option value="<?php echo $espec['ID_ESPECIALIDAD']; ?>"><?php echo $espec['NOMBRE_ESPECIALIDAD']; ?></option>
