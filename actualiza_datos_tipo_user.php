@@ -21,6 +21,5 @@
 	<br/>
 </div>
 
-</body>
-</html>
+
 

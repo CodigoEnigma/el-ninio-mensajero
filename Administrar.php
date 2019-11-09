@@ -28,8 +28,15 @@
 				echo "<td>Borrar</td>";
 			echo "</tr>";
 	?>
+
 	<br>
 <h2><strong>Administración de usuarios registrados</strong> </h2>
+
+
+
+
+<button type="button" class="btn btn-default" href=''></button>
+
 	<?php
 
 		while($arreglo=mysqli_fetch_array($query)){	
@@ -88,7 +95,7 @@
 	}	 ?>
 
 </form>
-         <button type="button" class="btn btn-default" data-dismiss="modal">cancel</button>
+         <button type="button" class="btn btn-default" data-dismiss="modal">cancelar</button>
 
         </div>
       </div>

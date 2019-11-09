@@ -1,3 +1,4 @@
+
 <?php
 	require('config/config.php');
    
@@ -13,11 +14,10 @@
 		$tamanio_imagen=$_FILES['imagen']['size'];
         
         if($tamanio_imagen != 0){
-		
+		 
             if($tamanio_imagen<=20000000){
                 if($tipo_imagen=="image/jpeg" || $tipo_imagen=="image/jpg" || $tipo_imagen=="image/png" || $tipo_imagen=="image/gif"){ 
                      $carpeta_destino=$_SERVER['DOCUMENT_ROOT'];
-
                         move_uploaded_file($_FILES['imagen']['tmp_name'],$nombre_imagen);
                         //echo "exito";
 
@@ -77,10 +77,14 @@
                                 $query = "INSERT INTO carta_recivida (ID_USUARIO, TEXTO_CARTA, FECHA_RECEPCION, IMAGEN, IMAGEN_AVATAR) VALUES('$usuario_asignado','$body', '$fecha', '$contenido','$contenido1')";
 
                                 if(mysqli_query($conn, $query)){
-                                    header('Location: '.ROOT_URL.'');
+                                    echo'<script type="text/javascript">
+                                    alert("Carta Enviada");
+                                    window.location.href="index.php";
+                                    </script>';
                                  } else {
                                      echo 'ERROR: '. mysqli_error($conn);}
                                  mysqli_close($conn);
+
 
                                  unlink($nombre_imagen);
 
@@ -143,7 +147,11 @@
                                 $query = "INSERT INTO carta_recivida (ID_USUARIO, TEXTO_CARTA, FECHA_RECEPCION, IMAGEN_AVATAR) VALUES('$usuario_asignado','$body', '$fecha', '$contenido1')";
                                 $estado = 1 ;
                                 if(mysqli_query($conn, $query)){
-                                    header('Location: '.ROOT_URL.'');
+                                    
+                                    echo'<script type="text/javascript">
+                                    alert("Carta Enviada");
+                                    window.location.href="index.php";
+                                    </script>';
                                 } else {
                                     echo 'ERROR: '. mysqli_error($conn);
                                       }
@@ -164,18 +172,18 @@
 
                
  }
-
-    
 ?>
+
+
 
 <?php include('inc/header.php'); ?>
 
 
     <div class="contenedor">
 	<script type="text/javascript">
-		/*function abrir(){
+		function abrir(){
 			alert('Su carta ha sido enviada con exito :)');
-		}*/
+		}
 	</script>
         <div class="alert alert-danger" role="alert">
 			<div class="icono-advertencia">
@@ -204,3 +212,4 @@
             </div>	
         </form>		
     </div>	
+

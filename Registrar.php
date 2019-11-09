@@ -160,22 +160,22 @@
   <form method="POST" action="<?php $_SERVER['PHP_SELF']; ?>" class="registrar">
     <small style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorR)) echo $errorR?></small>
     <div class="input-group">
-      <label>Cédula de identidad</label>
+      <label>Cédula de identidad*</label>
       <input type="text" name="ci" value="<?php if(isset($ciR)) echo $ciR?>" required autofocus>
       <small style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorCiR)) echo $errorCiR ?></small>
     </div>
     <div class="input-group">
-      <label>Nombre</label>
+      <label>Nombre*</label>
       <input type="text" name="nombre" value="<?php if(isset($nombreR)) echo $nombreR?>" required>
       <small style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorNombreR)) echo $errorNombreR ?></small>
     </div>
     <div class="input-group">
-      <label>Apellido</label>
+      <label>Apellido*</label>
       <input type="text" name="apellido" value="<?php if(isset($apellidoR)) echo $apellidoR?>" required>
       <small style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorApellidoR)) echo $errorApellidoR ?></small>
     </div>
     <div class="input-group">
-      <label>Especialidad</label>
+      <label>Especialidad*</label>
     </div>
     <div class="input-group">
       <select name="especialidad" required>
@@ -186,25 +186,27 @@
       </select> 
     </div>
     <div class="input-group">
-      <label>Email</label>
+      <label>Email*</label>
       <input type="email" name="email" value="<?php if(isset($emailR)) echo $emailR?>" required>
     </div>
     <div class="input-group">
-      <label>Contraseña</label>
+      <label>Contraseña*</label>
       <input type="password" name="password_1" required>
       <small style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorPassR1)) echo $errorPassR1?></small>
     </div>
     <div class="input-group">
-      <label>Confirmar Contraseña</label>
+      <label>Confirmar Contraseña*</label>
       <input type="password" name="password_2" required>
       <small style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorPassR2)) echo $errorPassR2?></small>
     </div>
-    <div class="input-group">
-      <a href="<?php echo ROOT_URL; ?>Administrar.php" class="btn btn-primary" style="margin-right: 160px; margin-left:20px" name="cancelar">Cancelar </a>
-
-      <button type="submit" class="btn btn-primary" name="registrar">Registrar</button>
+    <div>
+      <a href="<?php echo ROOT_URL; ?>Administrar.php" class="btn btn-primary btn-block"  name="cancelar">Cancelar </a> 
     </div>
+    <br>
+    <div>
+        <button type="submit" class="btn btn-primary btn-block" name="registrar" >Registrar</button>
+    </div>
+    <br>
+                    <label>Los campos marcados con <strong>*</strong> son campos obligatorios</label>
 
   </form>
-</body>
-</html>
