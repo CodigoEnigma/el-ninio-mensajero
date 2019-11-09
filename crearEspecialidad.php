@@ -4,14 +4,14 @@
 ?>
 <?php include('inc/header.php'); ?>
         <div class="container">
-                <a href="<?php echo ROOT_URL; ?>" role = "button" style="float:left; margin:10px;">
+                <a href="<?php echo ROOT_URL; ?>Administrar.php" role = "button" style="float:left; margin:10px;">
                     <img src="images/btn-atras.svg" class="img-fluid" alt="Responsive image" id="btn-back">
                 </a> <br> 
                 <h3>Página principal</h3>
                 <div class="cabeceraSesion">
                     <h2>CREAR ESPECIALIDAD</h2>
                 </div>
-                <form class="login">
+                <form class="login" method="POST">
                     <div class="input-group">
                         <label>Especialidad *</label>
                         <input type="text" name="especialidad" placeholder="Indroduzca nueva especialidad">
