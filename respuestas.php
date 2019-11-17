@@ -25,7 +25,9 @@
 
           <br>
 		  <br>
-		<h1 style="float:center"><strong>Cartas respondidas</strong></h1>
+		<h1 align="center"><strong>Cartas respondidas</strong></h1>
+		<br>
+		<br>
 		
 		<?php foreach($cartas as $carta) : ?>
 		
@@ -43,19 +45,25 @@
                     <ul class="list-group" >
 					     
 						<li class="list-group-item" id = "enviado">	
-							<p><small>Enviado <?php echo $carta['FECHA_RECEPCION']; ?></small><br></p>
-							<?php echo $carta['TEXTO_CARTA']; ?><br><br>
-						</li>	
-                          <?php
+							<h5><strong>Enviado <?php echo $carta['FECHA_RECEPCION']; ?></strong></h5>
+							<?php echo $carta['TEXTO_CARTA']; ?>
+						</li>
+                         
+                             <?php
                             $imagen = $carta['IMAGEN'];
                             if(!is_null($imagen)){
+                                echo "<div align='center'>" ;
+                                echo "<h5><strong>Imagen adjuntada a la carta</strong></h5>" ;
                                 echo "<img src='data:image/jpeg;base64,". base64_encode($imagen)."' height='125' width='125'>" ;
+                                echo "</div>" ;
                             }
                         
-                        ?>
+                            ?>
+                         	
+                          
                            
 						<li class="list-group-item" id="respuesta">
-							<p><small>Respuesta</small></p>
+							<h5><strong>Respuesta</strong></h5>
 							<?php echo $carta['RESPUESTA']; ?>
 						</li>
 						
