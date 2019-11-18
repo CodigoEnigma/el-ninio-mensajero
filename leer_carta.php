@@ -28,7 +28,13 @@
 	mysqli_free_result($result);
     $query1 = "UPDATE `carta_recivida` SET `LEIDA` = 'si' WHERE `carta_recivida`.`ID_CARTA_RECIVIDA` = '$id'";
     $result1 = mysqli_query($conn, $query1);
-
+    $permisos= "SELECT * FROM especialidad WHERE ID_ESPECIALIDAD ='$rol' ";
+    $perm = mysqli_query($conn, $permisos) ;
+    $permisos_obtenidos = mysqli_fetch_array($perm, MYSQL_ASSOC);
+    $leer = $permisos_obtenidos['LEER'];
+    $responder = $permisos_obtenidos['RESPONDER'];
+    $postular = $permisos_obtenidos['POSTULAR'];
+    $derivar= $permisos_obtenidos['DERIVAR'];
 	mysqli_close($conn);
     
     if(isset($_POST['submit'])){
@@ -56,26 +62,27 @@
             <img src="images/boton_volver.gif" class="img-fluid" alt="Responsive image" id="btn-back"  style = 'width:150px; height:50px;'>
         </a> 
     </div>
+   
     <br><br><br><br><br>
     
     <?php foreach($cartas as $carta) : ?>
 		<?php
             $estado = $carta['POSTULACION_BOLETIN'];
+            
         ?>
     
 		<div class = "contenidoCarta" >
-                <div class="imagenCarta" style="float:left">
-							
+                
+               <?php if($leer=='si'):?>
+               <div class="imagenCarta" style="float:left">			
 			    <img src="data:image/png;base64,<?php echo base64_encode($carta['IMAGEN_AVATAR']) ?>" height="100" width="100">				
-		        </div>
+                </div>
                 <div >
-                    <ul class="list-group" >
-					     
+                    <ul class="list-group" >  
 						<li class="list-group-item" id = "enviado" >	
 							<h5><strong>Enviado <?php echo $carta['FECHA_RECEPCION']; ?></strong></h5>
 							<?php echo $carta['TEXTO_CARTA']; ?>
 						</li>
-                         
                              <?php
                             $imagen = $carta['IMAGEN'];
                             if(!is_null($imagen)){
@@ -84,23 +91,27 @@
                                 echo "<img src='data:image/jpeg;base64,". base64_encode($imagen)."' height='125' width='125'>" ;
                                 echo "</div>" ;
                             }
-                        
                             ?>  
-                            <br>
-							<h4 align="center"><strong>Responder a la carta</strong></h4>
+                            <br>	
 				    </ul>
                 </div>
+                <?php endif ;?>
                 
+                <?php if($responder =='si'):?>
+                <h4 align="center"><strong>Responder a la carta</strong></h4>
                 <form method="POST" action="<?php $_SERVER['PHP_SELF']; ?>" enctype="multipart/form-data">
 			        <div class="form-group" align="center">
 				        <textarea name="TEXTO_CARTA" class="form-control" style = 'width:750px; height:350px;'></textarea><br>
 				        <input type="submit" name="submit" id="enviar" value="Responder" class="btn">
                     </div>	
                 </form>		 		    
-                 		     		     		    
+                <?php endif;?>
+                 		     		     		     		     		     		    
 		</div>
 		<?php endforeach; ?>
    
+          
+          <?php if($postular =='si'):?>
            <div  style="float:right; margin:30px;  ">
                   
                     <?php if(!isset($estado) || $estado == "no") : ?>
@@ -123,7 +134,9 @@
                            
                     <?php endif ; ?>
             </div>	           
+			  <?php endif;?>   
 			        
+			              
 			 <?php
     
      if(isset($_POST['no'])){
@@ -152,8 +165,17 @@
             
     ?>
     
+    
+    <?php if($derivar == 'si'):?>
+    
+     <div  style="float:right">
+            <p class="cartasParrafo"><strong>Asignar Carta</strong></p>
+            <a class="btn btn-info btn-lg" href="<?php echo ROOT_URL; ?>derivar_carta.php?id=<?php echo $id; ?>" role="button" id = "iconos">
+            <img class="imgCarta" src="images/reasignacion.png" class="img-fluid" alt="Responsive image">
+           	</a>
+         </div>
      
-                	
+    <?php endif ;?>        	
  
     
     
