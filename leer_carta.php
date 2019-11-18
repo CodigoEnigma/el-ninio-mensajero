@@ -130,6 +130,7 @@
             require('config/db.php');
              $consulta1 =  "UPDATE `carta_recivida` SET `POSTULACION_BOLETIN` = 'no' WHERE `carta_recivida`.`ID_CARTA_RECIVIDA` = '$id'" ;
             $cambio = mysqli_query($conn, $consulta1) ;
+             mysqli_close($conn);
             echo'<script type="text/javascript">
                                     alert("Postulacion a boletin ¡CANCELADA!");
                                     window.location.href="VentanaUsuario.php";
@@ -141,7 +142,7 @@
             require('config/db.php');
              $consulta1 =  "UPDATE `carta_recivida` SET `POSTULACION_BOLETIN` = 'si' WHERE `carta_recivida`.`ID_CARTA_RECIVIDA` = '$id'" ;
             $cambio = mysqli_query($conn, $consulta1) ;
-            
+             mysqli_close($conn);
              echo'<script type="text/javascript">
                                     alert("Postulado a boletin. ¡EXITOSA!");
                                     window.location.href="VentanaUsuario.php";

@@ -20,14 +20,16 @@
 ?>
 <?php include('inc/header.php'); ?>
         <div class="container">
-                <a href="<?php echo ROOT_URL; ?>Administrar.php" role = "button" style="float:left; margin:10px;">
+                <a href="<?php echo ROOT_URL; ?>administrar_tipos.php" role = "button" style="float:left; margin:10px;">
+
                     <img src="images/boton_volver.gif" class="img-fluid" alt="Responsive image" id="btn-back"  style = 'width:150px; height:50px;'>
+
                 </a> <br> 
                 
                 <div class="cabeceraSesion">
                     <h2>CREAR ESPECIALIDAD</h2>
                 </div>
-                <form class="login">
+                <form class="login" method="POST" action="<?php $_SERVER['PHP_SELF']; ?>" enctype="multipart/form-data">
                     <div class="input-group">
                         <label>Especialidad *</label>
                         <input type="text" name="especialidad" placeholder="Indroduzca nueva especialidad">
@@ -62,8 +64,12 @@
                             <label>*Agrega un archivo .txt con las palabras clave</label>
                             <input type="file" name="texto" id="texto" class="btn btn-info" style="height: 40px;"> 
                         </div>
+                        <div>
+                          <a href="<?php echo ROOT_URL; ?>administrar_tipos.php" class="btn btn-primary btn-block"  name="cancelar">Cancelar </a> 
+                          <br>
+                     </div>
                     
-                    <button type="submit" class="btn btn-primary btn-block" name="submit">Crear especialidad</button>
+                    <button type="submit" class="btn btn-primary btn-block" name="crear_especialidad">Crear especialidad</button>
                     <br>
                     <label>Los campos marcados con <strong>*</strong> son campos obligatorios</label>
                 </form>

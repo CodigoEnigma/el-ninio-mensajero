@@ -48,9 +48,9 @@
 				echo "<td>$arreglo[7]</td>";
 				echo "<td>$arreglo[5]</td>";
 				//echo "<td>$arreglo[5]</td>";
-				echo "<td><a href='actualizar.php?id=$arreglo[0]'><img class='imgCarta' src='images/ICONO_ACTUALIZAR.png' class='img-sluid' alt='Responsive image' style = 'width:50px; height:50px;'></td>";
+				echo "<td><a href='". ROOT_URL ."actualizar.php?id=$arreglo[0]'><img class='imgCarta' src='images/ICONO_ACTUALIZAR.png' class='img-sluid' alt='Responsive image' style = 'width:50px; height:50px;'></td>";
 
-				echo "<td><a href='Administrar.php?id=$arreglo[0]&idborrar=2'><img class='imgCarta' src='images/ICONO_ELIMINAR.png' class='img-sluid' alt='Responsive image' style = 'width:50px; height:50px;'></td>";	
+				echo "<td><a href='". ROOT_URL ."Administrar.php?id=$arreglo[0]&idborrar=2'><img class='imgCarta' src='images/ICONO_ELIMINAR.png' class='img-sluid' alt='Responsive image' style = 'width:50px; height:50px;'></td>";	
 	
 			echo "</tr>";
 
