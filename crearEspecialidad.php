@@ -7,7 +7,7 @@
 <body>
     <?php
 	require('config/config.php');
-    require('config/db.php');
+    
     session_start();
     if(!isset($_COOKIE)){
 		header('Location: '.ROOT_URL.'');
@@ -37,25 +37,25 @@
                     </div>
                     <label><strong>*Permisos:</strong> Puede selecionar uno o mas permisos</label>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="leerCartas" value="option1">
+                            <input class="form-check-input" type="checkbox" name="leerCartas" value="1">
                             <label class="form-check-label">
                                 Leer cartas
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="responderCartas" value="option2">
+                            <input class="form-check-input" type="checkbox" name="responderCartas" value="2" >
                             <label class="form-check-label" >
                                 Responder cartas
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="derivarCartas" value="option3">
+                            <input class="form-check-input" type="checkbox" name="derivarCartas" value="3">
                             <label class="form-check-label" >
                                 Derivar cartas
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="postularCartas" value="option4">
+                            <input class="form-check-input" type="checkbox" name="postularCartas" value="4">
                             <label class="form-check-label" >
                                 Postular cartas para boletin
                             </label>
@@ -74,5 +74,85 @@
                     <label>Los campos marcados con <strong>*</strong> son campos obligatorios</label>
                 </form>
         </div> 
+        
+        <?php 
+    
+        if(isset($_POST['crear_especialidad'])){
+            
+            if(isset($_POST['especialidad'])){
+                $nombre = trim($_POST['especialidad']);
+                $nombre_esp = substr($nombre,0,4);//substring
+            }
+            
+            if(isset($_POST['leerCartas'])){
+                $leer= 'si';    
+            }else{
+                $leer = 'no';
+            }
+            
+            if(isset($_POST['responderCartas'])){
+                $responder= 'si';
+            }else{
+                $responder= 'no';
+            }
+            
+            if(isset($_POST['derivarCartas'])){
+                $derivar = 'si';    
+            }else{
+                $derivar = 'no';
+            }
+            
+            if(isset($_POST['postularCartas'])){
+                 $postular= 'si';
+            }else{
+                $postular = 'no';
+            }
+            
+            require('config/db.php');
+            $verificacion_nombre = "SELECT * FROM especialidad WHERE NOMBRE_ESPECIALIDAD='$nombre'";
+            
+            $resultado= mysqli_query($conn, $verificacion_nombre);
+         //  $mostrar = mysqli_fetch_array($resultado);
+              // echo "esa especialidad ya existe";
+            $arreglo = mysqli_fetch_array($resultado, MYSQL_ASSOC);
+             
+            if($arreglo['NOMBRE_ESPECIALIDAD'] != null){
+                echo "ESTA ESPECIALIDA YA EXISTE" ;
+            }else{
+                
+                $nombre_texto = $_FILES['texto']['name'];
+    	        $tipo_texto=$_FILES['texto']['type'];
+		        $tamanio_texto=$_FILES['texto']['size'];
+                
+                if($tamanio_texto != 0){
+                    if($tipo_texto=="text/plain"){ 
+                         $carpeta_destino=$_SERVER['DOCUMENT_ROOT'].'/xampp/el-ninio-mensajero/palabras/';
+                         move_uploaded_file($_FILES['texto']['tmp_name'],$carpeta_destino.$nombre.$tipo_texto);
+                           
+                         $query = "INSERT INTO especialidad (ID_ESPECIALIDAD, NOMBRE_ESPECIALIDAD, LEER, RESPONDER, DERIVAR, POSTULAR) VALUES('$nombre_esp','$nombre', '$leer', '$responder', '$derivar', '$postular')";
+                         if( mysqli_query($conn, $query)){
+                                 echo'<script type="text/javascript">
+                                                alert("Especialidad registradad '.$carpeta_destino.'");
+                                                window.location.href="'.ROOT_URL.'administrar_tipos.php";
+                                                </script>';
+                         }else{echo 'ERROR: '. mysqli_error($conn);}
+                     } else {echo'<script type="text/javascript">
+                                                alert("Solo se pueden subir archivos de texto .txt");
+                                                window.location.href="'.ROOT_URL.'crearEspecialidad.php";
+                                                </script>'; }    
+                }else{
+                    echo'<script type="text/javascript">
+                                                alert("Selecione un archivo de texto .txt");
+                                                window.location.href="'.ROOT_URL.'crearEspecialidad.php";
+                                                </script>';
+                }
+               
+                
+            mysqli_close($conn);}
+            
+            //$query = "INSERT INTO carta_recivida (ID_USUARIO, TEXTO_CARTA, FECHA_RECEPCION, IMAGEN_AVATAR) VALUES('$usuario_asignado','$body', '$fecha', '$contenido1')";
+        }
+            
+    ?>
 </body>
 </html>

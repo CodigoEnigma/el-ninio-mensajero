@@ -146,7 +146,7 @@
              mysqli_close($conn);
             echo'<script type="text/javascript">
                                     alert("Postulacion a boletin ¡CANCELADA!");
-                                    window.location.href="VentanaUsuario.php";
+                                    window.location.href="'.ROOT_URL.'VentanaUsuario.php";
                                     </script>';
            
         }
@@ -158,7 +158,7 @@
              mysqli_close($conn);
              echo'<script type="text/javascript">
                                     alert("Postulado a boletin. ¡EXITOSA!");
-                                    window.location.href="VentanaUsuario.php";
+                                    window.location.href="'.ROOT_URL.'VentanaUsuario.php";
                                     </script>';
            
         }

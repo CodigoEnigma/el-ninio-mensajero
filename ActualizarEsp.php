@@ -91,7 +91,7 @@
 		$sqlborrar="DELETE FROM especialidad WHERE ID_ESPECIALIDAD=$id";
 		$resborrar=mysqli_query($conn,$sqlborrar);
 		echo '<script>alert("REGISTRO ELIMINADO")</script> ';
-		echo "<script>location.href='ActualizarEsp.php'</script>";
+		echo "<script>location.href='".ROOT_URL."ActualizarEsp.php'</script>";
 
 
 	}	 ?>
