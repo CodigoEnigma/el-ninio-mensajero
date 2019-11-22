@@ -14,6 +14,7 @@
         <div class="cabeceraSesion">
         	<h2>RECUPERAR CONTRASEÑA</h2>
         </div>
+        
         <form method="POST" action="<?php $_SERVER['PHP_SELF']; ?>" class="login">
             <div class="input-group">
                 <label>Ingrese su correo:</label>
@@ -25,8 +26,14 @@
 
             </div>
             
-            <button type="submit" class="btn btn-primary btn-block" name="submit">ENVIAR</button>
+            <button type="submit" class="btn btn-primary btn-block" name="recuperar_datos">ENVIAR</button>
             <p style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($error)) echo $error ?></p>
-
         </form>
+        
+        <?php
+        
+            
+    
+        ?>
+        
     </div> 

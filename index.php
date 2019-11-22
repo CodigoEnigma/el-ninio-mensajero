@@ -32,11 +32,14 @@
               			<img class="imgCarta" src="images/icono_leer_carta.png" class="img-fluid" alt="Responsive image">
            			</a>
 				</div>
-				<div class="boletin" >
+				<div>
 					<p class="cartasParrafo"><strong>BOLETINES</strong></p>
-		    		<img src="images/boletin-icono.jpg" class="btn btn-info btn-lg" alt="Responsive image"  id="iconos">
-         		</div>
+            		<a class="btn btn-info btn-lg" href="<?php echo ROOT_URL; ?>boletin.php" role="button" id = "iconos">
+						<!---->
+              			<img class="imgCarta" src="images/boletin.jpg" class="img-fluid" alt="Responsive image">
+           			</a>
+				</div>
+				
         	</div>
 	</div> 
-</body>
-</html>
+

@@ -60,12 +60,6 @@
                       echo "   <td align='center'><img class='imgCarta' src='images/leido.png' class='img-sluid' alt='Responsive image' style ='width:50px; height:50px;'></td>" ;
                  }
                 
-                 $postular = $arreglo['POSTULAR'] ;
-                 if(!isset($postular) || $postular == 'no'){
-                     echo "   <td align='center'><img class='imgCarta' src='images/no.png' class='img-sluid' alt='Responsive image' style ='width:50px; height:50px;'></td>" ;
-                 }else{
-                      echo "   <td align='center'><img class='imgCarta' src='images/leido.png' class='img-sluid' alt='Responsive image' style ='width:50px; height:50px;'></td>" ;
-                 }
                  
                  $derivar = $arreglo['DERIVAR'] ;
                  if(!isset($derivar) || $derivar == 'no'){
@@ -73,7 +67,13 @@
                  }else{
                       echo "   <td align='center'><img class='imgCarta' src='images/leido.png' class='img-sluid' alt='Responsive image' style ='width:50px; height:50px;'></td>" ;
                  }
-                 
+                
+                 $postular = $arreglo['POSTULAR'] ;
+                 if(!isset($postular) || $postular == 'no'){
+                     echo "   <td align='center'><img class='imgCarta' src='images/no.png' class='img-sluid' alt='Responsive image' style ='width:50px; height:50px;'></td>" ;
+                 }else{
+                      echo "   <td align='center'><img class='imgCarta' src='images/leido.png' class='img-sluid' alt='Responsive image' style ='width:50px; height:50px;'></td>" ;
+                 }
                 
                 echo "<td><a href='". ROOT_URL ."actualiza_datos_tipo_user.php?id=".$arreglo['ID_ESPECIALIDAD']."'><img class='imgCarta' src='images/ICONO_ACTUALIZAR.png' class='img-sluid' alt='Responsive image' style = 'width:50px; height:50px;'></td>";
 

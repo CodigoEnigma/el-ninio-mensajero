@@ -7,19 +7,90 @@ $query = "SELECT * FROM especialidad WHERE ID_ESPECIALIDAD='$id'" ;
 require('config/db.php');
 $cons = mysqli_query($conn, $query);
 $valores = mysqli_fetch_array($cons, MYSQL_ASSOC);
+$nombre_especialidad = $valores['NOMBRE_ESPECIALIDAD'];
 $leer = $valores['LEER'];
 $responder  = $valores['RESPONDER'];
 $derivar = $valores['DERIVAR'];
 $postular =  $valores['POSTULAR'];
 $nombre = $valores['NOMBRE_ESPECIALIDAD'] ;
 mysqli_close($conn);
+?>  
+   
+   
+   
+   
+   
+<?php
+$carpeta_destino=$_SERVER['DOCUMENT_ROOT'].'/xampp/el-ninio-mensajero/palabras/';
+     if(isset($_POST['actualizar_especialidad'])){
+         if(isset($_POST['actualizar_especialidad'])){
+            
+            if(isset($_POST['especialidad'])){
+                $nombre = trim($_POST['especialidad']);
+                $nombre_esp = substr($nombre,0,4);//substring
+            }
+            
+            if(isset($_POST['leerCartas'])){
+                $leer= 'si';    
+            }else{
+                $leer = 'no';
+            }
+            
+            if(isset($_POST['responderCartas'])){
+                $responder= 'si';
+            }else{
+                $responder= 'no';
+            }
+            
+            if(isset($_POST['derivarCartas'])){
+                $derivar = 'si';    
+            }else{
+                $derivar = 'no';
+            }
+            
+            if(isset($_POST['postularCartas'])){
+                 $postular= 'si';
+            }else{
+                $postular = 'no';
+            }
+            
+            require('config/db.php');
+            $verificacion_nombre = "SELECT * FROM especialidad WHERE NOMBRE_ESPECIALIDAD='$nombre'";
+            
+            $resultado= mysqli_query($conn, $verificacion_nombre);
+         //  $mostrar = mysqli_fetch_array($resultado);
+              // echo "esa especialidad ya existe";
+            $arreglo = mysqli_fetch_array($resultado, MYSQL_ASSOC);
+             
+            if($arreglo['NOMBRE_ESPECIALIDAD'] != null && $nombre != $nombre_especialidad){
+                 echo'<script type="text/javascript">
+                             alert("Ya existe una especialidad con el nombre '.$nombre.'");
+                             window.location.href="'.ROOT_URL.'administrar_tipos.php";
+                             </script>';
+            }else{
+                    if($nombre != $nombre_especialidad){
+                        rename($carpeta_destino.$nombre_especialidad.".txt",$carpeta_destino.$nombre.".txt");
+                    }
+                    $query = "UPDATE `especialidad` SET `ID_ESPECIALIDAD` = '$nombre_esp', `NOMBRE_ESPECIALIDAD` = '$nombre', `LEER` = '$leer', `RESPONDER` = '$responder', `DERIVAR` = '$derivar', `POSTULAR` = '$postular' WHERE `especialidad`.`ID_ESPECIALIDAD` = '$id'";
+                    if( mysqli_query($conn, $query)){
+                        
+                        echo'<script type="text/javascript">
+                             alert("Actualizacion exitosa");
+                             window.location.href="'.ROOT_URL.'administrar_tipos.php";
+                             </script>';
+                                
+                         }else{echo 'ERROR: '. mysqli_error($conn);}
+                    
+                    
+                }
+               
+                
+            mysqli_close($conn);}
+     }
 ?>
-    
-    
-    
-    
-    
-    
+
+
+
     
 <div class="container"> 
    
@@ -97,18 +168,18 @@ mysqli_close($conn);
                             </label>
                         </div>
                         <?php endif;?>
-                        <div class="input-group">
-                            <label>*Agrega un archivo .txt con las palabras clave</label>
-                            <input type="file" name="texto" id="texto" class="btn btn-info" style="height: 40px;"> 
+                        <br>
+                        <div>
+                          <a href="<?php echo ROOT_URL; ?>editar_palabras.php?id=<?php echo $id; ?>" class="btn btn-primary btn-block"  name="cancelar">Añadir o eliminar palabras clave </a> 
+                          <br>
                         </div>
                     <div>
                           <a href="<?php echo ROOT_URL; ?>administrar_tipos.php" class="btn btn-primary btn-block"  name="cancelar">Cancelar </a> 
                           <br>
                      </div>
-                    <button type="submit" class="btn btn-primary btn-block" name="crear_especialidad">Actualizar</button>
+                    <button type="submit" class="btn btn-primary btn-block" name="actualizar_especialidad">Actualizar</button>
                     <br>
                     <label>Los campos marcados con <strong>*</strong> son campos obligatorios</label>
                 </form>
         </div> 
-
-
+    

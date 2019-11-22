@@ -1,0 +1,4 @@
+drogas
+policia
+robo
+robar

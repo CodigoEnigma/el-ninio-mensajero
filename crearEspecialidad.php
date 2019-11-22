@@ -127,7 +127,8 @@
                 if($tamanio_texto != 0){
                     if($tipo_texto=="text/plain"){ 
                          $carpeta_destino=$_SERVER['DOCUMENT_ROOT'].'/xampp/el-ninio-mensajero/palabras/';
-                         move_uploaded_file($_FILES['texto']['tmp_name'],$carpeta_destino.$nombre.$tipo_texto);
+                         move_uploaded_file($_FILES['texto']['tmp_name'],$carpeta_destino.$nombre.".txt");
+                         
                            
                          $query = "INSERT INTO especialidad (ID_ESPECIALIDAD, NOMBRE_ESPECIALIDAD, LEER, RESPONDER, DERIVAR, POSTULAR) VALUES('$nombre_esp','$nombre', '$leer', '$responder', '$derivar', '$postular')";
                          if( mysqli_query($conn, $query)){

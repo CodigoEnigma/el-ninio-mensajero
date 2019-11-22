@@ -24,7 +24,7 @@
                  } //else {echo "Solo se pueden subir imagenes" ;} 
               }  //else {echo "tamaño muy grande de la imagen" ;}
             
-            $directorio = opendir("palabras/") ;
+            $directorio = opendir("palabras/") ; //directorio de donde se abren los archivos txt
             $estado=0;
             while($archivo=readdir($directorio) ){
                 if($estado==0){
@@ -53,7 +53,7 @@
                                     $cartas = mysqli_query($conn, "SELECT COUNT(ID_USUARIO) FROM carta_recivida WHERE ID_USUARIO = '$usuario_actual'");
                                     $numero_cartas = mysqli_fetch_array($cartas);
                                     $num_cartas = $numero_cartas[0];
-                                    if($cantidad_cartas == 0){$cantidad_cartas = $num_cartas ;}
+                                    if($cantidad_cartas == 0 && $num_cartas == 0){$cantidad_cartas = $num_cartas ;}
                                     if($cantidad_cartas >= $num_cartas){
                                         $cantidad_cartas = $num_cartas;
                                         $usuario_asignado = $usuario_actual;
@@ -91,13 +91,54 @@
                                 
                                
                                 }
-                            }
-                    }  
+                            }//fin foreacg
+                    } //fin while 
                     }
                 }
     
             }
-            
+            if($estado == 0){
+                require('config/db.php');
+                $especialistas = mysqli_query($conn, "SELECT ID_USUARIO FROM usuario WHERE ID_ESPECIALIDAD = 'Lect'");
+                $cantidad_cartas = 0 ;
+                $usuario_asignado  ;
+                while($usuarios=mysqli_fetch_array($especialistas)){ 
+                        $usuario_actual=$usuarios[0] ;
+                        $cartas = mysqli_query($conn, "SELECT COUNT(ID_USUARIO) FROM carta_recivida WHERE ID_USUARIO = '$usuario_actual'");
+                        $numero_cartas = mysqli_fetch_array($cartas);
+                        $num_cartas = $numero_cartas[0];
+                        if($cantidad_cartas == 0 && $num_cartas == 0){$cantidad_cartas = $num_cartas ;}
+                        if($cantidad_cartas >= $num_cartas){
+                                $cantidad_cartas = $num_cartas;
+                                $usuario_asignado = $usuario_actual;
+                                }
+                            }
+                        mysqli_close($conn);
+                        $archivo_objetivo=fopen($nombre_imagen,"r");
+                        $contenido=fread($archivo_objetivo,$tamanio_imagen); 
+                        $contenido=addslashes($contenido);
+                        fclose($archivo_objetivo);
+                                
+                        $fichero = "emojis/". $id. ".png";
+                        $archivo_objetivo1=fopen($fichero,"r");
+                        $contenido1=fread($archivo_objetivo1, filesize($fichero)); 
+                        $contenido1=addslashes($contenido1);
+                        fclose($archivo_objetivo1);
+                                
+                        extract($_GET) ;
+                        require('config/db.php');
+                        $query = "INSERT INTO carta_recivida (ID_USUARIO, TEXTO_CARTA, FECHA_RECEPCION, IMAGEN, IMAGEN_AVATAR) VALUES('$usuario_asignado','$body', '$fecha', '$contenido','$contenido1')";
+
+                        if(mysqli_query($conn, $query)){
+                                    echo'<script type="text/javascript">
+                                    alert("Carta Enviada");
+                                    window.location.href="index.php";
+                                    </script>';
+                            } else {echo 'ERROR: '. mysqli_error($conn);}
+                        mysqli_close($conn);
+                        unlink($nombre_imagen);
+
+            }
              
             
      }else{
@@ -130,7 +171,7 @@
                                     $cartas = mysqli_query($conn, "SELECT COUNT(ID_USUARIO) FROM carta_recivida WHERE ID_USUARIO = '$usuario_actual'");
                                     $numero_cartas = mysqli_fetch_array($cartas);
                                     $num_cartas = $numero_cartas[0];
-                                    if($cantidad_cartas == 0){$cantidad_cartas = $num_cartas ;}
+                                    if($cantidad_cartas == 0 && $num_cartas == 0){$cantidad_cartas = $num_cartas ;}
                                     if($cantidad_cartas >= $num_cartas){
                                         $cantidad_cartas = $num_cartas;
                                         $usuario_asignado = $usuario_actual;
@@ -162,10 +203,44 @@
                     }
                 }
     
-            }
+            }//fin de mientras hayan archivos
             
                  
-            
+            if($estado == 0){
+               require('config/db.php');
+               $especialistas = mysqli_query($conn, "SELECT ID_USUARIO FROM usuario WHERE ID_ESPECIALIDAD = 'Lect'");
+               $cantidad_cartas = 0 ;
+               $usuario_asignado  ;
+               while($usuarios=mysqli_fetch_array($especialistas)){ 
+                    $usuario_actual=$usuarios[0] ;
+                    $cartas = mysqli_query($conn, "SELECT COUNT(ID_USUARIO) FROM carta_recivida WHERE ID_USUARIO = '$usuario_actual'");
+                    $numero_cartas = mysqli_fetch_array($cartas);
+                    $num_cartas = $numero_cartas[0];
+                    if($cantidad_cartas == 0 && $num_cartas == 0){$cantidad_cartas = $num_cartas ;}
+                    if($cantidad_cartas >= $num_cartas){
+                            $cantidad_cartas = $num_cartas;
+                            $usuario_asignado = $usuario_actual;
+                        }
+                                
+                }
+                mysqli_close($conn);
+                require('config/db.php');
+                $fichero = "emojis/". $id. ".png";
+                $archivo_objetivo1=fopen($fichero,"r");
+                $contenido1=fread($archivo_objetivo1, filesize($fichero)); 
+                $contenido1=addslashes($contenido1);
+                fclose($archivo_objetivo1);
+                $query = "INSERT INTO carta_recivida (ID_USUARIO, TEXTO_CARTA, FECHA_RECEPCION, IMAGEN_AVATAR) VALUES('$usuario_asignado','$body', '$fecha', '$contenido1')";
+                $estado = 1 ;
+                if(mysqli_query($conn, $query)){
+                                    
+                        echo'<script type="text/javascript">
+                            alert("Carta Enviada");
+                            window.location.href="'.ROOT_URL.'index.php";
+                            </script>';
+                    } else {echo 'ERROR: '. mysqli_error($conn);}
+                mysqli_close($conn);
+            }
         }
                  
                 
