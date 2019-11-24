@@ -86,7 +86,7 @@
                                 if(mysqli_query($conn, $query)){
                                     echo'<script type="text/javascript">
                                     alert("Carta Enviada");
-                                    window.location.href="index.php";
+                                    window.location.href="'. ROOT_URL .'index.php";
                                     </script>';
                                  } else {
                                      echo 'ERROR: '. mysqli_error($conn);}
@@ -147,7 +147,7 @@
                         if(mysqli_query($conn, $query)){
                                     echo'<script type="text/javascript">
                                     alert("Carta Enviada");
-                                    window.location.href="index.php";
+                                    window.location.href="'. ROOT_URL .'index.php";
                                     </script>';
                             } else {echo 'ERROR: '. mysqli_error($conn);}
                         mysqli_close($conn);
