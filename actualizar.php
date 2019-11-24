@@ -1,74 +1,79 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Document</title>
-</head>
-<body>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Document</title>
-</head>
-<body>
 <?php
 	require('config/config.php');
 	require('config/db.php');
 
 	session_start();
+	if(!isset($_COOKIE)){
+		header('Location: '.ROOT_URL.'');
+	} else {
+		if($_COOKIE['roll'] != 'administrador'){
+			header('Location: '.ROOT_URL.'');
+		} else {
 
-	extract($_GET);
+			extract($_GET);
 
-		$sql="SELECT * FROM usuario WHERE ID_USUARIO=$id";
-		$ressql=mysqli_query($conn,$sql);
-		$row=mysqli_fetch_row ($ressql);
+				$sql="SELECT * FROM usuario WHERE ID_USUARIO=$id";
+				$ressql=mysqli_query($conn,$sql);
+				$row=mysqli_fetch_row ($ressql);
 
-	if (isset($_POST['editar'])) {
-		$ciR = mysqli_real_escape_string($conn, $_POST['ci']);
-		$tipoR = substr(mysqli_real_escape_string($conn, $_POST['tipo']),0,3);
-		$nombreR = mysqli_real_escape_string($conn, $_POST['nombre']);
-		$apellidoR = mysqli_real_escape_string($conn, $_POST['apellido']);
+			if (isset($_POST['editar'])) {
+				$ciR = mysqli_real_escape_string($conn, $_POST['ci']);
+				$tipoR = substr(mysqli_real_escape_string($conn, $_POST['tipo']),0,3);
+				$nombreR = mysqli_real_escape_string($conn, $_POST['nombre']);
+				$apellidoR = mysqli_real_escape_string($conn, $_POST['apellido']);
 
-	$query = "UPDATE usuario SET ID_ESPECIALIDAD='$tipoR', NOMBRE_USUARIO='$nombreR', APELLIDOS_USUARIO='$apellidoR' WHERE ID_USUARIO=$ciR";
-	if(mysqli_query($conn, $query)){
-		header('Location: '.ROOT_URL.'Administrar.php');
-	}
-		$error = "No se pudieron guardar sus cambios.";
+			$query = "UPDATE usuario SET ID_ESPECIALIDAD='$tipoR', NOMBRE_USUARIO='$nombreR', APELLIDOS_USUARIO='$apellidoR' WHERE ID_USUARIO=$ciR";
+			if(mysqli_query($conn, $query)){
+				mysqli_close($conn);
+				header('Location: '.ROOT_URL.'Administrar.php');
+			}
+				$error = "No se pudieron guardar sus cambios.";
+			}
+		}
 	}
 ?>
 
 <?php include('inc/header.php'); ?>
+<div class="container">
 
-	<h2> Administración de usuarios registrados</h2>	
-	<div class="well well-small">
-	<hr class="soft"/>
-	<h4>Edición de usuarios</h4>
-	<div class="row-fluid">
+	 <a href="<?php echo ROOT_URL; ?>Administrar.php" role = "button" style="float:left; margin:10px;">
+			 <img src="images/boton_volver.gif" class="img-fluid" alt="Responsive image" id="btn-back"  style = 'width:150px; height:50px;'>
+            </a> 
+  
 
-	<form action="<?php $_SERVER['PHP_SELF']; ?>" method="post">
-			CI<br><input type="text" name="ci" value= "<?php echo $row[0] ?>" readonly="readonly"><br>
-			Nombre<br> <input type="text" name="nombre" value="<?php echo $row[3];?>"><br>
-			Apellido<br> <input type="text" name="apellido" value="<?php echo $row[4];?>"><br>
-			Tipo<br> <input type="text" name="tipo" value="<?php echo $row[7];?>" readonly="readonly"><br>
-			
+	
+
+	<hr class="soft">
+        <div class="cabeceraSesion">
+        	<h2>EDICION DE USUARIOS</h2>
+        </div>
+
+
+	<form action="<?php $_SERVER['PHP_SELF']; ?>" method="post"  class="login">
+		CI<br>
+		<div class="input-group">
+			<input type="text" name="ci" value= "<?php echo $row[0] ?>" ><br>
+		</div>
+			Nombre<br>
+		<div class="input-group">
+			 <input type="text" name="nombre" value="<?php echo $row[3];?>">
+		</div>
+			Apellido<br> 
+		<div class="input-group">
+			<input type="text" name="apellido" value="<?php echo $row[4];?>">
+		</div>
+			Tipo<br> 
+		<div class="input-group">
+			<input type="text" name="tipo" value="<?php echo $row[7];?>">
+		</div>
 			<br>
+			<a href="<?php echo ROOT_URL; ?>Administrar.php" name="cancel" style="margin-right: 70px; margin-left:10px" class="btn btn-success btn-primary">Cancelar</a>
 			<button type="submit" name="editar" class="btn btn-success btn-primary">Guardar</button>
 		</form>
+	</hr>
+	</div>
 	
-	<div class="span8">
-	
-	</div>	
-	</div>	
-	<br/>
-</div>
 
-</body>
-</html>
 
 </body>
 </html>

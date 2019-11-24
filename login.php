@@ -1,25 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
 <?php
 	require('config/config.php');
     require('config/db.php');
-    
+    if(!isset($_COOKIE)){
+        header('Location: '.ROOT_URL.'');
+      } else {
     if(isset($_POST['submit'])){
         $ci = mysqli_real_escape_string($conn, $_POST['ci']);
         $pass = mysqli_real_escape_string($conn, $_POST['pass']);
@@ -65,44 +49,61 @@
                 $resultUsr = mysqli_query($conn, $queryUsr);
                 $clave = mysqli_fetch_row($resultUsr);
                 $claveLista = $clave[0];
+                
                 $queryNomUsr = "SELECT NOMBRE_USUARIO FROM usuario WHERE ID_USUARIO ='$ci'";
                 $resultNomUsr = mysqli_query($conn, $queryNomUsr);
                 $nombre = mysqli_fetch_row($resultNomUsr);
                 $nombreListo = $nombre[0];
-            } else {
-                $claveLista = $count;
-                $queryNomAdmin = "SELECT NOMBRE_ADMINISTRADOR FROM administrador WHERE ID_ADMINISTRADOR ='$ci'";
-                $resultNomAdmin = mysqli_query($conn, $queryNomAdmin);
-                $nombre = mysqli_fetch_row($resultNomAdmin);
-                $nombreListo = $nombre[0];
-            }
-            if(password_verify($pass, $claveLista)) {
-                session_start();
- 
-		        $_SESSION['ci'] = $ci;
-                $_SESSION['nombre'] = $nombreListo;
-                if (strlen($count) == 0) {
-                    $_SESSION['roll'] = 'usuario';
-                    header('Location: '.ROOT_URL.'');
-                } else {
-                    $_SESSION['roll'] = 'administrador';
-                    header('Location: '.ROOT_URL.'Administrar.php');
-                }
                 
-            } else {
-                $error = "Contraseña incorrecta. Intente de nuevo.";
-            }
+                $queryEsp = "SELECT ID_ESPECIALIDAD FROM usuario WHERE ID_USUARIO ='$ci'";
+                $resulEsp = mysqli_query($conn, $queryEsp);
+                $esp = mysqli_fetch_row($resulEsp);
+                $id_esp = $esp[0];
+                
+                } else {
+                    $claveLista = $count;
+                    $queryNomAdmin = "SELECT NOMBRE_ADMINISTRADOR FROM administrador WHERE ID_ADMINISTRADOR ='$ci'";
+                    $resultNomAdmin = mysqli_query($conn, $queryNomAdmin);
+                    $nombre = mysqli_fetch_row($resultNomAdmin);
+                    $nombreListo = $nombre[0];
+                }
+            
+                if(password_verify($pass, $claveLista)) {
+                    mysqli_close($conn);
+                    session_start();
+
+                    $_SESSION['ci'] = $ci;
+                    $_SESSION['nombre'] = $nombreListo;
+                    if (strlen($count) == 0) {
+                        $_SESSION['roll'] = 'usuario';
+                        setcookie('nombreUsuario', $_SESSION['nombre'], time() + (86400 * 30));
+                        setcookie('roll', $id_esp, time() + (86400 * 30));
+                        setcookie('id_usuario', $ci, time() + (86400 * 30));
+                        header('Location: '.ROOT_URL.'VentanaUsuario.php');
+                        } else {
+                            $_SESSION['roll'] = 'administrador';
+                            setcookie('nombreUsuario', $_SESSION['nombre'], time() + (86400 * 30));
+                            setcookie('roll', $_SESSION['roll'], time() + (86400 * 30));
+                             setcookie('id_usuario', $ci, time() + (86400 * 30));
+                            header('Location: '.ROOT_URL.'Administrar.php');
+                        }
+                
+                } else {
+                    $error = "Contraseña incorrecta. Intente de nuevo.";
+                }
         }
 
     }
+}
 ?>
 <?php include('inc/header.php'); ?>
 
     <div class="container">
         <a href="<?php echo ROOT_URL; ?>" role = "button" style="float:left; margin:10px;">
-            <img src="https://image.flaticon.com/icons/svg/137/137623.svg" class="img-fluid" alt="Responsive image" id="btn-back">
-        </a> <br> 
-        <h3>Página principal</h3>
+			 <img src="images/boton_volver.gif" class="img-fluid" alt="Responsive image" id="btn-back"  style = 'width:150px; height:50px;'>
+		  </a> 
+         <br> 
+        
         <div class="cabeceraSesion">
         	<h2>INICIAR SESION</h2>
         </div>
@@ -115,16 +116,15 @@
             </div>
             <div class="input-group">
                 <label>Contraseña</label>
-                <input type="password" name="pass" required>
+                <input type="password" placeholder="Contraseña" name="pass" required>
                 <!--small id="emailHelp" class="form-text text-muted">No comparta su contraseña.</small-->
                 <small style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorPass)) echo $errorPass ?></small>
             </div>
             
-            <button type="submit" class="btn btn-primary btn-block" name="submit">Enviar</button>
+            <button type="submit" class="btn btn-primary btn-block" name="submit">INGRESAR</button>
             <p style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($error)) echo $error ?></p>
+            <p>
+      Olvidaste tu contraseña pulse <a href="<?php echo ROOT_URL; ?>recuperar.php">AQUI</a>
+    </p>
         </form>
     </div> 
-</body>
-</html>
-</body>
-</html>
