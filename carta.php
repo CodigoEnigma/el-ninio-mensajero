@@ -46,18 +46,25 @@
                                 mysqli_close($conn);
                                 require('config/db.php');
                                 $especialistas = mysqli_query($conn, "SELECT ID_USUARIO FROM usuario WHERE ID_ESPECIALIDAD = '$clave[0]'");
-                                $cantidad_cartas = 0 ;
+                                $cantidad_cartas = null;
                                 $usuario_asignado  ;
                                 while($usuarios=mysqli_fetch_array($especialistas)){ 
                                     $usuario_actual=$usuarios[0] ;
                                     $cartas = mysqli_query($conn, "SELECT COUNT(ID_USUARIO) FROM carta_recivida WHERE ID_USUARIO = '$usuario_actual'");
                                     $numero_cartas = mysqli_fetch_array($cartas);
                                     $num_cartas = $numero_cartas[0];
-                                    if($cantidad_cartas == 0 && $num_cartas == 0){$cantidad_cartas = $num_cartas ;}
+                                    if($cantidad_cartas == null && $num_cartas == 0){
+                                            $cantidad_cartas = $num_cartas ;
+                                            $usuario_asignado = $usuario_actual ;
+                                        }
+                                    if($cantidad_cartas == null && $num_cartas != 0){
+                                             $cantidad_cartas = $num_cartas ;
+                                            $usuario_asignado = $usuario_actual ;
+                                        }
                                     if($cantidad_cartas >= $num_cartas){
-                                        $cantidad_cartas = $num_cartas;
-                                        $usuario_asignado = $usuario_actual;
-                                    }
+                                                $cantidad_cartas = $num_cartas;
+                                                $usuario_asignado = $usuario_actual;
+                                        }
                                 
                                 }
                                 mysqli_close($conn);
@@ -75,7 +82,7 @@
                                 extract($_GET) ;
                                 require('config/db.php');
                                 $query = "INSERT INTO carta_recivida (ID_USUARIO, TEXTO_CARTA, FECHA_RECEPCION, IMAGEN, IMAGEN_AVATAR) VALUES('$usuario_asignado','$body', '$fecha', '$contenido','$contenido1')";
-
+                                $estado = 1;
                                 if(mysqli_query($conn, $query)){
                                     echo'<script type="text/javascript">
                                     alert("Carta Enviada");
@@ -87,9 +94,6 @@
 
 
                                  unlink($nombre_imagen);
-
-                                
-                               
                                 }
                             }//fin foreacg
                     } //fin while 
@@ -100,19 +104,30 @@
             if($estado == 0){
                 require('config/db.php');
                 $especialistas = mysqli_query($conn, "SELECT ID_USUARIO FROM usuario WHERE ID_ESPECIALIDAD = 'Lect'");
-                $cantidad_cartas = 0 ;
+                $cantidad_cartas = null ;
                 $usuario_asignado  ;
                 while($usuarios=mysqli_fetch_array($especialistas)){ 
                         $usuario_actual=$usuarios[0] ;
                         $cartas = mysqli_query($conn, "SELECT COUNT(ID_USUARIO) FROM carta_recivida WHERE ID_USUARIO = '$usuario_actual'");
                         $numero_cartas = mysqli_fetch_array($cartas);
                         $num_cartas = $numero_cartas[0];
-                        if($cantidad_cartas == 0 && $num_cartas == 0){$cantidad_cartas = $num_cartas ;}
+                        if($cantidad_cartas == null && $num_cartas == 0){
+                        $cantidad_cartas = $num_cartas ;
+                        $usuario_asignado = $usuario_actual ;
+                        }
+                        if($cantidad_cartas == null && $num_cartas != 0){
+                             $cantidad_cartas = $num_cartas ;
+                            $usuario_asignado = $usuario_actual ;
+                        }
+                        //if($cantidad_cartas != 0 && $num_cartas >= 0){
+                          //  $cantidad_cartas = $num_cartas ;
+                            //$usuario_asignado = $usuario_actual ;
+                        //}
                         if($cantidad_cartas >= $num_cartas){
                                 $cantidad_cartas = $num_cartas;
                                 $usuario_asignado = $usuario_actual;
-                                }
-                            }
+                        }
+                        }
                         mysqli_close($conn);
                         $archivo_objetivo=fopen($nombre_imagen,"r");
                         $contenido=fread($archivo_objetivo,$tamanio_imagen); 
@@ -128,7 +143,7 @@
                         extract($_GET) ;
                         require('config/db.php');
                         $query = "INSERT INTO carta_recivida (ID_USUARIO, TEXTO_CARTA, FECHA_RECEPCION, IMAGEN, IMAGEN_AVATAR) VALUES('$usuario_asignado','$body', '$fecha', '$contenido','$contenido1')";
-
+                        $estado = 1 ;
                         if(mysqli_query($conn, $query)){
                                     echo'<script type="text/javascript">
                                     alert("Carta Enviada");
@@ -164,17 +179,24 @@
                                 mysqli_close($conn);
                                 require('config/db.php');
                                 $especialistas = mysqli_query($conn, "SELECT ID_USUARIO FROM usuario WHERE ID_ESPECIALIDAD = '$clave[0]'");
-                                $cantidad_cartas = 0 ;
+                                $cantidad_cartas = null;
                                 $usuario_asignado  ;
                                 while($usuarios=mysqli_fetch_array($especialistas)){ 
                                     $usuario_actual=$usuarios[0] ;
                                     $cartas = mysqli_query($conn, "SELECT COUNT(ID_USUARIO) FROM carta_recivida WHERE ID_USUARIO = '$usuario_actual'");
                                     $numero_cartas = mysqli_fetch_array($cartas);
                                     $num_cartas = $numero_cartas[0];
-                                    if($cantidad_cartas == 0 && $num_cartas == 0){$cantidad_cartas = $num_cartas ;}
+                                    if($cantidad_cartas == null && $num_cartas == 0){
+                                        $cantidad_cartas = $num_cartas ;
+                                        $usuario_asignado = $usuario_actual ;
+                                    }
+                                    if($cantidad_cartas == null && $num_cartas != 0){
+                                         $cantidad_cartas = $num_cartas ;
+                                        $usuario_asignado = $usuario_actual ;
+                                    }
                                     if($cantidad_cartas >= $num_cartas){
-                                        $cantidad_cartas = $num_cartas;
-                                        $usuario_asignado = $usuario_actual;
+                                            $cantidad_cartas = $num_cartas;
+                                            $usuario_asignado = $usuario_actual;
                                     }
                                 
                                 }
@@ -209,18 +231,25 @@
             if($estado == 0){
                require('config/db.php');
                $especialistas = mysqli_query($conn, "SELECT ID_USUARIO FROM usuario WHERE ID_ESPECIALIDAD = 'Lect'");
-               $cantidad_cartas = 0 ;
+               $cantidad_cartas = null;
                $usuario_asignado  ;
                while($usuarios=mysqli_fetch_array($especialistas)){ 
                     $usuario_actual=$usuarios[0] ;
                     $cartas = mysqli_query($conn, "SELECT COUNT(ID_USUARIO) FROM carta_recivida WHERE ID_USUARIO = '$usuario_actual'");
                     $numero_cartas = mysqli_fetch_array($cartas);
                     $num_cartas = $numero_cartas[0];
-                    if($cantidad_cartas == 0 && $num_cartas == 0){$cantidad_cartas = $num_cartas ;}
+                    if($cantidad_cartas == null && $num_cartas == 0){
+                        $cantidad_cartas = $num_cartas ;
+                        $usuario_asignado = $usuario_actual ;
+                    }
+                    if($cantidad_cartas == null && $num_cartas != 0){
+                         $cantidad_cartas = $num_cartas ;
+                        $usuario_asignado = $usuario_actual ;
+                    }
                     if($cantidad_cartas >= $num_cartas){
                             $cantidad_cartas = $num_cartas;
                             $usuario_asignado = $usuario_actual;
-                        }
+                    }
                                 
                 }
                 mysqli_close($conn);
@@ -234,7 +263,7 @@
                 $estado = 1 ;
                 if(mysqli_query($conn, $query)){
                                     
-                        echo'<script type="text/javascript">
+                       echo'<script type="text/javascript">
                             alert("Carta Enviada");
                             window.location.href="'.ROOT_URL.'index.php";
                             </script>';
