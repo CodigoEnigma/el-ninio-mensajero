@@ -33,23 +33,14 @@
 		
        
 		
-		
-		
-		
-		<div class = "contenidoCarta" >
-                <div class="imagenCarta" style="float:left">
+		<div class="imagenCarta" style="float:left">
 							
 			    <img src="data:image/png;base64,<?php echo base64_encode($carta['IMAGEN_AVATAR']) ?>" height="100" width="100">				
 		        </div>
-                <div>
-                    <ul class="list-group" >
-					     
-						<li class="list-group-item" id = "enviado">	
-							<h5><strong>Enviado <?php echo $carta['FECHA_RECEPCION']; ?></strong></h5>
-							<?php echo $carta['TEXTO_CARTA']; ?>
-						</li>
-                         
-                             <?php
+		
+		
+		
+		 <?php
                             $imagen = $carta['IMAGEN'];
                             if(!is_null($imagen)){
                                 echo "<div align='center'>" ;
@@ -59,25 +50,6 @@
                             }
                         
                             ?>
-                         	
-                          
-                           
-						<li class="list-group-item" id="respuesta">
-							<h5><strong>Respuesta</strong></h5>
-							<?php echo $carta['RESPUESTA']; ?>
-						</li>
-						
-                        
-					<!--a href="descarga.php?id=?php echo $carta['ID_CARTA_RECIVIDA'] ?>" class="btn btn-primary">Descargar</a-->
-					<!--a download="img.jpg" [href]="/" title="ImgName"-->
-					<!--/a-->
-				    </ul>
-				   <hr color ="green">
-                </div>
-                 
-				    
-		</div>
-		
 		
 			<!--?php echo '<img src="data:image/png;base64,' . base64_encode($carta['IMAGEN']) . '">'; ?-->
         

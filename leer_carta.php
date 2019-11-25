@@ -3,20 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>El niño mensajero</title>
+     
 </head>
 <body>
-   <div class="contenedor" >
-        <a href="<?php echo ROOT_URL; ?>VentanaUsuario.php" role = "button" style="float:left; margin:10px;">
-            <img src="images/boton_volver.gif" class="img-fluid" alt="Responsive image" id="btn-back"  style = 'width:150px; height:50px;'>
-        </a> 
-    </div>
-   
-    <br><br><br><br><br>
-    <?php
-    require('config/config.php');
-    
-
-	session_start();
+  
+  <?php
+     require('config/config.php');
+    session_start();
     if(!isset($_COOKIE)){
 		header('Location: '.ROOT_URL.'');
 	}else{
@@ -24,10 +17,14 @@
         $id = $_COOKIE['id_usuario'];
         $rol = $_COOKIE['roll'];
     } 
-     
+    ?>
+    
+   
+    
+    <?php
+    
     include('inc/header.php');
     extract($_GET);
-    
 	require('config/db.php');
 	$query = 'SELECT * FROM carta_recivida where ID_CARTA_RECIVIDA='.$id.'';
 	$result = mysqli_query($conn, $query);
@@ -43,24 +40,6 @@
     $postular = $permisos_obtenidos['POSTULAR'];
     $derivar= $permisos_obtenidos['DERIVAR'];
 	mysqli_close($conn);
-    
-    if(isset($_POST['submit'])){
-		$body = $_POST['TEXTO_CARTA'];
-        require('config/db.php');
-        $consulta ="UPDATE `carta_recivida` SET `RESPUESTA` = '$body' WHERE `carta_recivida`.`ID_CARTA_RECIVIDA` = '$id'" ;
-        $resultado = mysqli_query($conn, $consulta);
-        if($resultado){
-                                   echo'<script type="text/javascript">
-                                    alert("Respuesta Enviada");
-                                    window.location.href="VentanaUsuario.php";
-                                    </script>';
-            echo "actualizado" ;
-                                 } else {
-                                     echo 'ERROR: '. mysqli_error($conn);}
-                                 mysqli_close($conn);
-
-    }
-    
     ?>
     
     
@@ -76,7 +55,8 @@
 		<?php
             $estado = $carta['POSTULACION_BOLETIN'];
             
-        ?>
+        ?>        
+        
     
 		<div class = "contenidoCarta" >
                 
@@ -84,13 +64,19 @@
                <div class="imagenCarta" style="float:left">			
 			    <img src="data:image/png;base64,<?php echo base64_encode($carta['IMAGEN_AVATAR']) ?>" height="100" width="100">				
                 </div>
-                <div >
+                <!-- <div >
+                   
                     <ul class="list-group" >  
 						<li class="list-group-item" id = "enviado" >	
-							<h5><strong>Enviado <?php echo $carta['FECHA_RECEPCION']; ?></strong></h5>
-							<?php echo $carta['TEXTO_CARTA']; ?>
+							<h5><strong>Enviado <?php //echo $carta['FECHA_RECEPCION']; ?></strong></h5>
+							<?php// echo $carta['TEXTO_CARTA']; ?>
 						</li>
-                             <?php
+                            
+                            <br>	
+				    </ul>
+                </div>-->
+                 
+                <?php
                             $imagen = $carta['IMAGEN'];
                             if(!is_null($imagen)){
                                 echo "<div align='center'>" ;
@@ -98,10 +84,8 @@
                                 echo "<img src='data:image/jpeg;base64,". base64_encode($imagen)."' height='125' width='125'>" ;
                                 echo "</div>" ;
                             }
-                            ?>  
-                            <br>	
-				    </ul>
-                </div>
+                            ?>
+               
                 <?php endif ;?>
                 
                 <?php if($responder =='si'):?>
@@ -170,6 +154,28 @@
            
         }
             
+    ?>
+    
+    <?php
+    
+        if(isset($_POST['submit'])){
+		$body = $_POST['TEXTO_CARTA'];
+        require('config/db.php');
+        $consulta ="UPDATE `carta_recivida` SET `RESPUESTA` = '$body' WHERE `carta_recivida`.`ID_CARTA_RECIVIDA` = '$id'" ;
+        $resultado = mysqli_query($conn, $consulta);
+        if($resultado){
+                                   echo'<script type="text/javascript">
+                                    alert("Respuesta Enviada");
+                                    window.location.href="VentanaUsuario.php";
+                                    </script>';
+            echo "actualizado" ;
+                                 } else {
+                                     echo 'ERROR: '. mysqli_error($conn);}
+                                 mysqli_close($conn);
+
+    }
+    
+    
     ?>
     
     
