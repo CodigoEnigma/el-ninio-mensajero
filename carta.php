@@ -21,7 +21,12 @@
                         move_uploaded_file($_FILES['imagen']['tmp_name'],$nombre_imagen);
                         //echo "exito";
 
-                 } //else {echo "Solo se pueden subir imagenes" ;} 
+                 }else{
+                    echo'<script type="text/javascript">
+                                    alert("Solo se permiten imagenes");
+                                    window.location.href="'. ROOT_URL .'carta.php?id=chico";
+                                    </script>';
+                } //else {echo "Solo se pueden subir imagenes" ;} 
               }  //else {echo "tamaño muy grande de la imagen" ;}
             
             $directorio = opendir("palabras/") ; //directorio de donde se abren los archivos txt
@@ -305,7 +310,7 @@
            	</a>
          </div>
       
-        <h1 align="center"><Strong>¡Cuentanos cómo estas!</Strong></h1>
+            
         <form method="POST" action="<?php $_SERVER['PHP_SELF']; ?>" enctype="multipart/form-data">
 			<div class="form-group" align="center">
 				<textarea name="TEXTO_CARTA" class="form-control" style = 'width:750px; height:350px;'></textarea><br>
