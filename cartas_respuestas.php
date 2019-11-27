@@ -26,7 +26,20 @@
     $res=mysqli_fetch_array($carta,MYSQL_ASSOC);
     echo "<br>".$res['TEXTO_CARTA'];
     echo "<br><br>".$res['RESPUESTA'];
+    $imagen = $res['IMAGEN'];
+                            if(!is_null($imagen)){
+                                echo "<div align='center'>" ;
+                                echo "<h5><strong>Imagen adjuntada a la carta</strong></h5>" ;
+                                echo "<img src='data:image/jpeg;base64,". base64_encode($imagen)."' height='125' width='125'>" ;
+                                echo "</div>" ;
+                            }
     
     ?>
+    <div class="imagenCarta" style="float:left">
+							
+			    <img src="data:image/png;base64,<?php echo base64_encode($res['IMAGEN_AVATAR']) ?>" height="100" width="100">				
+		        </div>
+		
+     		
 </body>
 </html>
