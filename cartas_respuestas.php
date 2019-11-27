@@ -8,6 +8,7 @@
    
     <?php include('inc/header.php');
         require('config/config.php');
+    require('config/db.php');
     ?>
     
     
@@ -19,6 +20,13 @@
     
     <?php
      echo $_SERVER['DOCUMENT_ROOT'];
+    
+    $consulta='SELECT * FROM carta_recivida where RESPUESTA IS NOT NULL ';
+    $carta = mysqli_query($conn,$consulta);
+    $res=mysqli_fetch_array($carta,MYSQL_ASSOC);
+    echo "<br>".$res['TEXTO_CARTA'];
+    echo "<br><br>".$res['RESPUESTA'];
+    
     ?>
 </body>
 </html>
