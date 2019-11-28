@@ -6,13 +6,15 @@
 <?php include('inc/header.php'); ?>
 
     <div class="container">
-        <a href="<?php echo ROOT_URL; ?>" role = "button" style="float:left; margin:10px;">
-            <img src="https://image.flaticon.com/icons/svg/137/137623.svg" class="img-fluid" alt="Responsive image" id="btn-back">
-        </a> <br> 
-        <h3>Página principal</h3>
+           <a href="<?php echo ROOT_URL; ?>login.php" role = "button" style="float:left; margin:10px;">
+			 <img src="images/boton_volver.gif" class="img-fluid" alt="Responsive image" id="btn-back"  style = 'width:150px; height:50px;'>
+		  </a> 
+        <br> 
+    
         <div class="cabeceraSesion">
         	<h2>RECUPERAR CONTRASEÑA</h2>
         </div>
+        
         <form method="POST" action="<?php $_SERVER['PHP_SELF']; ?>" class="login">
             <div class="input-group">
                 <label>Ingrese su correo:</label>
@@ -24,8 +26,14 @@
 
             </div>
             
-            <button type="submit" class="btn btn-primary btn-block" name="submit">ENVIAR</button>
+            <button type="submit" class="btn btn-primary btn-block" name="recuperar_datos">ENVIAR</button>
             <p style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($error)) echo $error ?></p>
-
         </form>
+        
+        <?php
+        
+            
+    
+        ?>
+        
     </div> 

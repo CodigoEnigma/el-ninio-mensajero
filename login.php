@@ -49,38 +49,56 @@
                 $resultUsr = mysqli_query($conn, $queryUsr);
                 $clave = mysqli_fetch_row($resultUsr);
                 $claveLista = $clave[0];
+                
                 $queryNomUsr = "SELECT NOMBRE_USUARIO FROM usuario WHERE ID_USUARIO ='$ci'";
                 $resultNomUsr = mysqli_query($conn, $queryNomUsr);
                 $nombre = mysqli_fetch_row($resultNomUsr);
                 $nombreListo = $nombre[0];
-            } else {
-                $claveLista = $count;
-                $queryNomAdmin = "SELECT NOMBRE_ADMINISTRADOR FROM administrador WHERE ID_ADMINISTRADOR ='$ci'";
-                $resultNomAdmin = mysqli_query($conn, $queryNomAdmin);
-                $nombre = mysqli_fetch_row($resultNomAdmin);
-                $nombreListo = $nombre[0];
-            }
-            if(password_verify($pass, $claveLista)) {
-                mysqli_close($conn);
-                session_start();
- 
-		        $_SESSION['ci'] = $ci;
-                $_SESSION['nombre'] = $nombreListo;
-                if (strlen($count) == 0) {
-                    $_SESSION['roll'] = 'usuario';
-                    setcookie('nombreUsuario', $_SESSION['nombre'], time() + (86400 * 30));
-                    setcookie('roll', $_SESSION['roll'], time() + (86400 * 30));
-                    header('Location: '.ROOT_URL.'');
-                } else {
-                    $_SESSION['roll'] = 'administrador';
-                    setcookie('nombreUsuario', $_SESSION['nombre'], time() + (86400 * 30));
-                    setcookie('roll', $_SESSION['roll'], time() + (86400 * 30));
-                    header('Location: '.ROOT_URL.'Administrar.php');
-                }
                 
-            } else {
-                $error = "Contraseña incorrecta. Intente de nuevo.";
-            }
+                $queryEsp = "SELECT ID_ESPECIALIDAD FROM usuario WHERE ID_USUARIO ='$ci'";
+                $resulEsp = mysqli_query($conn, $queryEsp);
+                $esp = mysqli_fetch_row($resulEsp);
+                $id_esp = $esp[0];
+                
+                } else {
+                    $claveLista = $count;
+                    $queryNomAdmin = "SELECT NOMBRE_ADMINISTRADOR FROM administrador WHERE ID_ADMINISTRADOR ='$ci'";
+                    $resultNomAdmin = mysqli_query($conn, $queryNomAdmin);
+                    $nombre = mysqli_fetch_row($resultNomAdmin);
+                    $nombreListo = $nombre[0];
+                }
+            
+                if(password_verify($pass, $claveLista)) {
+                    mysqli_close($conn);
+                    session_start();
+
+                    $_SESSION['ci'] = $ci;
+                    $_SESSION['nombre'] = $nombreListo;
+                    if (strlen($count) == 0) {
+                        $_SESSION['roll'] = 'usuario';
+                        if($id_esp == 'Edit'){
+                            setcookie('nombreUsuario', $_SESSION['nombre'], time() + (86400 * 30));
+                            setcookie('roll', $id_esp, time() + (86400 * 30));
+                            setcookie('id_usuario', $ci, time() + (86400 * 30));
+                            header('Location: '.ROOT_URL.'carta.php'); // AQUI VIENE EL NOMBRE DE LA VENTANA DEL EDITOR DE BOLETIN
+                            }else{
+                                setcookie('nombreUsuario', $_SESSION['nombre'], time() + (86400 * 30));
+                                setcookie('roll', $id_esp, time() + (86400 * 30));
+                                setcookie('id_usuario', $ci, time() + (86400 * 30));
+                                header('Location: '.ROOT_URL.'VentanaUsuario.php');
+                            }
+
+                        } else {
+                            $_SESSION['roll'] = 'administrador';
+                            setcookie('nombreUsuario', $_SESSION['nombre'], time() + (86400 * 30));
+                            setcookie('roll', $_SESSION['roll'], time() + (86400 * 30));
+                             setcookie('id_usuario', $ci, time() + (86400 * 30));
+                            header('Location: '.ROOT_URL.'Administrar.php');
+                        }
+                
+                } else {
+                    $error = "Contraseña incorrecta. Intente de nuevo.";
+                }
         }
 
     }
@@ -89,10 +107,11 @@
 <?php include('inc/header.php'); ?>
 
     <div class="container">
-        <a href="<?php echo ROOT_URL; ?>" role = "button" style="float:left; margin:10px;" id="formReg">
-            <img src="https://image.flaticon.com/icons/svg/137/137623.svg" class="img-fluid" alt="Responsive image" id="btn-back">
-        </a> <br> 
-        <h3>Página principal</h3>
+        <a href="<?php echo ROOT_URL; ?>" role = "button" style="float:left; margin:10px;">
+			 <img src="images/boton_volver.gif" class="img-fluid" alt="Responsive image" id="btn-back"  style = 'width:150px; height:50px;'>
+		  </a> 
+         <br> 
+        
         <div class="cabeceraSesion">
         	<h2>INICIAR SESION</h2>
         </div>
