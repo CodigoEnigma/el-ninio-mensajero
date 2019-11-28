@@ -37,7 +37,7 @@
                     $nombre = $archivo ;
                     extract($_GET) ;
                     $texto = explode(" ",$body);
-                    $archivo = fopen("palabras/". $archivo,"r");
+                    $archivo = fopen("palabras/". $archivo,"r");//DIRECCIONEES
                     while(!feof($archivo) && $estado==0){
                         $cadena = fgets($archivo);
                         $cadena1 = trim($cadena);

@@ -41,7 +41,7 @@ include('inc/header.php');
     $nombre_especialidad = $valores['NOMBRE_ESPECIALIDAD'];
     mysqli_close($conn);
 
-    $carpeta_destino=$_SERVER['DOCUMENT_ROOT'].'/xampp/el-ninio-mensajero/palabras/'.$nombre_especialidad.".txt";
+    $carpeta_destino=$_SERVER['DOCUMENT_ROOT'].'/xampp/el-ninio-mensajero/palabras/'.$nombre_especialidad.".txt";//DIRECTORIO
     echo $carpeta_destino ;
     $archivo = fopen("$carpeta_destino","r") or die ("PROBLEMAS AL ABRIR EL ARCHIVO TXT") ;
         while(!feof($archivo)){
@@ -49,16 +49,66 @@ include('inc/header.php');
             $salto_de_linea = nl2br($traer);
             echo $salto_de_linea ;
         }
+    fclose($archivo);
     if(isset($_POST['añadir'])){
-        $texto = fopen("$carpeta_destino","a") or die ("problemas");
-        fwrite($texto, "\n");
-        fwrite($texto,$_POST['palabra']);
+        $existe = 0 ;
+        $texto = fopen("$carpeta_destino","a+") or die ("problemas");
+         while(!feof($texto) && $existe == 0){
+             $cadena = fgets($texto);
+             $cadena1 = trim($cadena);
+             if($cadena1 == $_POST['palabra']){
+                 $existe = 1 ;
+             }
+         }
+        if($existe == 0){
+            fwrite($texto, "\n");
+            fwrite($texto,$_POST['palabra']);
+            fclose($texto);
+            echo'<script type="text/javascript">
+                                        alert("PALABRA AÑADIDA CON EXITO A LA ESPECIALIDAD:'.$nombre_especialidad.' ");
+                                        window.location.href="'. ROOT_URL .'editar_palabras.php?id='.$id.'";
+                                        </script>';    
+        }else{
+            echo'<script type="text/javascript">
+                                    alert("ESTA PALABRA YA ES PALABRA CLAVE DE:'.$nombre_especialidad.' ");
+                                    window.location.href="'. ROOT_URL .'editar_palabras.php?id='.$id.'";
+                                    </script>';
+        }
+        
+
         
     }
     
     if(isset($_POST['eliminar'])){
-        $archivo =  fopen("$carpeta_destino","a") or die ("problemas");
-        $borrado = 0 ;
+        $estado = 0;
+        rename("$carpeta_destino",$_SERVER['DOCUMENT_ROOT'].'/xampp/el-ninio-mensajero/palabras/cambio.txt');//DIRECTORIO
+        $text = fopen($_SERVER['DOCUMENT_ROOT'].'/xampp/el-ninio-mensajero/palabras/cambio.txt', "r");//DIRECTORIO
+        $texto1 = fopen("$carpeta_destino","a") or die ("problemas");
+        while(!feof($text)){
+               $cadena = fgets($text);
+                $cadena1 = trim($cadena);
+            if($cadena1 != $_POST['palabra']){ 
+                fwrite($texto1,$cadena1);
+                fwrite($texto1, "\n");
+            }else{
+                $estado = 1;
+            }
+        }
+        fclose ($text);
+        unlink($_SERVER['DOCUMENT_ROOT'].'/xampp/el-ninio-mensajero/palabras/cambio.txt');
+        if($estado == 1){
+            echo'<script type="text/javascript">
+                                    alert("PALABRA ELIMINADA CON EXITO");
+                                    window.location.href="'. ROOT_URL .'editar_palabras.php?id='.$id.'";
+                                    </script>';
+        }else{
+             echo'<script type="text/javascript">
+                                    alert("ESTA PALABRA NO SE ENCUENTRA ENTRE LAS PALABRAS CLAVE ");
+                                    window.location.href="'. ROOT_URL .'editar_palabras.php?id='.$id.'";
+                                    </script>';
+        }
+        //$archivo =  fopen("$carpeta_destino","a") or die ("problemas");
+        //$borrado = 0 ;}
         
     }
     
