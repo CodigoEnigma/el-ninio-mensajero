@@ -19,7 +19,11 @@
         <div>
             <?php if(isset($_SESSION['roll'])): ?>
                 <?php if($_SESSION['roll'] == 'administrador'): ?>
-                    <a class="btn btn-primary" href="<?php echo ROOT_URL; ?>Registrar.php" role="button" id = "registrar">Registrar usuario</a>
+                    <a class="btn btn-primary" href="<?php echo ROOT_URL; ?>registrar_usuario.php" role="button" id = "registrar">Registrar usuario</a>
+
+                    <a class="btn btn-primary" href="<?php echo ROOT_URL; ?>administrar_tipos.php" role="button" id ="crearEspecialidad">Administrar Especialidadd</a>
+                    
+
                     <button class="btn btn-primary" onclick="cerrarSesion()">Cerrar sesion</button>
                 <?php elseif ($_SESSION['roll'] == 'usuario'): ?>
                     <button class="btn btn-primary" onclick="cerrarSesion()">Cerrar sesion</button>
@@ -31,6 +35,7 @@
             <script>
                 function cerrarSesion() {
                     window.location='unset.php';
+                    
                 }
             </script>
         </div>
