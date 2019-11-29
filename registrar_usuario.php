@@ -29,7 +29,15 @@
       <label>Cédula de identidad*</label>
       <input type="text" name="ci" value="<?php if(isset($ciR)) echo $ciR?>" required autofocus>
       <small style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorCiR)) echo $errorCiR ?></small>
-    </div>
+     </div>
+     <div>
+      <a href="<?php echo ROOT_URL; ?>Administrar.php" class="btn btn-primary btn-block"  name="cancelar">Cancelar </a> 
+     </div>
+     <br>
+     <div>
+        <button type="submit" class="btn btn-primary btn-block" name="registrar" >Registrar</button>
+     </div>
+     
    
   </form>
   <?php
