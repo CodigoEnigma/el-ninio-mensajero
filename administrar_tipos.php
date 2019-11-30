@@ -41,7 +41,7 @@
 	        $resultado = mysqli_query($conn , $query) ;
            
             while($arreglo = mysqli_fetch_array($resultado, MYSQL_ASSOC)){
-                if($arreglo['NOMBRE_ESPECIALIDAD'] != "Administrador"){
+                if($arreglo['NOMBRE_ESPECIALIDAD'] != "Administrador" && $arreglo['NOMBRE_ESPECIALIDAD'] != "Editor Boletin" && $arreglo['NOMBRE_ESPECIALIDAD'] != "Lector"){
                     echo "<tr class ='success' >" ;
                 echo "<td >". $arreglo['ID_ESPECIALIDAD']. "</td>";
                 echo "<td >". $arreglo['NOMBRE_ESPECIALIDAD']. "</td>" ;

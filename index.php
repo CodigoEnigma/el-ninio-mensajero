@@ -27,7 +27,7 @@
             	</div>
             	<div>
 					<p class="cartasParrafo"><strong>LEE LAS CARTTITAS DE OTROS NIÑOS</strong></p>
-            		<a class="btn btn-info btn-lg" href="<?php echo ROOT_URL; ?>respuestas.php" role="button" id = "iconos">
+            		<a class="btn btn-info btn-lg" href="<?php echo ROOT_URL; ?>cartas_respuestas.php" role="button" id = "iconos">
 						<!---->
               			<img class="imgCarta" src="images/icono_leer_carta.png" class="img-fluid" alt="Responsive image">
            			</a>

@@ -40,6 +40,7 @@
     
     
         ?>
+         
           
 		<table border="1"; class="table table-dark" style="margin-left: auto;margin-right: auto;max-width:70%">
 			<tr class='warning'>
@@ -65,7 +66,7 @@
                 
                 if($leer == 'si'){
                     echo "<div style='float:center'>
-                    <td align='center'><a href=".ROOT_URL."leer_carta.php?id=". $arreglo['ID_CARTA_RECIVIDA']. "><img class='imgCarta' src='images/leer.png' class='img-sluid' alt='Responsive image' style ='width:50px; height:50px;'></td>
+                    <td align='center'><a href=".ROOT_URL."lectura_carta.php?id=". $arreglo['ID_CARTA_RECIVIDA']. "><img class='imgCarta' src='images/leer.png' class='img-sluid' alt='Responsive image' style ='width:50px; height:50px;'></td>
                     </div>";
                     $leida = $arreglo['LEIDA'] ;
                     if($leida == "si"){
