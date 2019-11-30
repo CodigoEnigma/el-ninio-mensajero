@@ -53,7 +53,7 @@
 
 <h2 style="margin-left: 250px;"><strong>Vista previa boletin</strong> </h2>
 
-<div class="card text-white bg-secondary mb-3" style="max-width: 50rem; margin-left: 50px;">
+<div class="card text-white bg-secondary mb-3" style="max-width: 50rem; margin-left: 60px;">
   <div class="card-header" style="margin-left: auto;margin-right: auto;">BOLETIN</div>
   <div class="card-body">
     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
