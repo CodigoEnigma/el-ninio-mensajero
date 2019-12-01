@@ -13,7 +13,7 @@
 				<div class="bienvenida">
 					<img src="images/icono-bienvenida.png" style="height: 300px; width: 300px;">
 				</div>
-				<div class="burbuja">
+				<div class="burbujaBienvenida">
 					<img src="images/burbuja-mensaje.png" class="img-fluid" alt="Responsive image" style = "height: 300px; width: 400px; ">
 					<div class ="centrado"><h5><strong>¡HOLA AMIGUITO MENSAJERO! <br>Aqui podras contarnos tus aventuras y leer las aventuras de otros mensajeros</strong></h5></div>
 				</div>

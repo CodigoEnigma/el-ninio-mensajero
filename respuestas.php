@@ -7,7 +7,7 @@
 <body>
    
    <?php
-	require('config/config.php');
+	require('config/config.php'); 
 	require('config/db.php');
 	$query = 'SELECT * FROM carta_recivida where RESPUESTA IS NOT NULL ORDER BY ID_CARTA_RECIVIDA ASC';
 	$result = mysqli_query($conn, $query);
@@ -36,19 +36,19 @@
 		
 		
 		
-		<div class = "contenidoCarta" >
+		<div class = "contenidoCarta">
                 <div class="imagenCarta" style="float:left">
 							
 			    <img src="data:image/png;base64,<?php echo base64_encode($carta['IMAGEN_AVATAR']) ?>" height="100" width="100">				
 		        </div>
-                <div>
-                    <ul class="list-group" >
-					     
-						<li class="list-group-item" id = "enviado">	
+                <div align = "center">
+						<div class="burbuja">
+						<li id="enviado">
 							<h5><strong>Enviado <?php echo $carta['FECHA_RECEPCION']; ?></strong></h5>
-							<?php echo $carta['TEXTO_CARTA']; ?>
-						</li>
-                         
+						
+						</li>	
+						</div>
+                        <div class = "imagen">
                              <?php
                             $imagen = $carta['IMAGEN'];
                             if(!is_null($imagen)){
@@ -57,24 +57,18 @@
                                 echo "<img src='data:image/jpeg;base64,". base64_encode($imagen)."' height='125' width='125'>" ;
                                 echo "</div>" ;
                             }
-                        
-                            ?>
-                         	
-                          
-                           
-						<li class="list-group-item" id="respuesta">
+							?>
+						</div>
+						<div class="burbujaRespuesta">
+						<li id="respuesta">	
 							<h5><strong>Respuesta</strong></h5>
 							<?php echo $carta['RESPUESTA']; ?>
-						</li>
+							
+						</li>	
+						</div>
 						
-                        
-					<!--a href="descarga.php?id=?php echo $carta['ID_CARTA_RECIVIDA'] ?>" class="btn btn-primary">Descargar</a-->
-					<!--a download="img.jpg" [href]="/" title="ImgName"-->
-					<!--/a-->
-				    </ul>
-				   <hr color ="green">
                 </div>
-                 
+				
 				    
 		</div>
 		

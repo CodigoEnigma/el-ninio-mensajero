@@ -2,11 +2,10 @@
 .contenidoCarta{
     float: left;
     width: 900px;
-    flex-direction: row;
+    flex-direction: row; 
     flex-wrap: wrap;
     justify-content: left;
     align-items: unset;
-    
   }
 
 .imagenCarta{
@@ -21,11 +20,13 @@
   }
 
 li#enviado{
+    background: #fff;
     border: 1px solid black;
-    border-radius: 40px 40px 40px 1px;
+    border-radius: 1px 40px 40px 40px;
     margin-bottom: 5px;
 }
 li#respuesta{
+    background: #fff;
     border: 1px solid black;
     border-radius: 40px 40px 40px 1px;
     margin-bottom: 30px;
@@ -39,3 +40,32 @@ li#respuesta{
   align-items: unset;
 }
 
+body{
+  background-color: #f0f0f0;
+}
+
+.burbuja{
+  float: left;
+  position: static;
+
+  padding: 20px;
+  color: #222;
+  border-radius: 3px;
+  margin-left: 20px;
+  width: 755px;
+}
+.burbujaRespuesta{
+  float: left;
+  position: static;
+
+  padding: 20px;
+  color: #222;
+  border-radius: 3px;
+  margin-left: 145px;
+  width: 755px;
+}
+
+.imagen{
+  display: inline;
+  align-content: center;
+}
