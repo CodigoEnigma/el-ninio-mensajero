@@ -134,15 +134,15 @@
                             <p>En donde podra acceder con las siguientes credenciales que le fueron asignadas.</p>';
                 $credenciales = 'Usuario: '.$ciR.' y contraseña: '.$passR1;
                 $body = '<h2> Aviso de cuenta </h2>
-                  <h4>Name</h4><p>'.$nombreR.'</p>
-                  <h4>Email</h4><p>'.$email.'</p>
-                  <h4>Message</h4><p>'.$mensaje.'</p>
-                  <h4>Message</h4><p>'.$credenciales.'</p>
+                  <h4>Nombre</h4><p>'.$nombreR.'</p>
+                  <h4>Correo electrónico</h4><p>'.$email.'</p>
+                  <h4>Felicidades </h4><p>'.$mensaje.'</p>
+                  <h4>Credenciales</h4><p>'.$credenciales.'</p>
                 ';
   
                 $headers = "MIME-Version: 1.0" ."\r\n";
                 $headers .="Content-Type:text/html;charset=UTF-8" . "\r\n";
-                $headers .= "From: Admin niño mensajero <admin@gmail.com>\r\n";
+                $headers .= "From: Admin niño mensajero <shiorishinobu@gmail.com>\r\n";
   
                 mail($toEmail, $sujeto, $body, $headers);
   
