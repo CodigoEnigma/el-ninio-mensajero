@@ -5,3 +5,4 @@
 		echo 'Failed to connect to MySQL '. mysqli_connect_errno();
 	}
 	mysqli_set_charset($conn,"utf8");
+?>

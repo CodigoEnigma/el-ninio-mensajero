@@ -54,24 +54,8 @@
                     <h4 class="modal-title">¿Esta seguro de que quiere asignar la carta a este empleado?</h4>
                 </div>
                 <div class="modal-footer">
-
-                    <form method="post">
-
-                        <button type="submit" class="btn btn-default" name = "aceptar">aceptar</button>
-                        <?php
-                            if(isset($_POST["aceptar"])) {
-                                $sqlAsign="UPDATE carta_recivida SET ID_USUARIO=$usr WHERE ID_CARTA_RECIVIDA=$id";
-                                $resAsign=mysqli_query($conn,$sqlAsign);
-                                echo'<script type="text/javascript">
-                                    alert("Carta asignada correctamente.");
-                                    window.location.href="'.ROOT_URL.'VentanaUsuario.php";
-                                    </script>';
-                            }	 
-                        ?>
-
-                    </form>
+                    <?php echo "<a href='". ROOT_URL ."derivar_carta_usr.php?id=$id&esp=$esp&usr=$usr&asi=2' type='submit' class='btn btn-default'>aceptar</a>"; ?>
                     <button type="button" class="btn btn-default" data-dismiss="modal">cancelar</button>
-
                 </div>
             </div>
         </div>
@@ -83,7 +67,16 @@
 				<script>
 					$("#myModalAsi").modal("show");
 				</script>';
-		}
+		} elseif (@$asi==2) {
+            $sqlAsign="UPDATE carta_recivida SET ID_USUARIO=$usr WHERE ID_CARTA_RECIVIDA=$id";
+            require('config/db.php');
+            $resAsign=mysqli_query($conn,$sqlAsign);
+            mysqli_close($conn);
+            echo'<script type="text/javascript">
+            alert("Carta asignada correctamente.");
+            window.location.href="'.ROOT_URL.'VentanaUsuario.php";
+            </script>';
+        }
     ?>
     
 </body>
