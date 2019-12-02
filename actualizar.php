@@ -7,6 +7,9 @@
 		header('Location: '.ROOT_URL.'');
 	} else {
 		if($_COOKIE['roll'] != 'administrador'){
+			$queryEspec = 'SELECT * FROM especialidad';
+      		$resultEspec = mysqli_query($conn,$queryEspec);
+			$especs = mysqli_fetch_all($resultEspec, MYSQLI_ASSOC);
 			header('Location: '.ROOT_URL.'');
 		} else {
 
@@ -23,6 +26,8 @@
 				$apellidoR = mysqli_real_escape_string($conn, $_POST['apellido']);
 
 			$query = "UPDATE usuario SET ID_ESPECIALIDAD='$tipoR', NOMBRE_USUARIO='$nombreR', APELLIDOS_USUARIO='$apellidoR' WHERE ID_USUARIO=$ciR";
+
+				
 			if(mysqli_query($conn, $query)){
 				mysqli_close($conn);
 				header('Location: '.ROOT_URL.'Administrar.php');
@@ -64,7 +69,12 @@
 		</div>
 			Tipo<br> 
 		<div class="input-group">
-			<input type="text" name="tipo" value="<?php echo $row[7];?>">
+			<select name="especialidad" required>
+				<option value="">Elige una opción</option>    
+				<?php foreach($especs as $espec) : ?>
+				<option value="<?php echo $espec['ID_ESPECIALIDAD']; ?>"><?php echo $espec['NOMBRE_ESPECIALIDAD']; ?></option>
+				<?php endforeach;?>
+			</select> 
 		</div>
 			<br>
 			<a href="<?php echo ROOT_URL; ?>Administrar.php" name="cancel" style="margin-right: 70px; margin-left:10px" class="btn btn-success btn-primary">Cancelar</a>

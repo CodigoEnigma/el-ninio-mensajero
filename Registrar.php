@@ -3,8 +3,6 @@
   require('config/db.php');
 
   session_start();
-  $numeros = array("1", "2", "3", "4", "5", "6", "7", "8", "9", "0");
-
   if(!isset($_COOKIE)){
     header('Location: '.ROOT_URL.'');
   } else {
@@ -47,14 +45,6 @@
             if(!filter_var($nombreR, FILTER_VALIDATE_URL)){
               if(strlen($nombreR) < 1 && strlen($nombreR) > 15){
                 $errorNombreR = "El nombre no puede tener mas de 15 caracteres.";
-              } else {
-                for ($i=0; $i < strlen($nombreR); $i++) { 
-                  for ($j=0; $j < count($numeros); $j++) { 
-                    if ($nombreR[$i] == $numeros[$j]) {
-                      $errorNombreR = "El nombre no puede contener números.";
-                    }
-                  }
-                }
               }
             } else {
               $errorNombreR = "No se permite ese tipo de contenido.";
@@ -67,14 +57,6 @@
             if(!filter_var($apellidoR, FILTER_VALIDATE_URL)){
               if(strlen($apellidoR) < 1 && strlen($apellidoR) > 15){
                 $errorApellidoR = "El apellido no puede tener mas de 15 caracteres.";
-              } else {
-                for ($i=0; $i < strlen($apellidoR); $i++) { 
-                  for ($j=0; $j < count($numeros); $j++) { 
-                    if ($apellidoR[$i] == $numeros[$j]) {
-                      $errorApellidoR = "El nombre no puede contener números.";
-                    }
-                  }
-                }
               }
             } else {
               $errorApellidoR = "No se permite ese tipo de contenido.";
@@ -134,15 +116,15 @@
                             <p>En donde podra acceder con las siguientes credenciales que le fueron asignadas.</p>';
                 $credenciales = 'Usuario: '.$ciR.' y contraseña: '.$passR1;
                 $body = '<h2> Aviso de cuenta </h2>
-                  <h4>Nombre</h4><p>'.$nombreR.'</p>
-                  <h4>Correo electrónico</h4><p>'.$email.'</p>
-                  <h4>Felicidades </h4><p>'.$mensaje.'</p>
-                  <h4>Credenciales</h4><p>'.$credenciales.'</p>
+                  <h4>Name</h4><p>'.$nombreR.'</p>
+                  <h4>Email</h4><p>'.$email.'</p>
+                  <h4>Message</h4><p>'.$mensaje.'</p>
+                  <h4>Message</h4><p>'.$credenciales.'</p>
                 ';
   
                 $headers = "MIME-Version: 1.0" ."\r\n";
                 $headers .="Content-Type:text/html;charset=UTF-8" . "\r\n";
-                $headers .= "From: Admin niño mensajero <shiorishinobu@gmail.com>\r\n";
+                $headers .= "From: Admin niño mensajero <admin@gmail.com>\r\n";
   
                 mail($toEmail, $sujeto, $body, $headers);
   
@@ -218,12 +200,13 @@
       <small style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorPassR2)) echo $errorPassR2?></small>
     </div>
     <div>
-        <button type="submit" class="btn btn-primary btn-block" name="registrar" >Registrar</button>
+      <a href="<?php echo ROOT_URL; ?>Administrar.php" class="btn btn-primary btn-block"  name="cancelar">Cancelar </a> 
     </div>
     <br>
     <div>
-      <a href="<?php echo ROOT_URL; ?>Administrar.php" class="btn btn-primary btn-block"  name="cancelar">Cancelar </a> 
+        <button type="submit" class="btn btn-primary btn-block" name="registrar" >Registrar</button>
     </div>
-    <label>Los campos marcados con <strong>*</strong> son campos obligatorios</label>
+    <br>
+                    <label>Los campos marcados con <strong>*</strong> son campos obligatorios</label>
 
   </form>

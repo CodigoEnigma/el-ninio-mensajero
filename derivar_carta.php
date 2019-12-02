@@ -7,42 +7,16 @@
 <body>
     
    <?php 
-        require('config/config.php');
-        session_start();
-        include('inc/header.php');
-        extract($_GET);
-        require('config/db.php');
-        $queryEspec = 'SELECT DISTINCT * FROM especialidad WHERE NOMBRE_ESPECIALIDAD NOT LIKE "Administrador" ORDER BY NOMBRE_ESPECIALIDAD ASC';
-        $resultEspec = mysqli_query($conn,$queryEspec);
-        mysqli_close($conn);
+    require('config/config.php');
+    session_start();
+    include('inc/header.php');
+    extract($_GET);
     ?>
     
     <div class="contenedor" >
-        <h2 style="float:left; margin:10px;"><strong>Seleccione la especialidad para asignar la carta a un empleado de esta.</strong></h2>
-        <a href="<?php echo ROOT_URL; ?>leer_carta.php?id=<?php echo $id; ?>" role = "button" style="float:right; margin:10px;">
+        <a href="<?php echo ROOT_URL; ?>leer_carta.php?id=<?php echo $id; ?>" role = "button" style="float:left; margin:10px;">
             <img src="images/boton_volver.gif" class="img-fluid" alt="Responsive image" id="btn-back"  style = 'width:150px; height:50px;'>
-        </a>
-    </div>
-
-    <div class="container">
-        <table border='1'; class='table table-dark'>
-			<tr class='warning'>
-				<td>Id de la especialidad</td>
-				<td>Nombre de la especialidad</td>
-				<td>Seleccionar</td>
-			</tr>
-
-            <?php
-                while($especs = mysqli_fetch_array($resultEspec)){
-                    echo "<tr class='success'>";
-                        echo "<td>$especs[0]</td>";
-                        echo "<td>$especs[1]</td>";
-                        echo "<td><a href='". ROOT_URL ."derivar_carta_usr.php?id=$id&esp=$especs[0]'><img class='imgCarta' src='images/ICONO_ACTUALIZAR.png' class='img-sluid' alt='Responsive image' style = 'width:50px; height:50px;'></td>";
-                    echo "</tr>";
-                }
-
-            ?>
-        </table>
+        </a> 
     </div>
     
 </body>
