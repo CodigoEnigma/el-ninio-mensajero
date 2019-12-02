@@ -3,6 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <title>El niño mensajero</title>
+    <style>
+        body{
+            background-color: #f0f0f0;
+        }
+        .comentarios{
+            width: 400px;
+        }
+        .comentarios .comentario{
+            width: 100%;
+            margin: 20px;
+        }
+        .comentarios .comentario p{
+            margin: 0 0 10px 0;
+        }
+        .burbuja{
+            position: relative;
+            background: #fff;
+            padding: 20px;
+            color: #222;
+            border-radius: 3px;
+            margin-left: 20px;
+        }
+        .burbuja:after{
+            content: "";
+            display: block;
+            position: absolute;
+            
+            top: 15px;
+            margin-left: -35px;
+                
+            
+            width: 0;
+            height: 0;
+            border-top: 8px solid transparent ;
+            border-bottom: 8px solid transparent ;
+            border-right: 15px solid #fff;
+        }
+    </style>
 </head>
 <body>
    
@@ -41,5 +79,16 @@
 		        </div>
 		
      		
+    <div class="comentarios" >
+        <div class="comentario burbuja" >
+            <h1><strong>HOLA COMO ESTAS</strong></h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit quod dolore fugit, cum autem veniam. Alias quidem dolorum sunt, iste reiciendis. Libero, doloremque dolore harum minus per
+            spiciatis quis voluptas recusandae.
+            orem ipsum dolor sit amet, consectetur adipisicing elit. Sit quod dolore fugit, cum autem veniam. Alias quidem dolorum sunt, iste reiciendis. Libero, doloremque dolore harum minus perspiciati
+            orem ipsum dolor sit amet, consectetur adipisicing elit. Sit quod dolore fugit, cum autem veniam. Alias quidem dolorum sunt, iste reiciendis. Libero, doloremque dolore harum minus perspiciati
+            orem ipsum dolor sit amet, consectetur adipisicing elit. Sit quod dolore fugit, cum autem veniam. Alias quidem dolorum sunt, iste reiciendis. Libero, doloremque dolore harum minus perspiciati
+            </p>
+        </div>
+    </div>
 </body>
 </html>
