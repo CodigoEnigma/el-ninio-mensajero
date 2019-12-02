@@ -40,6 +40,32 @@
       <input type="text" name="apellido" value="<?php if(isset($apellidoR)) echo $apellidoR?>" required>
       <small style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorApellidoR)) echo $errorApellidoR ?></small>
     </div>
+    
+    <div class="input-group">
+      <select name="especialidad" required>
+        <option value="">Elige una opción</option>    
+        <?php foreach($especs as $espec) : ?>
+          <option value="<?php echo $espec['ID_ESPECIALIDAD']; ?>"><?php echo $espec['NOMBRE_ESPECIALIDAD']; ?></option>
+        <?php endforeach;?>
+      </select> 
+    </div>
+    
+    
+    <div class="input-group">
+      <label>Email*</label>
+      <input type="email" name="email" value="<?php if(isset($emailR)) echo $emailR?>" required>
+    </div>
+    <div class="input-group">
+      <label>Contraseña*</label>
+      <input type="password" name="password_1" required>
+      <small style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorPassR1)) echo $errorPassR1?></small>
+    </div>
+    <div class="input-group">
+      <label>Confirmar Contraseña*</label>
+      <input type="password" name="password_2" required>
+      <small style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorPassR2)) echo $errorPassR2?></small>
+    </div>
+     <label>Los campos marcados con <strong>*</strong> son campos obligatorios</label>
      <div>
       <a href="<?php echo ROOT_URL; ?>Administrar.php" class="btn btn-primary btn-block"  name="cancelar">Cancelar </a> 
      </div>

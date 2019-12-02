@@ -16,13 +16,11 @@
         mysqli_close($conn);
     ?>
     
-    <div class="contenedor" >
-        <h2 style="float:left; margin:10px;"><strong>Seleccione El empleado al que desea asignar la carta.</strong></h2>
-        <a href="<?php echo ROOT_URL; ?>derivar_carta.php?id=<?php echo $id; ?>" role = "button" style="float:right; margin:10px;">
-            <img src="images/boton_volver.gif" class="img-fluid" alt="Responsive image" id="btn-back"  style = 'width:150px; height:50px;'>
-        </a>
-    </div>
-
+     <a href="<?php echo ROOT_URL; ?>derivar_carta.php?id=<?php echo $id;?>" role = "button" style="float:left; margin:10px;">
+        <img src="images/boton_volver.gif" class="img-fluid" alt="Responsive image" id="btn-back"  style = 'width:150px; height:50px;'>
+    </a> 
+    <br><br><br>
+     <h2 style="float:center" align="center"><strong>Seleccione El empleado al que desea asignar la carta.</strong></h2>
     <div class="container">
         <table border='1'; class='table table-dark'>
 			<tr class='warning'>
