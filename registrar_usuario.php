@@ -30,6 +30,16 @@
       <input type="text" name="ci" value="<?php if(isset($ciR)) echo $ciR?>" required autofocus>
       <small style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorCiR)) echo $errorCiR ?></small>
      </div>
+     <div class="input-group">
+      <label>Nombre*</label>
+      <input type="text" name="nombre" value="<?php if(isset($nombreR)) echo $nombreR?>" required>
+      <small style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorNombreR)) echo $errorNombreR ?></small>
+    </div>
+    <div class="input-group">
+      <label>Apellido*</label>
+      <input type="text" name="apellido" value="<?php if(isset($apellidoR)) echo $apellidoR?>" required>
+      <small style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($errorApellidoR)) echo $errorApellidoR ?></small>
+    </div>
      <div>
       <a href="<?php echo ROOT_URL; ?>Administrar.php" class="btn btn-primary btn-block"  name="cancelar">Cancelar </a> 
      </div>
@@ -37,6 +47,7 @@
      <div>
         <button type="submit" class="btn btn-primary btn-block" name="registrar" >Registrar</button>
      </div>
+      
      
    
   </form>
