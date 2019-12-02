@@ -3,14 +3,13 @@
 	require('config/db.php');
 	session_start();
 
-	if(!isset($_COOKIE)){
+		if(!isset($_COOKIE)){
 		header('Location: '.ROOT_URL.'');
 	} else {
 		if($_COOKIE['roll'] != 'administrador'){
 			header('Location: '.ROOT_URL.'');
 		}
 	}
-	
  include('inc/header.php');
 		echo "<table border='1'; class='table table-dark';>";
 			echo "<tr class='warning'>";
