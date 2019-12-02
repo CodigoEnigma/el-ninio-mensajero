@@ -25,7 +25,7 @@
 
           <br>
 		  <br>
-		<h1 align="center"><strong>Cartas respondidas</strong></h1>
+		<h1 style ="margin-right: 90px; " align="center"><strong>Cartas respondidas</strong></h1>
 		<br>
 		<br>
 		
@@ -43,10 +43,8 @@
 		        </div>
                 <div align = "center">
 						<div class="burbuja">
-						<li id="enviado">
 							<h5><strong>Enviado <?php echo $carta['FECHA_RECEPCION']; ?></strong></h5>
 						
-						</li>	
 						</div>
                         <div class = "imagen">
                              <?php
@@ -60,11 +58,8 @@
 							?>
 						</div>
 						<div class="burbujaRespuesta">
-						<li id="respuesta">	
 							<h5><strong>Respuesta</strong></h5>
 							<?php echo $carta['RESPUESTA']; ?>
-							
-						</li>	
 						</div>
 						
                 </div>
