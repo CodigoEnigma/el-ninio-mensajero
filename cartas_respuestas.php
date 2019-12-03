@@ -3,44 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>El niño mensajero</title>
-  <style>
-    body{
-  background-color: #f0f0f0;
-}
-
-.burbuja{
-  background: #fff;
-  float: left;
-  position: static;
-  padding: 20px;
-  color: #222;
-  border-radius: 3px;
-  margin-left: 20px;
-  width: 755px;
-  border: 1px solid black;
-  border-radius: 1px 40px 40px 40px;
-  margin-bottom: 5px;
-}
-.burbujaRespuesta{
-  float: left;
-  position: static;
-  background: #fff;
-  padding: 20px;
-  color: #222;
-  border-radius: 3px;
-  margin-left: 145px;
-  width: 850px;
-  border: 1px solid black;
-  border-radius: 1px 40px 40px 40px;
-  margin-bottom: 30px;
-  margin-top: 10px;
-}
-
-.imagen{
-  display: inline;
-  align-content: center;
-}
-    </style>
 </head>
 <body>
    
