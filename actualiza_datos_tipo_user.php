@@ -169,17 +169,17 @@ $carpeta_destino=$_SERVER['DOCUMENT_ROOT'].'/xampp/el-ninio-mensajero/palabras/'
                         </div>
                         <?php endif;?>
                         <br>
+                        <label>Los campos marcados con <strong>*</strong> son campos obligatorios</label>
                         <div>
                           <a href="<?php echo ROOT_URL; ?>editar_palabras.php?id=<?php echo $id; ?>" class="btn btn-primary btn-block"  name="cancelar">Añadir o eliminar palabras clave </a> 
                           <br>
                         </div>
+                    <button type="submit" class="btn btn-primary btn-block" name="actualizar_especialidad">Actualizar</button>
+                    <br>
                     <div>
                           <a href="<?php echo ROOT_URL; ?>administrar_tipos.php" class="btn btn-primary btn-block"  name="cancelar">Cancelar </a> 
                           <br>
                      </div>
-                    <button type="submit" class="btn btn-primary btn-block" name="actualizar_especialidad">Actualizar</button>
-                    <br>
-                    <label>Los campos marcados con <strong>*</strong> son campos obligatorios</label>
                 </form>
-        </div> 
+        
     
