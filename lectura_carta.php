@@ -45,39 +45,27 @@
    <div>
   
        <?php if($leer=='si'):?>
-              
-              
-              <div class="imagenCarta" style="float:left">			
+               <div class="imagenCarta" style="float:left">			
 			    <img src="data:image/png;base64,<?php echo base64_encode($carta['IMAGEN_AVATAR']) ?>" height="100" width="100">				
                 </div>
-              
-                <div class="burbuja">
-            <h5><strong>Enviado</strong></h5>
-            <?php
-            echo $_SERVER['DOCUMENT_ROOT'];
-            
-           
-            echo "<br>".$carta['TEXTO_CARTA'];
-            echo "<br><br>".$carta['FECHA_RECEPCION'];
-            $imagen = $carta['IMAGEN'];
-                                    if(!is_null($imagen)){
-                                        echo "<div align='center'>" ;
-                                        echo "<h5><strong>Imagen adjuntada a la carta</strong></h5>" ;
-                                        echo "<img src='data:image/jpeg;base64,". base64_encode($imagen)."' height='125' width='125'>" ;
-                                        echo "</div>" ;
-                                    }
-            
-            ?>
-
-        </div>
-        
-              
+                <?php echo $carta['FECHA_RECEPCION']; ?>
+                <?php echo $carta['TEXTO_CARTA']; ?>
+                <?php
+                            $imagen = $carta['IMAGEN'];
+                            if(!is_null($imagen)){
+                                echo "<div align='center'>" ;
+                                echo "<h5><strong>Imagen adjuntada a la carta</strong></h5>" ;
+                                echo "<img src='data:image/jpeg;base64,". base64_encode($imagen)."' height='125' width='125'>" ;
+                                echo "</div>" ;
+                            }
+                            ?>
+               
+               
          <?php endif;?> 
-     <br><br>
+     <br><br><br><br>
      <?php if($responder =='si'):?>
-                <br><br><br>
-                <div style="float:left; margin:40px;">
-                    <h4 align="center"><strong>Responder a la carta</strong></h4>
+                <div style="float:left">
+                    <h4 align="cener"><strong>Responder a la carta</strong></h4>
                 <form method="POST" action="<?php $_SERVER['PHP_SELF']; ?>" enctype="multipart/form-data">
 			        <div class="form-group" align="center">
 				        <textarea name="TEXTO_CARTA" class="form-control" style = 'width:750px; height:350px;'></textarea><br>
@@ -88,11 +76,11 @@
                 <?php endif;?>
     
     <?php if($postular =='si'):?>
-           <div  style="float:right; margin:30px; ">
+           <div  style="float:right; margin:30px;  ">
                   
                     <?php if(!isset($estado) || $estado == "no") : ?>
                       
-                    <form method="POST" action="<?php echo ROOT_URL; ?>lectura_carta.php?id=<?php echo $id?>" enctype="multipart/form-data">
+                    <form method="POST" action="<?php echo ROOT_URL; ?>leer_carta.php?id=<?php echo $id?>" enctype="multipart/form-data">
 			        <div class="form-group" align="center">
 				        <h5><strong>Postular a Boletin</strong></h5>
 				        <input type="submit" name="si" id="postular" value="SI" class="btn btn-success btn-primary">
@@ -101,7 +89,7 @@
                             
                     <?php elseif($estado == "si"):?>
                             
-                    <form method="POST" action="<?php echo ROOT_URL; ?>lectura_carta.php?id=<?php echo $id?>" enctype="multipart/form-data">
+                    <form method="POST" action="<?php echo ROOT_URL; ?>leer_carta.php?id=<?php echo $id?>" enctype="multipart/form-data">
 			        <div class="form-group" align="center">
 				        <h5><strong>Dejar de Postular a Boletin</strong></h5>
 				        <input type="submit" name="no" id="dejarpostular" value="SI" class="btn btn-success btn-primary" style="'width:70px; height:25px">
