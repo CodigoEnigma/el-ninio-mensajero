@@ -3,6 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <title>El niño mensajero</title>
+    <style>
+    
+        body{
+  background-color: #f0f0f0;
+}
+
+.burbuja{
+  background: #fff;
+  float: left;
+  position: static;
+  padding: 20px;
+  color: #222;
+  border-radius: 3px;
+  margin-left: 20px;
+  width: 755px;
+  border: 1px solid black;
+  border-radius: 1px 40px 40px 40px;
+  margin-bottom: 5px;
+}
+.burbujaRespuesta{
+  float: left;
+  position: static;
+  background: #fff;
+  padding: 20px;
+  color: #222;
+  border-radius: 3px;
+  margin-left: 145px;
+  width: 850px;
+  border: 1px solid black;
+  border-radius: 1px 40px 40px 40px;
+  margin-bottom: 30px;
+  margin-top: 10px;
+}
+
+.imagen{
+  display: inline;
+  align-content: center;
+}
+        
+    </style>
 </head>
 <body>
     <?php
@@ -45,22 +85,33 @@
    <div>
   
        <?php if($leer=='si'):?>
-               <div class="imagenCarta" style="float:left">			
+              
+              
+              <div class="imagenCarta" style="float:left">			
 			    <img src="data:image/png;base64,<?php echo base64_encode($carta['IMAGEN_AVATAR']) ?>" height="100" width="100">				
                 </div>
-                <?php echo $carta['FECHA_RECEPCION']; ?>
-                <?php echo $carta['TEXTO_CARTA']; ?>
-                <?php
-                            $imagen = $carta['IMAGEN'];
-                            if(!is_null($imagen)){
-                                echo "<div align='center'>" ;
-                                echo "<h5><strong>Imagen adjuntada a la carta</strong></h5>" ;
-                                echo "<img src='data:image/jpeg;base64,". base64_encode($imagen)."' height='125' width='125'>" ;
-                                echo "</div>" ;
-                            }
-                            ?>
-               
-               
+              
+                <div class="burbuja">
+            <h5><strong>Enviado</strong></h5>
+            <?php
+            echo $_SERVER['DOCUMENT_ROOT'];
+            
+           
+            echo "<br>".$carta['TEXTO_CARTA'];
+            echo "<br><br>".$carta['FECHA_RECEPCION'];
+            $imagen = $carta['IMAGEN'];
+                                    if(!is_null($imagen)){
+                                        echo "<div align='center'>" ;
+                                        echo "<h5><strong>Imagen adjuntada a la carta</strong></h5>" ;
+                                        echo "<img src='data:image/jpeg;base64,". base64_encode($imagen)."' height='125' width='125'>" ;
+                                        echo "</div>" ;
+                                    }
+            
+            ?>
+
+        </div>
+        
+              
          <?php endif;?> 
      <br><br><br><br>
      <?php if($responder =='si'):?>
