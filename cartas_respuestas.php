@@ -3,43 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <title>El niño mensajero</title>
-    <style>
-        body{
-            background-color: #f0f0f0;
-        }
-        .comentarios{
-            width: 400px;
-        }
-        .comentarios .comentario{
-            width: 100%;
-            margin: 20px;
-        }
-        .comentarios .comentario p{
-            margin: 0 0 10px 0;
-        }
-        .burbuja{
-            position: relative;
-            background: #fff;
-            padding: 20px;
-            color: #222;
-            border-radius: 3px;
-            margin-left: 20px;
-        }
-        .burbuja:after{
-            content: "";
-            display: block;
-            position: absolute;
-            
-            top: 15px;
-            margin-left: -35px;
-                
-            
-            width: 0;
-            height: 0;
-            border-top: 8px solid transparent ;
-            border-bottom: 8px solid transparent ;
-            border-right: 15px solid #fff;
-        }
+  <style>
+    body{
+  background-color: #f0f0f0;
+}
+
+.burbuja{
+  background: #fff;
+  float: left;
+  position: static;
+  padding: 20px;
+  color: #222;
+  border-radius: 3px;
+  margin-left: 20px;
+  width: 755px;
+  border: 1px solid black;
+  border-radius: 1px 40px 40px 40px;
+  margin-bottom: 5px;
+}
+.burbujaRespuesta{
+  float: left;
+  position: static;
+  background: #fff;
+  padding: 20px;
+  color: #222;
+  border-radius: 3px;
+  margin-left: 145px;
+  width: 850px;
+  border: 1px solid black;
+  border-radius: 1px 40px 40px 40px;
+  margin-bottom: 30px;
+  margin-top: 10px;
+}
+
+.imagen{
+  display: inline;
+  align-content: center;
+}
     </style>
 </head>
 <body>
@@ -55,32 +55,43 @@
     <a href="<?php echo ROOT_URL; ?>" role = "button" style="float:left; margin:10px;">
 			 <img src="images/boton_volver.gif" class="img-fluid" alt="Responsive image" id="btn-back"  style = 'width:150px; height:50px;'>
     </a> 
+    <br>
+    <br>
+    <h1 style ="margin-right: 90px; " align="center"><strong>Cartas respondidas</strong></h1>
     
-    <?php
-     echo $_SERVER['DOCUMENT_ROOT'];
-    
-    $consulta='SELECT * FROM carta_recivida where RESPUESTA IS NOT NULL ';
-    $carta = mysqli_query($conn,$consulta);
-    $res=mysqli_fetch_array($carta,MYSQL_ASSOC);
-    echo "<br>".$res['TEXTO_CARTA'];
-    echo "<br><br>".$res['RESPUESTA'];
-    $imagen = $res['IMAGEN'];
-                            if(!is_null($imagen)){
-                                echo "<div align='center'>" ;
-                                echo "<h5><strong>Imagen adjuntada a la carta</strong></h5>" ;
-                                echo "<img src='data:image/jpeg;base64,". base64_encode($imagen)."' height='125' width='125'>" ;
-                                echo "</div>" ;
-                            }
-    
-    ?>
-    <div class="imagenCarta" style="float:left">
+
+        
+
+        <div class="burbuja">
+            <h5><strong>Enviado</strong></h5>
+            <?php
+            echo $_SERVER['DOCUMENT_ROOT'];
+            
+            $consulta='SELECT * FROM carta_recivida where RESPUESTA IS NOT NULL ';
+            $carta = mysqli_query($conn,$consulta);
+            $res=mysqli_fetch_array($carta,MYSQL_ASSOC);
+            echo "<br>".$res['TEXTO_CARTA'];
+            echo "<br><br>".$res['RESPUESTA'];
+            $imagen = $res['IMAGEN'];
+                                    if(!is_null($imagen)){
+                                        echo "<div align='center'>" ;
+                                        echo "<h5><strong>Imagen adjuntada a la carta</strong></h5>" ;
+                                        echo "<img src='data:image/jpeg;base64,". base64_encode($imagen)."' height='125' width='125'>" ;
+                                        echo "</div>" ;
+                                    }
+            
+            ?>
+
+        </div>
+        
+            
+		<div class="imagenCarta">
 							
 			    <img src="data:image/png;base64,<?php echo base64_encode($res['IMAGEN_AVATAR']) ?>" height="100" width="100">				
-		        </div>
-		
+		</div>
      		
-    <div class="comentarios" >
-        <div class="comentario burbuja" >
+        <div class="burbujaRespuesta">
+            <h5><strong>Respuesta</strong></h5>
             <h1><strong>HOLA COMO ESTAS</strong></h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit quod dolore fugit, cum autem veniam. Alias quidem dolorum sunt, iste reiciendis. Libero, doloremque dolore harum minus per
             spiciatis quis voluptas recusandae.
@@ -89,6 +100,6 @@
             orem ipsum dolor sit amet, consectetur adipisicing elit. Sit quod dolore fugit, cum autem veniam. Alias quidem dolorum sunt, iste reiciendis. Libero, doloremque dolore harum minus perspiciati
             </p>
         </div>
-    </div>
+						
 </body>
 </html>
