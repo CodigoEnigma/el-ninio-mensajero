@@ -113,10 +113,11 @@
         
               
          <?php endif;?> 
-     <br><br><br><br>
+     <br><br>
      <?php if($responder =='si'):?>
-                <div style="float:left">
-                    <h4 align="cener"><strong>Responder a la carta</strong></h4>
+                <br><br><br>
+                <div style="float:left; margin:40px;">
+                    <h4 align="center"><strong>Responder a la carta</strong></h4>
                 <form method="POST" action="<?php $_SERVER['PHP_SELF']; ?>" enctype="multipart/form-data">
 			        <div class="form-group" align="center">
 				        <textarea name="TEXTO_CARTA" class="form-control" style = 'width:750px; height:350px;'></textarea><br>
@@ -127,11 +128,11 @@
                 <?php endif;?>
     
     <?php if($postular =='si'):?>
-           <div  style="float:right; margin:30px;  ">
+           <div  style="float:right; margin:30px; ">
                   
                     <?php if(!isset($estado) || $estado == "no") : ?>
                       
-                    <form method="POST" action="<?php echo ROOT_URL; ?>leer_carta.php?id=<?php echo $id?>" enctype="multipart/form-data">
+                    <form method="POST" action="<?php echo ROOT_URL; ?>lectura_carta.php?id=<?php echo $id?>" enctype="multipart/form-data">
 			        <div class="form-group" align="center">
 				        <h5><strong>Postular a Boletin</strong></h5>
 				        <input type="submit" name="si" id="postular" value="SI" class="btn btn-success btn-primary">
@@ -140,7 +141,7 @@
                             
                     <?php elseif($estado == "si"):?>
                             
-                    <form method="POST" action="<?php echo ROOT_URL; ?>leer_carta.php?id=<?php echo $id?>" enctype="multipart/form-data">
+                    <form method="POST" action="<?php echo ROOT_URL; ?>lectura_carta.php?id=<?php echo $id?>" enctype="multipart/form-data">
 			        <div class="form-group" align="center">
 				        <h5><strong>Dejar de Postular a Boletin</strong></h5>
 				        <input type="submit" name="no" id="dejarpostular" value="SI" class="btn btn-success btn-primary" style="'width:70px; height:25px">
