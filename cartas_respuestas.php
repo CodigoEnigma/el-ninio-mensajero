@@ -21,15 +21,23 @@
     <br>
     <br>
     <h1 style ="margin-right: 90px; " align="center"><strong>Cartas respondidas</strong></h1>
-    
+    <div class="imagenCarta" >
+				
+                    <?php
+                        $consulta='SELECT * FROM carta_recivida where RESPUESTA IS NOT NULL ';
+                        $carta = mysqli_query($conn,$consulta);
+                         while($arreglo = mysqli_fetch_array($carta, MYSQL_ASSOC)){
+                             echo '<img src="data:image/png;base64,'.base64_encode($arreglo['IMAGEN_AVATAR']).'" height="100" width="100" align="left">' ;
+                         }
+                ?>			
+			   				
+		</div>
 
         
 
         <div class="burbuja">
             <h5><strong>Enviado</strong></h5>
             <?php
-            echo $_SERVER['DOCUMENT_ROOT'];
-            
             $consulta='SELECT * FROM carta_recivida where RESPUESTA IS NOT NULL ';
             $carta = mysqli_query($conn,$consulta);
             $res=mysqli_fetch_array($carta,MYSQL_ASSOC);
@@ -48,10 +56,6 @@
         </div>
         
             
-		<div class="imagenCarta">
-							
-			    <img src="data:image/png;base64,<?php echo base64_encode($res['IMAGEN_AVATAR']) ?>" height="100" width="100">				
-		</div>
      		
         <div class="burbujaRespuesta">
             <h5><strong>Respuesta</strong></h5>
