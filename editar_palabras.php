@@ -3,6 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>El niño mensajero</title>
+    
+    <style>
+    
+    #div1 {
+     overflow:scroll;
+     height:200px;
+     width:700px;
+    margin: 0 auto;
+    }
+    #div1 table {
+        
+        width:700px;
+        background-color:lightgray;
+    }
+        
+    </style>
+    
 </head>
 <body>
     <?php 
@@ -12,12 +29,14 @@ include('inc/header.php');
  extract($_GET);
 ?>  
 
-<div class="container"> 
+
    
     <a href="<?php echo ROOT_URL; ?>actualiza_datos_tipo_user.php?id=<?php echo $id; ?>" role = "button" style="float:left; margin:10px;">
 			 <img src="images/boton_volver.gif" class="img-fluid" alt="Responsive image" id="btn-back"  style = 'width:150px; height:50px;'>
             </a> 
-               <div class="cabeceraSesion">
+
+              
+    <div class="cabeceraSesion">
                     <h2>AÑADIR O ELIMINAR PALABRAS CLAVE</h2>
                 </div>
                 <form class="login" method="POST" action="<?php $_SERVER['PHP_SELF']; ?>" enctype="multipart/form-data">
@@ -30,7 +49,9 @@ include('inc/header.php');
                     <button type="submit" class="btn btn-primary btn-block" name="eliminar">Eliminar palabra</button>
                     <br>
                 </form>
-   </div>
+               <br>
+                   
+   
    
    <?php 
     
@@ -42,13 +63,32 @@ include('inc/header.php');
     mysqli_close($conn);
 
     $carpeta_destino=$_SERVER['DOCUMENT_ROOT'].'/xampp/el-ninio-mensajero/palabras/'.$nombre_especialidad.".txt";//DIRECTORIO
-    echo $carpeta_destino ;
     $archivo = fopen("$carpeta_destino","r") or die ("PROBLEMAS AL ABRIR EL ARCHIVO TXT") ;
+    echo '<div id="div1" style ="float: center">' ;
+    echo '<table border="1">';
+    $tamaño_tabla = 0 ;
         while(!feof($archivo)){
             $traer = fgets($archivo);
-            $salto_de_linea = nl2br($traer);
-            echo $salto_de_linea ;
+            //$salto_de_linea = nl2br($traer); reconoce caracteres de salto de linea
+            $hola =trim($traer) ;
+                
+             if($hola != ""){
+                  if($tamaño_tabla == 0){
+                    echo" <tr>";
+                    echo "<td>".$traer."</td>";
+                    $tamaño_tabla = $tamaño_tabla +1 ;
+                }else if($tamaño_tabla != 0 && $tamaño_tabla !=6){
+                        echo "<td>".$traer."</td>";
+                        $tamaño_tabla = $tamaño_tabla +1 ;
+                    }else if ($tamaño_tabla == 6){
+                            echo "<td>".$traer."</td>";
+                            echo" </tr>";
+                            $tamaño_tabla = $tamaño_tabla +1 ;
+                        }
+                }   
         }
+    echo "</table>";
+    echo "</div>";
     fclose($archivo);
     if(isset($_POST['añadir'])){
         $existe = 0 ;

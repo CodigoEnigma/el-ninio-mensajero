@@ -39,7 +39,9 @@
 ?>
 
 <?php include('inc/header.php'); ?>
-<div class="container">
+
+
+
 
 	 <a href="<?php echo ROOT_URL; ?>Administrar.php" role = "button" style="float:left; margin:10px;">
 			 <img src="images/boton_volver.gif" class="img-fluid" alt="Responsive image" id="btn-back"  style = 'width:150px; height:50px;'>
@@ -55,19 +57,21 @@
 
 
 	<form action="<?php $_SERVER['PHP_SELF']; ?>" method="post"  class="login">
-		CI<br>
+		
 		<div class="input-group">
+		    <label>Cedula de Identidad</label> <br>
 			<input type="text" name="ci" value= "<?php echo $row[0] ?>" ><br>
 		</div>
-			Nombre<br>
 		<div class="input-group">
+        	 <label>Nombre</label>
 			 <input type="text" name="nombre" value="<?php echo $row[3];?>">
 		</div>
-			Apellido<br> 
+		
 		<div class="input-group">
+		    <label>Apellidos</label> 
 			<input type="text" name="apellido" value="<?php echo $row[4];?>">
 		</div>
-			Tipo<br> 
+        
 		<div class="input-group">
 			<select name="especialidad" required>
 				<option value="">Elige una opción</option>    
@@ -76,12 +80,14 @@
 				<?php endforeach;?>
 			</select> 
 		</div>
+		    <button type="submit" name="editar" class="btn btn-primary btn-block">Guardar</button>
 			<br>
-			<a href="<?php echo ROOT_URL; ?>Administrar.php" name="cancel" style="margin-right: 70px; margin-left:10px" class="btn btn-success btn-primary">Cancelar</a>
-			<button type="submit" name="editar" class="btn btn-success btn-primary">Guardar</button>
+			<a href="<?php echo ROOT_URL; ?>Administrar.php" name="cancel"  class="btn btn-primary btn-block">Cancelar</a>
+			<br>
+			
 		</form>
 	</hr>
-	</div>
+	
 	
 
 
