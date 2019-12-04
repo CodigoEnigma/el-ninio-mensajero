@@ -126,7 +126,8 @@
                 
                 if($tamanio_texto != 0){
                     if($tipo_texto=="text/plain"){ 
-                         $carpeta_destino=$_SERVER['DOCUMENT_ROOT'].'/xampp/el-ninio-mensajero/palabras/'; //DIRECTORIO
+                         $carpeta_destino=
+                         $carpeta_destino=$_SERVER['DOCUMENT_ROOT'].'/palabras/'; //DIRECTORIO
                          move_uploaded_file($_FILES['texto']['tmp_name'],$carpeta_destino.$nombre.".txt");//MANEJO DE RUTAS
                          
                            

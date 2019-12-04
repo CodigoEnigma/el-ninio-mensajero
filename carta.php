@@ -28,8 +28,8 @@
                                     </script>';
                 } //else {echo "Solo se pueden subir imagenes" ;} 
               }  //else {echo "tamaño muy grande de la imagen" ;}
-            
-            $directorio = opendir("palabras/") ; //directorio de donde se abren los archivos txt
+            $carpeta_destino=$_SERVER['DOCUMENT_ROOT'].'/xampp/el-ninio-mensajero/palabras/';
+            $directorio = opendir($carpeta_destino) ; //directorio de donde se abren los archivos txt
             $estado=0;
             while($archivo=readdir($directorio) ){
                 if($estado==0){
@@ -37,7 +37,7 @@
                     $nombre = $archivo ;
                     extract($_GET) ;
                     $texto = explode(" ",$body);
-                    $archivo = fopen("palabras/". $archivo,"r");//DIRECCIONEES
+                    $archivo = fopen($carpeta_destino. $archivo,"r");//DIRECCIONEES
                     while(!feof($archivo) && $estado==0){
                         $cadena = fgets($archivo);
                         $cadena1 = trim($cadena);
@@ -73,12 +73,12 @@
                                 
                                 }
                                 mysqli_close($conn);
-                                $archivo_objetivo=fopen($nombre_imagen,"r");
+                                $archivo_objetivo=fopen($nombre_imagen,"r");//directorio
                                 $contenido=fread($archivo_objetivo,$tamanio_imagen); 
                                 $contenido=addslashes($contenido);
                                 fclose($archivo_objetivo);
                                 
-                                $fichero = "emojis/". $id. ".png";
+                                $fichero = "emojis/". $id. ".png";//url
                                 $archivo_objetivo1=fopen($fichero,"r");
                                 $contenido1=fread($archivo_objetivo1, filesize($fichero)); 
                                 $contenido1=addslashes($contenido1);
@@ -98,7 +98,7 @@
                                  mysqli_close($conn);
 
 
-                                 unlink($nombre_imagen);
+                                 unlink($nombre_imagen);//url
                                 }
                             }//fin foreacg
                     } //fin while 
@@ -134,13 +134,13 @@
                         }
                         }
                         mysqli_close($conn);
-                        $archivo_objetivo=fopen($nombre_imagen,"r");
+                        $archivo_objetivo=fopen($nombre_imagen,"r");//uurl
                         $contenido=fread($archivo_objetivo,$tamanio_imagen); 
                         $contenido=addslashes($contenido);
                         fclose($archivo_objetivo);
                                 
                         $fichero = "emojis/". $id. ".png";
-                        $archivo_objetivo1=fopen($fichero,"r");
+                        $archivo_objetivo1=fopen($fichero,"r");//url
                         $contenido1=fread($archivo_objetivo1, filesize($fichero)); 
                         $contenido1=addslashes($contenido1);
                         fclose($archivo_objetivo1);
@@ -156,13 +156,14 @@
                                     </script>';
                             } else {echo 'ERROR: '. mysqli_error($conn);}
                         mysqli_close($conn);
-                        unlink($nombre_imagen);
+                        unlink($nombre_imagen);//url
 
             }
              
             
      }else{
-            $directorio = opendir("palabras/") ;
+            $carpeta_destino=$_SERVER['DOCUMENT_ROOT'].'/xampp/el-ninio-mensajero/palabras/';
+            $directorio = opendir($carpeta_destino) ;//url
             $estado=0;
             while($archivo=readdir($directorio) ){
                 if($estado==0){
@@ -170,7 +171,7 @@
                     $nombre = $archivo ;
                     extract($_GET) ;
                     $texto = explode(" ",$body);
-                    $archivo = fopen("palabras/". $archivo,"r");
+                    $archivo = fopen($carpeta_destino. $archivo,"r");//url
                     while(!feof($archivo) && $estado==0){
                         $cadena = fgets($archivo);
                         $cadena1 = trim($cadena);
@@ -208,7 +209,7 @@
                                 mysqli_close($conn);
                                 require('config/db.php');
                                 $fichero = "emojis/". $id. ".png";
-                                $archivo_objetivo1=fopen($fichero,"r");
+                                $archivo_objetivo1=fopen($fichero,"r");//url
                                 $contenido1=fread($archivo_objetivo1, filesize($fichero)); 
                                 $contenido1=addslashes($contenido1);
                                 fclose($archivo_objetivo1);
@@ -259,7 +260,7 @@
                 }
                 mysqli_close($conn);
                 require('config/db.php');
-                $fichero = "emojis/". $id. ".png";
+                $fichero = "emojis/". $id. ".png";//url
                 $archivo_objetivo1=fopen($fichero,"r");
                 $contenido1=fread($archivo_objetivo1, filesize($fichero)); 
                 $contenido1=addslashes($contenido1);
