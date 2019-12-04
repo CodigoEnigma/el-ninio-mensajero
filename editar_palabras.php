@@ -79,7 +79,7 @@ include('inc/header.php');
     $nombre_especialidad = $valores['NOMBRE_ESPECIALIDAD'];
     mysqli_close($conn);
 
-    $carpeta_destino=$_SERVER['DOCUMENT_ROOT'].'/xampp/el-ninio-mensajero/palabras/'.$nombre_especialidad.".txt";//DIRECTORIO
+    $carpeta_destino=$_SERVER['DOCUMENT_ROOT'].'/palabras/'.$nombre_especialidad.".txt";//DIRECTORIO
     $archivo = fopen("$carpeta_destino","r") or die ("PROBLEMAS AL ABRIR EL ARCHIVO TXT") ;
     echo '<div id="div1" style ="float: center">' ;
     echo '<table border="1">';
@@ -138,8 +138,8 @@ include('inc/header.php');
     
     if(isset($_POST['eliminar'])){
         $estado = 0;
-        rename("$carpeta_destino",$_SERVER['DOCUMENT_ROOT'].'/xampp/el-ninio-mensajero/palabras/cambio.txt');//DIRECTORIO
-        $text = fopen($_SERVER['DOCUMENT_ROOT'].'/xampp/el-ninio-mensajero/palabras/cambio.txt', "r");//DIRECTORIO
+        rename("$carpeta_destino",$_SERVER['DOCUMENT_ROOT'].'/palabras/cambio.txt');//DIRECTORIO
+        $text = fopen($_SERVER['DOCUMENT_ROOT'].'/palabras/cambio.txt', "r");//DIRECTORIO
         $texto1 = fopen("$carpeta_destino","a") or die ("problemas");
         while(!feof($text)){
                $cadena = fgets($text);
@@ -152,7 +152,7 @@ include('inc/header.php');
             }
         }
         fclose ($text);
-        unlink($_SERVER['DOCUMENT_ROOT'].'/xampp/el-ninio-mensajero/palabras/cambio.txt');
+        unlink($_SERVER['DOCUMENT_ROOT'].'/palabras/cambio.txt');
         if($estado == 1){
             echo'<script type="text/javascript">
                                     alert("PALABRA ELIMINADA CON EXITO");
