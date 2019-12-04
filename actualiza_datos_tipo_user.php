@@ -1,6 +1,23 @@
-<?php 
-        require('config/config.php');
+
+       
+
+        <?php
+	require('config/config.php');
+    
     session_start();
+    if(!isset($_COOKIE)){
+		header('Location: '.ROOT_URL.'');
+	} else {
+		if($_COOKIE['roll'] != 'administrador'){
+			header('Location: '.ROOT_URL.'');
+		}
+	}
+	
+?>
+       
+       
+       <?php 
+        
 include('inc/header.php'); 
  extract($_GET);
 $query = "SELECT * FROM especialidad WHERE ID_ESPECIALIDAD='$id'" ;

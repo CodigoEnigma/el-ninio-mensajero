@@ -5,6 +5,8 @@
     <title>El niño mensajero</title>
 </head>
 <body>
+   
+   
     <?php
       require('config/config.php');
       require('config/db.php');
@@ -154,9 +156,16 @@
 
                     mail($toEmail, $sujeto, $body, $headers);
 
-                    header('Location: '.ROOT_URL.'Administrar.php');
+                     echo '<script type="text/javascript">
+                                    alert("EL USUARIO FUE REGISTRADO CORRECTAMENTE");
+                                    window.location.href="'. ROOT_URL .'Administrar.php";
+                                    </script>';
                   } else {
                     mysqli_close($conn);
+                     echo '<script type="text/javascript">
+                                    alert("");
+                                    window.location.href="'. ROOT_URL .'Administrar.php";
+                                    </script>';
                     $errorR = "No se pudo realizar el registro. Intente de nuevo.";
                   }
 
@@ -246,10 +255,6 @@
      
    
   </form>
-  <?php
-    
-    
-    ?>
   
 </body>
 </html>
