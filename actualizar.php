@@ -6,9 +6,9 @@
 		header('Location: '.ROOT_URL.'');
 	} else {
 		if($_COOKIE['roll'] != 'administrador'){
-			$queryEspec = 'SELECT * FROM especialidad';
-      		$resultEspec = mysqli_query($conn,$queryEspec);
-			$especs = mysqli_fetch_all($resultEspec, MYSQLI_ASSOC);
+			//$queryEspec = 'SELECT * FROM especialidad';
+      		//$resultEspec = mysqli_query($conn,$queryEspec);
+			//$especs = mysqli_fetch_array($resultEspec, MYSQL_ASSOC);
 			header('Location: '.ROOT_URL.'');
 		} else {
 
@@ -109,12 +109,11 @@
                 ?></option> 
             <?php require('config/db.php');
                 $query=mysqli_query($conn,"SELECT * FROM especialidad");
-                $especs= mysqli_fetch_all($query,MYSQL_ASSOC);
-                mysqli_close($conn);   
-                foreach($especs as $espec) : ?>
-             
-                  <option value="<?php echo $espec['ID_ESPECIALIDAD']; ?>"><?php echo $espec['NOMBRE_ESPECIALIDAD']; ?></option>
-                <?php endforeach;?>
+                while($especialidad= mysqli_fetch_array($query,MYSQL_ASSOC)){
+                    echo '<option value="'.$especialidad['ID_ESPECIALIDAD'].'">'. $especialidad['NOMBRE_ESPECIALIDAD'].'</option>' ;
+                }
+               mysqli_close($conn);
+                ?>
           </select> 
         </div>
 		
