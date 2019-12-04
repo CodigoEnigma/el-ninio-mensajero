@@ -80,24 +80,26 @@
                 </div>		    
                 <?php endif;?>
     
-    <?php if($postular =='si'):?>
+    
+    <?php if($postular =='si'):?>      
+         
            <div  style="float:right; margin:30px;  ">
                   
-                    <?php if(!isset($estado) || $estado == "no") : ?>
+                    <?php if( $estado == "no") : ?>
                       
-                    <form method="POST" action="<?php echo ROOT_URL; ?>leer_carta.php?id=<?php echo $id?>" enctype="multipart/form-data">
+                    <form method="POST" action="<?php echo ROOT_URL; ?>lectura_carta.php?id=<?php echo $id?>" enctype="multipart/form-data">
 			        <div class="form-group" align="center">
 				        <h5><strong>Postular a Boletin</strong></h5>
-				        <input type="submit" name="si" id="postular" value="SI" class="btn btn-success btn-primary">
+				        <input type="submit" name="si" id="postular" value="           SI           " class="btn btn-primary">
                     </div>	
                     </form>	 
                             
                     <?php elseif($estado == "si"):?>
                             
-                    <form method="POST" action="<?php echo ROOT_URL; ?>leer_carta.php?id=<?php echo $id?>" enctype="multipart/form-data">
+                    <form method="POST" action="<?php echo ROOT_URL; ?>lectura_carta.php?id=<?php echo $id?>" enctype="multipart/form-data">
 			        <div class="form-group" align="center">
 				        <h5><strong>Dejar de Postular a Boletin</strong></h5>
-				        <input type="submit" name="no" id="dejarpostular" value="SI" class="btn btn-success btn-primary" style="'width:70px; height:25px">
+				        <input type="submit" name="no" id="dejarpostular" value="           SI           " class="btn btn-primary"  style="'width:100px; height:25px">
                     </div>	
                     </form>	    
                            
