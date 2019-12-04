@@ -35,10 +35,15 @@
     $estado = $carta['POSTULACION_BOLETIN'];
     ?>
     
-    
+    <?php if($rol != "Edit"):?>
         <a href="<?php echo ROOT_URL; ?>VentanaUsuario.php" role = "button" style="float:left; margin:10px;">
             <img src="images/boton_volver.gif" class="img-fluid" alt="Responsive image" id="btn-back"  style = 'width:150px; height:50px;'>
         </a> 
+    <?php elseif ($rol == "Edit") :?>
+         <a href="<?php echo ROOT_URL; ?>editor_boletin.php" role = "button" style="float:left; margin:10px;">
+            <img src="images/boton_volver.gif" class="img-fluid" alt="Responsive image" id="btn-back"  style = 'width:150px; height:50px;'>
+        </a> 
+    <?php endif ; ?>
   
   <br><br><br>
   
@@ -85,7 +90,7 @@
          
            <div  style="float:right; margin:30px;  ">
                   
-                    <?php if( $estado == "no") : ?>
+                    <?php if( !isset($estado) || $estado == "no") : ?>
                       
                     <form method="POST" action="<?php echo ROOT_URL; ?>lectura_carta.php?id=<?php echo $id?>" enctype="multipart/form-data">
 			        <div class="form-group" align="center">
