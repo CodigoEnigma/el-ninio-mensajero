@@ -80,7 +80,7 @@
                             setcookie('nombreUsuario', $_SESSION['nombre'], time() + (86400 * 30));
                             setcookie('roll', $id_esp, time() + (86400 * 30));
                             setcookie('id_usuario', $ci, time() + (86400 * 30));
-                            header('Location: '.ROOT_URL.'carta.php'); // AQUI VIENE EL NOMBRE DE LA VENTANA DEL EDITOR DE BOLETIN
+                            header('Location: '.ROOT_URL.'editor_boletin.php'); // AQUI VIENE EL NOMBRE DE LA VENTANA DEL EDITOR DE BOLETIN
                             }else{
                                 setcookie('nombreUsuario', $_SESSION['nombre'], time() + (86400 * 30));
                                 setcookie('roll', $id_esp, time() + (86400 * 30));

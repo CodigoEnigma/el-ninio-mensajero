@@ -2,63 +2,65 @@
 	require('config/config.php');
 	require('config/db.php');
 	session_start();
-    extract($_GET);
 
-		if(!isset($_COOKIE)){
+	if(!isset($_COOKIE)){
 		header('Location: '.ROOT_URL.'');
 	} else {
 		if($_COOKIE['roll'] != 'administrador'){
 			header('Location: '.ROOT_URL.'');
 		}
 	}
- include('inc/header.php');
-?>
-    
-    
-    
-		<table border='1'; class='table table-dark';>
-			<tr class='warning'>
-				<td>ID</td>
-				<td>Nombre</td>
-				<td>Apellido</td>
-				<td>Especialidad</td>
-				<td>Correo</td>
-				<td>Editar</td>
-				<td>Borrar</td>
-			</tr>
 	
+ include('inc/header.php');
+		echo "<table border='1'; class='table table-dark';>";
+			echo "<tr class='warning'>";
+				echo "<td>ID</td>";
+				echo "<td>Nombre</td>";
+				echo "<td>Apellido</td>";
+				echo "<td>Especialidad</td>";
+				echo "<td>Correo</td>";
+				echo "<td>Editar</td>";
+				echo "<td>Borrar</td>";
+			echo "</tr>";
+	?>
 
 	<br>
 <h2><strong>Administración de usuarios registrados</strong> </h2>
-    
-    
-    <?php require('config/db.php');
-                $query=mysqli_query($conn,"SELECT * FROM usuario");
-                $especs= mysqli_fetch_all($query,MYSQLI_ASSOC);
-                mysqli_close($conn);   
-                foreach($especs as $espec) : ?>
-                    <tr class='success'>
-                        <td><?php echo $espec['ID_USUARIO'];?></td>
-                        <td><?php echo $espec['NOMBRE_USUARIO'];?></td>
-                        <td><?php echo $espec['APELLIDOS_USUARIO'];?></td>
-                        <td><?php $esp = $espec['ID_ESPECIALIDAD'];
-                                require('config/db.php');
-                                $consulta = mysqli_query($conn, "SELECT NOMBRE_ESPECIALIDAD FROM especialidad WHERE ID_ESPECIALIDAD = '$esp'");
-                                $resultado_especialidad = mysqli_fetch_array($consulta,MYSQL_ASSOC);
-                                 mysqli_close($conn); 
-                                 echo $resultado_especialidad['NOMBRE_ESPECIALIDAD'] ;
-                                 
-                            ?></td>
-                        <td><?php echo $espec['CORREO_USUARIO'];?></td>                       
-                        <td><a href="<?php echo ROOT_URL ;?>actualizar.php?id=<?php echo $espec['ID_USUARIO'];?>"><img class='imgCarta' src='images/ICONO_ACTUALIZAR.png' class='img-sluid' alt='Responsive image' style = 'width:50px; height:50px;'></a></td>                     <td><a href="<?php echo ROOT_URL ;?>Administrar.php?id=<?php echo $espec['ID_USUARIO'];?>&idborrar=2"><img class='imgCarta' src='images/ICONO_ELIMINAR.png' class='img-sluid' alt='Responsive image' style = 'width:50px; height:50px;'></a></td>	
-	
-			        </tr>  
-                        
-                 <?php endforeach;?>  
 
 
+
+
+<button type="button" class="btn btn-default" href=''></button>
+
+	<?php
+        $sql=("SELECT * FROM usuario");
+		$query=mysqli_query($conn,$sql);
+        while($arreglo=mysqli_fetch_array($query)){	
+			echo "<tr class='success'>";
+            echo "<td>$arreglo[0]</td>";
+            echo "<td>$arreglo[3]</td>";
+            echo "<td>$arreglo[4]</td>";
+            echo "<td>$arreglo[7]</td>";
+            echo "<td>$arreglo[5]</td>";
+            //echo "<td>$arreglo[5]</td>";
+            echo "<td><a href='". ROOT_URL ."actualizar.php?id=$arreglo[0]'><img class='imgCarta' src='images/ICONO_ACTUALIZAR.png' class='img-sluid' alt='Responsive image' style = 'width:50px; height:50px;'></td>";
+
+            echo "<td><a href='". ROOT_URL ."Administrar.php?id=$arreglo[0]&idborrar=2'><img class='imgCarta' src='images/ICONO_ELIMINAR.png' class='img-sluid' alt='Responsive image' style = 'width:50px; height:50px;'></td>";	
 	
-   
+			echo "</tr>";
+
+		}
+
+		echo "</table>";
+		 mysqli_close($conn);
+
+		
+
+
+		extract($_GET);
+
+
+?>
     <div class="modal" id="myModal" role="dialog">
     <div class="modal-dialog">
     
