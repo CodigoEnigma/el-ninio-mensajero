@@ -109,7 +109,7 @@
                 ?></option> 
             <?php require('config/db.php');
                 $query=mysqli_query($conn,"SELECT * FROM especialidad");
-                $especs= mysqli_fetch_all($query,MYSQLI_ASSOC);
+                $especs= mysqli_fetch_all($query,MYSQL_ASSOC);
                 mysqli_close($conn);   
                 foreach($especs as $espec) : ?>
              

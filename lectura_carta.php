@@ -35,36 +35,41 @@
     $estado = $carta['POSTULACION_BOLETIN'];
     ?>
     
-    <div class="contenedor" >
+    
         <a href="<?php echo ROOT_URL; ?>VentanaUsuario.php" role = "button" style="float:left; margin:10px;">
             <img src="images/boton_volver.gif" class="img-fluid" alt="Responsive image" id="btn-back"  style = 'width:150px; height:50px;'>
         </a> 
-  </div>
-  <br><br><br><br>
   
-   <div>
+  <br><br><br>
+  
+   
   
        <?php if($leer=='si'):?>
-               <div class="imagenCarta" style="float:left">			
-			    <img src="data:image/png;base64,<?php echo base64_encode($carta['IMAGEN_AVATAR']) ?>" height="100" width="100">				
-                </div>
-                <?php echo $carta['FECHA_RECEPCION']; ?>
-                <?php echo $carta['TEXTO_CARTA']; ?>
-                <?php
-                            $imagen = $carta['IMAGEN'];
-                            if(!is_null($imagen)){
-                                echo "<div align='center'>" ;
-                                echo "<h5><strong>Imagen adjuntada a la carta</strong></h5>" ;
-                                echo "<img src='data:image/jpeg;base64,". base64_encode($imagen)."' height='125' width='125'>" ;
-                                echo "</div>" ;
-                            }
+              
+              
+               <div class="burbuja" >
+                             <img src="data:image/png;base64,<?php echo base64_encode($carta['IMAGEN_AVATAR']) ?>" height="100" width="100" align="left">
+                             <h5><strong>Carta enviada la fecha:<?php echo $carta['FECHA_RECEPCION']?></strong></h5>
+                             <br><?php echo $carta['TEXTO_CARTA']?>
+                             <?php
+                   
+                                $imagen = $carta['IMAGEN'];
+                                    if(!is_null($imagen)){
+                                        echo "<div align='center'>" ;
+                                        echo "<h5><strong>Imagen adjuntada a la carta</strong></h5>" ;
+                                        echo "<img src='data:image/jpeg;base64,". base64_encode($imagen)."' height='125' width='125'>" ;
+                                        echo "</div>" ;
+                                    }
                             ?>
-               
-               
-         <?php endif;?> 
-     <br><br><br><br>
+                             
+                  </div>
+        <?php endif;?> 
+        
+     
      <?php if($responder =='si'):?>
+               
                 <div style="float:left">
+                   <br><br>
                     <h4 align="cener"><strong>Responder a la carta</strong></h4>
                 <form method="POST" action="<?php $_SERVER['PHP_SELF']; ?>" enctype="multipart/form-data">
 			        <div class="form-group" align="center">
@@ -109,7 +114,7 @@
          </div>
     <?php endif ;?> 
                  
-   </div>
+   
     
 			  
 			  
