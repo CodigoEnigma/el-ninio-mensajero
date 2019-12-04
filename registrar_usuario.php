@@ -5,6 +5,8 @@
     <title>El niño mensajero</title>
 </head>
 <body>
+   
+   
     <?php
       require('config/config.php');
       require('config/db.php');
