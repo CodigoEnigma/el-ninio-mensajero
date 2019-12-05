@@ -98,7 +98,7 @@
                                  mysqli_close($conn);
 
 
-                                 unlink($nombre_imagen);//url
+                                 unlink($_SERVER['DOCUMENT_ROOT']."/".$nombre_imagen);//url
                                 }
                             }//fin foreacg
                     } //fin while 
@@ -156,7 +156,7 @@
                                     </script>';
                             } else {echo 'ERROR: '. mysqli_error($conn);}
                         mysqli_close($conn);
-                        unlink($nombre_imagen);//url
+                        unlink($_SERVER['DOCUMENT_ROOT']."/".$nombre_imagen);//url
 
             }
              
