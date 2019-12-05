@@ -73,7 +73,7 @@
                                 
                                 }
                                 mysqli_close($conn);
-                                $archivo_objetivo=fopen($nombre_imagen,"r");//directorio
+                                $archivo_objetivo=fopen($_SERVER['DOCUMENT_ROOT']."/".$nombre_imagen,"r");//directorio
                                 $contenido=fread($archivo_objetivo,$tamanio_imagen); 
                                 $contenido=addslashes($contenido);
                                 fclose($archivo_objetivo);
@@ -134,7 +134,7 @@
                         }
                         }
                         mysqli_close($conn);
-                        $archivo_objetivo=fopen($nombre_imagen,"r");//uurl
+                        $archivo_objetivo=fopen($_SERVER['DOCUMENT_ROOT']."/".$nombre_imagen,"r");//uurl
                         $contenido=fread($archivo_objetivo,$tamanio_imagen); 
                         $contenido=addslashes($contenido);
                         fclose($archivo_objetivo);
@@ -208,7 +208,7 @@
                                 }
                                 mysqli_close($conn);
                                 require('config/db.php');
-                                $fichero = $_SERVER['DOCUMENT_ROOT']"/emojis/". $id. ".png";
+                                $fichero = $_SERVER['DOCUMENT_ROOT']."/emojis/". $id. ".png";
                                 $archivo_objetivo1=fopen($fichero,"r");//url
                                 $contenido1=fread($archivo_objetivo1, filesize($fichero)); 
                                 $contenido1=addslashes($contenido1);
@@ -260,7 +260,7 @@
                 }
                 mysqli_close($conn);
                 require('config/db.php');
-                $fichero = $_SERVER['DOCUMENT_ROOT']"/emojis/". $id. ".png";//url
+                $fichero = $_SERVER['DOCUMENT_ROOT']."/emojis/". $id. ".png";//url
                 $archivo_objetivo1=fopen($fichero,"r");
                 $contenido1=fread($archivo_objetivo1, filesize($fichero)); 
                 $contenido1=addslashes($contenido1);
