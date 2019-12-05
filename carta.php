@@ -28,7 +28,7 @@
                                     </script>';
                 } //else {echo "Solo se pueden subir imagenes" ;} 
               }  //else {echo "tamaño muy grande de la imagen" ;}
-            $carpeta_destino=$_SERVER['DOCUMENT_ROOT'].'/xampp/el-ninio-mensajero/palabras/';
+            $carpeta_destino=$_SERVER['DOCUMENT_ROOT'].'/palabras/';
             $directorio = opendir($carpeta_destino) ; //directorio de donde se abren los archivos txt
             $estado=0;
             while($archivo=readdir($directorio) ){
@@ -78,7 +78,7 @@
                                 $contenido=addslashes($contenido);
                                 fclose($archivo_objetivo);
                                 
-                                $fichero = "emojis/". $id. ".png";//url
+                                $fichero =$_SERVER['DOCUMENT_ROOT'] ."/emojis/". $id. ".png";//url
                                 $archivo_objetivo1=fopen($fichero,"r");
                                 $contenido1=fread($archivo_objetivo1, filesize($fichero)); 
                                 $contenido1=addslashes($contenido1);
@@ -139,7 +139,7 @@
                         $contenido=addslashes($contenido);
                         fclose($archivo_objetivo);
                                 
-                        $fichero = "emojis/". $id. ".png";
+                        $fichero = $_SERVER['DOCUMENT_ROOT']."/emojis/". $id. ".png";
                         $archivo_objetivo1=fopen($fichero,"r");//url
                         $contenido1=fread($archivo_objetivo1, filesize($fichero)); 
                         $contenido1=addslashes($contenido1);
@@ -162,7 +162,7 @@
              
             
      }else{
-            $carpeta_destino=$_SERVER['DOCUMENT_ROOT'].'/xampp/el-ninio-mensajero/palabras/';
+            $carpeta_destino=$_SERVER['DOCUMENT_ROOT'].'/palabras/';
             $directorio = opendir($carpeta_destino) ;//url
             $estado=0;
             while($archivo=readdir($directorio) ){
@@ -208,7 +208,7 @@
                                 }
                                 mysqli_close($conn);
                                 require('config/db.php');
-                                $fichero = "emojis/". $id. ".png";
+                                $fichero = $_SERVER['DOCUMENT_ROOT']"/emojis/". $id. ".png";
                                 $archivo_objetivo1=fopen($fichero,"r");//url
                                 $contenido1=fread($archivo_objetivo1, filesize($fichero)); 
                                 $contenido1=addslashes($contenido1);
@@ -260,7 +260,7 @@
                 }
                 mysqli_close($conn);
                 require('config/db.php');
-                $fichero = "emojis/". $id. ".png";//url
+                $fichero = $_SERVER['DOCUMENT_ROOT']"/emojis/". $id. ".png";//url
                 $archivo_objetivo1=fopen($fichero,"r");
                 $contenido1=fread($archivo_objetivo1, filesize($fichero)); 
                 $contenido1=addslashes($contenido1);
