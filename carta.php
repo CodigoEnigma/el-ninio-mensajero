@@ -17,17 +17,11 @@
 		 
             if($tamanio_imagen<=20000000){
                 if($tipo_imagen=="image/jpeg" || $tipo_imagen=="image/jpg" || $tipo_imagen=="image/png" || $tipo_imagen=="image/gif"){ 
-                     $carpeta_destino=$_SERVER['DOCUMENT_ROOT'];
-                        move_uploaded_file($_FILES['imagen']['tmp_name'],$nombre_imagen);
+                     
+                        move_uploaded_file($_FILES['imagen']['tmp_name'],$_SERVER['DOCUMENT_ROOT']."/temporal/".$nombre_imagen);
                         //echo "exito";
 
-                 }else{
-                    echo'<script type="text/javascript">
-                                    alert("Solo se permiten imagenes");
-                                    window.location.href="'. ROOT_URL .'carta.php?id=chico";
-                                    </script>';
-                } //else {echo "Solo se pueden subir imagenes" ;} 
-              }  //else {echo "tamaño muy grande de la imagen" ;}
+                 
             $carpeta_destino=$_SERVER['DOCUMENT_ROOT'].'/palabras/';
             $directorio = opendir($carpeta_destino) ; //directorio de donde se abren los archivos txt
             $estado=0;
@@ -98,7 +92,7 @@
                                  mysqli_close($conn);
 
 
-                                 unlink($_SERVER['DOCUMENT_ROOT']."/".$nombre_imagen);//url
+                                 unlink($_SERVER['DOCUMENT_ROOT']."/temporal/".$nombre_imagen);//url
                                 }
                             }//fin foreacg
                     } //fin while 
@@ -156,10 +150,16 @@
                                     </script>';
                             } else {echo 'ERROR: '. mysqli_error($conn);}
                         mysqli_close($conn);
-                        unlink($_SERVER['DOCUMENT_ROOT']."/".$nombre_imagen);//url
+                        unlink($_SERVER['DOCUMENT_ROOT']."/temporal/".$nombre_imagen);//url
 
             }
-             
+             }else{
+                    echo'<script type="text/javascript">
+                                    alert("Solo se permiten imagenes");
+                                    window.location.href="'. ROOT_URL .'carta.php?id=chico";
+                                    </script>';
+                } //else {echo "Solo se pueden subir imagenes" ;} 
+            } //else {echo "tamaño muy grande de la imagen" ;}
             
      }else{
             $carpeta_destino=$_SERVER['DOCUMENT_ROOT'].'/palabras/';
