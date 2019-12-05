@@ -145,7 +145,7 @@
                         $estado = 1 ;
                         if(mysqli_query($conn, $query)){
                                     echo'<script type="text/javascript">
-                                    alert("Carta Enviada");
+                                    alert("¡Cartita enviada con exito!");
                                     window.location.href="'. ROOT_URL .'index.php";
                                     </script>';
                             } else {echo 'ERROR: '. mysqli_error($conn);}
@@ -155,7 +155,7 @@
             }
              }else{
                     echo'<script type="text/javascript">
-                                    alert("Solo se permiten imagenes");
+                                    alert("¡Solo se puden añadir imagenes a la cartita!");
                                     window.location.href="'. ROOT_URL .'carta.php?id=chico";
                                     </script>';
                 } //else {echo "Solo se pueden subir imagenes" ;} 

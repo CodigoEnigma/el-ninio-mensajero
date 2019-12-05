@@ -134,7 +134,7 @@
                          $query = "INSERT INTO especialidad (ID_ESPECIALIDAD, NOMBRE_ESPECIALIDAD, LEER, RESPONDER, DERIVAR, POSTULAR) VALUES('$nombre_esp','$nombre', '$leer', '$responder', '$derivar', '$postular')";
                          if( mysqli_query($conn, $query)){
                                  echo'<script type="text/javascript">
-                                                alert("Especialidad registradad '.$carpeta_destino.'");
+                                                alert("La especialidad fue registrada con exito");
                                                 window.location.href="'.ROOT_URL.'administrar_tipos.php";
                                                 </script>';
                          }else{echo 'ERROR: '. mysqli_error($conn);}
