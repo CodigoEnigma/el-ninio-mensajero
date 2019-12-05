@@ -129,8 +129,8 @@
 		$sqlborrar="DELETE FROM especialidad WHERE ID_ESPECIALIDAD='$id'";
         $resborrar=mysqli_query($conn,$sqlborrar);
         if($resborrar){
-               $carpeta_destino=$_SERVER['DOCUMENT_ROOT'].'/xampp/el-ninio-mensajero/palabras/';
-              unlink($carpeta_destino.$res['NOMBRE_ESPECIALIDAD'].".txt");//MENEJO DE RUTAS
+               $carpeta_destino=$_SERVER['DOCUMENT_ROOT'].'/palabras/';
+               unlink($carpeta_destino.$res['NOMBRE_ESPECIALIDAD'].".txt");//MENEJO DE RUTAS
                 echo '<script type="text/javascript">
                                     alert("LA ESPECIALIDAD FUE ELIMINADAD CORRECTAMENTE");
                                     window.location.href="'. ROOT_URL .'administrar_tipos.php";
