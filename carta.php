@@ -67,7 +67,7 @@
                                 
                                 }
                                 mysqli_close($conn);
-                                $archivo_objetivo=fopen($_SERVER['DOCUMENT_ROOT']."/".$nombre_imagen,"r");//directorio
+                                $archivo_objetivo=fopen($_SERVER['DOCUMENT_ROOT']."/temporal/".$nombre_imagen,"r");//directorio
                                 $contenido=fread($archivo_objetivo,$tamanio_imagen); 
                                 $contenido=addslashes($contenido);
                                 fclose($archivo_objetivo);
@@ -128,7 +128,7 @@
                         }
                         }
                         mysqli_close($conn);
-                        $archivo_objetivo=fopen($_SERVER['DOCUMENT_ROOT']."/".$nombre_imagen,"r");//uurl
+                        $archivo_objetivo=fopen($_SERVER['DOCUMENT_ROOT']."/temporal/".$nombre_imagen,"r");//uurl
                         $contenido=fread($archivo_objetivo,$tamanio_imagen); 
                         $contenido=addslashes($contenido);
                         fclose($archivo_objetivo);
