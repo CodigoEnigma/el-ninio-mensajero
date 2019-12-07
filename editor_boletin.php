@@ -28,8 +28,8 @@
         <div style="float:right">
                 <a class="btn btn-primary" href="<?php echo ROOT_URL; ?>crear_boletin.php" role="button" id ="crearEspecialidad" style="margin:30px;">Crear Boletin</a>
             </div>
-		<h1 align="left"><strong>Bienvenido: <?php echo $nombre?></strong> </h1>
-		<h1 align="left"><strong><?php
+		<h2 align="left"><strong>Bienvenido: <?php echo $nombre?></strong> </h2>
+		<h2 align="left"><strong>Rol: <?php
                 require('config/db.php');
                 $nom_esp = mysqli_query( $conn, "SELECT NOMBRE_ESPECIALIDAD FROM especialidad WHERE ID_ESPECIALIDAD = '$rol'");
                 $res_nombre_esp = mysqli_fetch_array($nom_esp, MYSQL_ASSOC);
@@ -38,7 +38,7 @@
                
             
             ?>
-		</strong> </h1>
+		</strong> </h2>
 		<br>
 		<h2 style="text-align:center"><strong>CARTAS ASIGNADAS</strong></h2>
         <table border="1"; class="table table-dark" style="margin-left: auto;margin-right: auto;max-width:70%">

@@ -5,7 +5,8 @@
 
     if(isset($_POST['submit'])){
 		$body = $_POST['TEXTO_CARTA'];
-		date_default_timezone_set('America/La_Paz');
+		if($body != ""){
+            date_default_timezone_set('America/La_Paz');
 		$fecha = date("Y-m-d H:i:s");
 		//$img = $_POST['imagen'];
 		//$image = addslashes(file_get_contents($_POST['imagen']['tmp_name']));
@@ -277,9 +278,15 @@
                 mysqli_close($conn);
             }
         }
-                 
-                
-
+        }else {
+            
+                          
+                       echo'<script type="text/javascript">
+                            alert("Texto vacio, carta no enviada");
+                            window.location.href="'.ROOT_URL.'index.php";
+                            </script>';
+            
+        }
                
  }
 ?>
@@ -305,8 +312,8 @@
             <img src="images/boton_volver.gif" class="img-fluid" alt="Responsive image" id="btn-back"  style = 'width:150px; height:50px;'>
 		    </a> 
          <div  style="float:right">
-            <p class="cartasParrafo"><strong>Escoje un pesonaje</strong></p>
-            <a class="btn btn-info btn-lg" href="<?php echo ROOT_URL; ?>avatares.php" role="button" id = "iconos">
+            <p class="cartasParrafo"><strong><?php extract($_GET);echo $id;?></strong></p>
+            <a class="btn btn-info btn-lg"  role="button" id = "iconos">
             <img class="imgCarta" src="emojis/<?php extract($_GET);echo $id;?>.png" class="img-fluid" alt="Responsive image">
            	</a>
          </div>

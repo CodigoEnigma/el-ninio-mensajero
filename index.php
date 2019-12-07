@@ -21,7 +21,7 @@
 			<div class="iconos">	
             	<div>
 					<p class="cartasParrafo"><strong>CUENTANOS TUS AVENTURAS</strong> </p>
-					<a class="btn btn-info btn-lg" href="<?php echo ROOT_URL; ?>carta.php?id=chico" role="button" id = "iconos">
+					<a class="btn btn-info btn-lg" href="<?php echo ROOT_URL; ?>avatares.php" role="button" id = "iconos">
               			<img class="imgCarta" src="images/ICONO_ENVIAR_CARTA.png" class="img-fluid" alt="Responsive image">
            			</a>
             	</div>

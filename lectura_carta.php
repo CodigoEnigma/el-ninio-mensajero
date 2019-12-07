@@ -94,7 +94,7 @@
                       
                     <form method="POST" action="<?php echo ROOT_URL; ?>lectura_carta.php?id=<?php echo $id?>" enctype="multipart/form-data">
 			        <div class="form-group" align="center">
-				        <h5><strong>Postular a Boletin</strong></h5>
+				        <h5><strong>Postular carta a Boletin</strong></h5>
 				        <input type="submit" name="si" id="postular" value="           SI           " class="btn btn-primary">
                     </div>	
                     </form>	 
@@ -103,7 +103,7 @@
                             
                     <form method="POST" action="<?php echo ROOT_URL; ?>lectura_carta.php?id=<?php echo $id?>" enctype="multipart/form-data">
 			        <div class="form-group" align="center">
-				        <h5><strong>Dejar de Postular a Boletin</strong></h5>
+				        <h5><strong>Dejar de Postular carta a Boletin</strong></h5>
 				        <input type="submit" name="no" id="dejarpostular" value="           SI           " class="btn btn-primary"  style="'width:100px; height:25px">
                     </div>	
                     </form>	    

@@ -10,7 +10,8 @@
 			header('Location: '.ROOT_URL.'');
 		}
 	}
-	
+	$nombre = $_COOKIE['nombreUsuario'];
+    $rol1 = $_COOKIE['roll'];
  include('inc/header.php');
 		echo "<table border='1'; class='table table-dark';>";
 			echo "<tr class='warning'>";
@@ -25,7 +26,11 @@
 	?>
 
 	<br>
-<h2><strong>Administración de usuarios registrados</strong> </h2>
+	<h2 align="left"><strong>Bienvenido: <?php echo $nombre?> </strong> </h2>
+   <h2><strong>Rol: Administrador</strong></h2>
+    
+		
+<h3 align="center"><strong>Administración de usuarios registrados</strong> </h3>
 
 
 
