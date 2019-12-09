@@ -17,29 +17,35 @@
     <a href="<?php echo ROOT_URL; ?>" role = "button" style="float:left; margin:10px;">
 			 <img src="images/boton_volver.gif" class="img-fluid" alt="Responsive image" id="btn-back"  style = 'width:150px; height:50px;'>
     </a> 
+    <br>
+    <br>
+    <h1 style ="margin-right: 90px; " align="center"><strong>Cartas respondidas</strong></h1>
     
-    <?php
-     echo $_SERVER['DOCUMENT_ROOT'];
-    
-    $consulta='SELECT * FROM carta_recivida where RESPUESTA IS NOT NULL ';
-    $carta = mysqli_query($conn,$consulta);
-    $res=mysqli_fetch_array($carta,MYSQL_ASSOC);
-    echo "<br>".$res['TEXTO_CARTA'];
-    echo "<br><br>".$res['RESPUESTA'];
-    $imagen = $res['IMAGEN'];
-                            if(!is_null($imagen)){
-                                echo "<div align='center'>" ;
-                                echo "<h5><strong>Imagen adjuntada a la carta</strong></h5>" ;
-                                echo "<img src='data:image/jpeg;base64,". base64_encode($imagen)."' height='125' width='125'>" ;
-                                echo "</div>" ;
-                            }
-    
-    ?>
-    <div class="imagenCarta" style="float:left">
-							
-			    <img src="data:image/png;base64,<?php echo base64_encode($res['IMAGEN_AVATAR']) ?>" height="100" width="100">				
-		        </div>
-		
-     		
+				
+                    <?php
+                        $consulta='SELECT * FROM carta_recivida where RESPUESTA IS NOT NULL ';
+                        $carta = mysqli_query($conn,$consulta);
+                         while($arreglo = mysqli_fetch_array($carta, MYSQL_ASSOC)){
+                             
+                             echo ' <div class="burbuja" >';
+                             echo '<img src="data:image/png;base64,'.base64_encode($arreglo['IMAGEN_AVATAR']).'" height="100" width="100" align="left">' ;
+                             echo '<h5><strong>Carta enviada la fecha: '.$arreglo['FECHA_RECEPCION'].'</strong></h5>';
+                             echo "<br>".$arreglo['TEXTO_CARTA'];
+                             $imagen = $arreglo['IMAGEN'];
+                                    if(!is_null($imagen)){
+                                        echo "<div align='center'>" ;
+                                        echo "<h5><strong>Imagen adjuntada a la carta</strong></h5>" ;
+                                        echo "<img src='data:image/jpeg;base64,". base64_encode($imagen)."' height='125' width='125'>" ;
+                                        echo "</div>" ;
+                                    }
+                             echo ' </div>';
+                             echo '<div class="burbujaRespuesta">';
+                             echo '<h5><strong>Respuesta</strong></h5>';
+                             echo "<br><br>".$arreglo['RESPUESTA'];
+                             echo '</div>';
+                           
+                         }
+                ?>			
+						
 </body>
 </html>

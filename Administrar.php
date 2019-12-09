@@ -3,13 +3,15 @@
 	require('config/db.php');
 	session_start();
 
-		if(!isset($_COOKIE)){
+	if(!isset($_COOKIE)){
 		header('Location: '.ROOT_URL.'');
 	} else {
 		if($_COOKIE['roll'] != 'administrador'){
 			header('Location: '.ROOT_URL.'');
 		}
 	}
+	$nombre = $_COOKIE['nombreUsuario'];
+    $rol1 = $_COOKIE['roll'];
  include('inc/header.php');
 		echo "<table border='1'; class='table table-dark';>";
 			echo "<tr class='warning'>";
@@ -24,7 +26,11 @@
 	?>
 
 	<br>
-<h2><strong>Administración de usuarios registrados</strong> </h2>
+	<h2 align="left"><strong>Bienvenido: <?php echo $nombre?> </strong> </h2>
+   <h2><strong>Rol: Administrador</strong></h2>
+    
+		
+<h3 align="center"><strong>Administración de usuarios registrados</strong> </h3>
 
 
 
@@ -34,17 +40,25 @@
 	<?php
         $sql=("SELECT * FROM usuario");
 		$query=mysqli_query($conn,$sql);
-        while($arreglo=mysqli_fetch_array($query)){	
+        while($arreglo=mysqli_fetch_array($query,MYSQL_ASSOC)){	
 			echo "<tr class='success'>";
-            echo "<td>$arreglo[0]</td>";
-            echo "<td>$arreglo[3]</td>";
-            echo "<td>$arreglo[4]</td>";
-            echo "<td>$arreglo[7]</td>";
-            echo "<td>$arreglo[5]</td>";
+            echo "<td>".$arreglo['ID_USUARIO']."</td>"; 
+            echo "<td>".$arreglo['NOMBRE_USUARIO']."</td>";
+            echo "<td>".$arreglo['APELLIDOS_USUARIO']."</td>";
+            $id_especialidad = $arreglo['ID_ESPECIALIDAD'] ;
+            $obtengo_especialidad = mysqli_query($conn, "SELECT  NOMBRE_ESPECIALIDAD FROM especialidad WHERE ID_ESPECIALIDAD = '$id_especialidad'");
+            $obtengo_especialidad1 = mysqli_fetch_array($obtengo_especialidad,MYSQL_ASSOC);
+            echo "<td>".$obtengo_especialidad1['NOMBRE_ESPECIALIDAD']."</td>";
+            
+            echo "<td>".$arreglo['CORREO_USUARIO']."</td>";
             //echo "<td>$arreglo[5]</td>";
-            echo "<td><a href='". ROOT_URL ."actualizar.php?id=$arreglo[0]'><img class='imgCarta' src='images/ICONO_ACTUALIZAR.png' class='img-sluid' alt='Responsive image' style = 'width:50px; height:50px;'></td>";
+            
+             echo '<td><a href="'. ROOT_URL .'actualizar.php?id='.$arreglo['ID_USUARIO'].'"><img class="imgCarta" src="images/ICONO_ACTUALIZAR.png" class="img-sluid" alt="Responsive image" style = "width:50px; height:50px;"></td>';
+            
+            echo '<td><a href="'. ROOT_URL .'Administrar.php?id='.$arreglo['ID_USUARIO'].'&idborrar=2"><img class="imgCarta" src="images/ICONO_ELIMINAR.png" class="img-sluid" alt="Responsive image" style = "width:50px; height:50px;"></td>';
+            
 
-            echo "<td><a href='". ROOT_URL ."Administrar.php?id=$arreglo[0]&idborrar=2'><img class='imgCarta' src='images/ICONO_ELIMINAR.png' class='img-sluid' alt='Responsive image' style = 'width:50px; height:50px;'></td>";	
+            
 	
 			echo "</tr>";
 

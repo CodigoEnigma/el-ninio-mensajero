@@ -2,11 +2,10 @@
 .contenidoCarta{
     float: left;
     width: 900px;
-    flex-direction: row;
+    flex-direction: row; 
     flex-wrap: wrap;
     justify-content: left;
     align-items: unset;
-    
   }
 
 .imagenCarta{
@@ -14,22 +13,13 @@
     width: 125px;
     float: left;
     display: flex;
+    position: static;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
     align-items: unset; 
   }
 
-li#enviado{
-    border: 1px solid black;
-    border-radius: 40px 40px 40px 1px;
-    margin-bottom: 5px;
-}
-li#respuesta{
-    border: 1px solid black;
-    border-radius: 40px 40px 40px 1px;
-    margin-bottom: 30px;
-}
 .icono-advertencia{
   float: left;
   display: flex;
@@ -39,3 +29,39 @@ li#respuesta{
   align-items: unset;
 }
 
+body{
+  background-color: #f0f0f0;
+}
+
+.burbuja{
+  background: #fff;
+  float: left;
+  position: static;
+  padding: 20px;
+  color: #222;
+  border-radius: 3px;
+  margin-left: 20px;
+  width: 755px;
+  border: 1px solid black;
+  border-radius: 1px 40px 40px 40px;
+  margin-bottom: 5px;
+}
+.burbujaRespuesta{
+  float: left;
+  position: static;
+  background: #fff;
+  padding: 20px;
+  color: #222;
+  border-radius: 3px;
+  margin-left: 145px;
+  width: 850px;
+  border: 1px solid black;
+  border-radius: 1px 40px 40px 40px;
+  margin-bottom: 30px;
+  margin-top: 10px;
+}
+
+.imagen{
+  display: inline;
+  align-content: center;
+}
