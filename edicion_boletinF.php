@@ -6,16 +6,39 @@
 	
 ?>
 <?php include('inc/header.php'); ?>
+	<script type="text/javascript" src="js/jquery-1.12.0.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/editor.js"></script>	
+		<link rel="stylesheet" type="text/css" href="css/editor.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('#txt-content').Editor();
+
+			$('#txt-content').Editor('setText', ['<p style="color:black;">Hola me llamo favio y esta es mi historia</p>']);
+
+			$('#btn-enviar').click(function(e){
+				e.preventDefault();
+				$('#txt-content').text($('#txt-content').Editor('getText'));
+				$('#frm-test').submit();				
+			});
+		});	
+	</script>
 
 <br>
 <h1 align="center"><Strong>Edicion De Boletin</Strong></h1>
-        <form method="POST" action="<?php $_SERVER['PHP_SELF']; ?>" enctype="multipart/form-data">
-			<div class="form-group" align="center">
-				<textarea name="TEXTO_CARTA" class="form-control" style = 'width:750px; height:350px;'></textarea><br>
-			
-				<input type="submit" name="submit" id="enviar" value="Cancelar" class="btn">
-			
-				<input type="submit" name="submit" id="enviar" value="Confirmar" class="btn">
-            </div>	
+
+	<div class="container" style="margin-left:370px;" >
+		<div class="row">
+			<div class="col-sm-8">
+				<form action="prueba.php" method="post" id="frm-test">
+					<div class="form-group">
+						<textarea id="txt-content" name="txt-content" ></textarea>
+					</div>
+					<input type="submit" class="btn btn-default" id="btn-enviar" value="Crear Boletin">
+				</form>
+			</div>
+		</div>
+    </div>	
         </form>		
