@@ -3,11 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>El niño mensajero</title>
-     
 </head>
 <body>
-  
-  <?php
+    <?php
      require('config/config.php');
     session_start();
     if(!isset($_COOKIE)){
@@ -17,19 +15,13 @@
         $id = $_COOKIE['id_usuario'];
         $rol = $_COOKIE['roll'];
     } 
-    ?>
-    
-   
-    
-    <?php
     
     include('inc/header.php');
     extract($_GET);
 	require('config/db.php');
 	$query = 'SELECT * FROM carta_recivida where ID_CARTA_RECIVIDA='.$id.'';
 	$result = mysqli_query($conn, $query);
-	$cartas = mysqli_fetch_all($result, MYSQLI_ASSOC);
-	mysqli_free_result($result);
+	$carta = mysqli_fetch_array($result, MYSQL_ASSOC);
     $query1 = "UPDATE `carta_recivida` SET `LEIDA` = 'si' WHERE `carta_recivida`.`ID_CARTA_RECIVIDA` = '$id'";
     $result1 = mysqli_query($conn, $query1);
     $permisos= "SELECT * FROM especialidad WHERE ID_ESPECIALIDAD ='$rol' ";
@@ -40,95 +32,102 @@
     $postular = $permisos_obtenidos['POSTULAR'];
     $derivar= $permisos_obtenidos['DERIVAR'];
 	mysqli_close($conn);
+    $estado = $carta['POSTULACION_BOLETIN'];
     ?>
     
-    
-    <div class="contenedor" >
+    <?php if($rol != "Edit"):?>
         <a href="<?php echo ROOT_URL; ?>VentanaUsuario.php" role = "button" style="float:left; margin:10px;">
             <img src="images/boton_volver.gif" class="img-fluid" alt="Responsive image" id="btn-back"  style = 'width:150px; height:50px;'>
         </a> 
-    </div>
+    <?php elseif ($rol == "Edit") :?>
+         <a href="<?php echo ROOT_URL; ?>editor_boletin.php" role = "button" style="float:left; margin:10px;">
+            <img src="images/boton_volver.gif" class="img-fluid" alt="Responsive image" id="btn-back"  style = 'width:150px; height:50px;'>
+        </a> 
+    <?php endif ; ?>
+  
+  <br><br><br>
+  
    
-    <br><br><br><br><br>
-    
-    <?php foreach($cartas as $carta) : ?>
-		<?php
-            $estado = $carta['POSTULACION_BOLETIN'];
-            
-        ?>        
-        
-    
-		<div class = "contenidoCarta" >
-                
-               <?php if($leer=='si'):?>
-               <div class="imagenCarta" style="float:left">			
-			    <img src="data:image/png;base64,<?php echo base64_encode($carta['IMAGEN_AVATAR']) ?>" height="100" width="100">				
-                </div>
-                <!-- <div >
+  
+       <?php if($leer=='si'):?>
+              
+              
+               <div class="burbuja" >
+                             <img src="data:image/png;base64,<?php echo base64_encode($carta['IMAGEN_AVATAR']) ?>" height="100" width="100" align="left">
+                             <h5><strong>Carta enviada la fecha:<?php echo $carta['FECHA_RECEPCION']?></strong></h5>
+                             <br><?php echo $carta['TEXTO_CARTA']?>
+                             <?php
                    
-                    <ul class="list-group" >  
-						<li class="list-group-item" id = "enviado" >	
-							<h5><strong>Enviado <?php //echo $carta['FECHA_RECEPCION']; ?></strong></h5>
-							<?php// echo $carta['TEXTO_CARTA']; ?>
-						</li>
-                            
-                            <br>	
-				    </ul>
-                </div>-->
-                 
-                <?php
-                            $imagen = $carta['IMAGEN'];
-                            if(!is_null($imagen)){
-                                echo "<div align='center'>" ;
-                                echo "<h5><strong>Imagen adjuntada a la carta</strong></h5>" ;
-                                echo "<img src='data:image/jpeg;base64,". base64_encode($imagen)."' height='125' width='125'>" ;
-                                echo "</div>" ;
-                            }
+                                $imagen = $carta['IMAGEN'];
+                                    if(!is_null($imagen)){
+                                        echo "<div align='center'>" ;
+                                        echo "<h5><strong>Imagen adjuntada a la carta</strong></h5>" ;
+                                        echo "<img src='data:image/jpeg;base64,". base64_encode($imagen)."' height='125' width='125'>" ;
+                                        echo "</div>" ;
+                                    }
                             ?>
+                             
+                  </div>
+        <?php endif;?> 
+        
+     
+     <?php if($responder =='si'):?>
                
-                <?php endif ;?>
-                
-                <?php if($responder =='si'):?>
-                <h4 align="center"><strong>Responder a la carta</strong></h4>
+                <div style="float:left">
+                   <br><br>
+                    <h4 align="cener"><strong>Responder a la carta</strong></h4>
                 <form method="POST" action="<?php $_SERVER['PHP_SELF']; ?>" enctype="multipart/form-data">
 			        <div class="form-group" align="center">
 				        <textarea name="TEXTO_CARTA" class="form-control" style = 'width:750px; height:350px;'></textarea><br>
 				        <input type="submit" name="submit" id="enviar" value="Responder" class="btn">
                     </div>	
-                </form>		 		    
+                </form>		 
+                </div>		    
                 <?php endif;?>
-                 		     		     		     		     		     		    
-		</div>
-		<?php endforeach; ?>
-   
-          
-          <?php if($postular =='si'):?>
+    
+    
+    <?php if($postular =='si'):?>      
+         
            <div  style="float:right; margin:30px;  ">
                   
-                    <?php if(!isset($estado) || $estado == "no") : ?>
+                    <?php if( !isset($estado) || $estado == "no") : ?>
                       
-                    <form method="POST" action="<?php echo ROOT_URL; ?>leer_carta.php?id=<?php echo $id?>" enctype="multipart/form-data">
+                    <form method="POST" action="<?php echo ROOT_URL; ?>lectura_carta.php?id=<?php echo $id?>" enctype="multipart/form-data">
 			        <div class="form-group" align="center">
-				        <h5><strong>Postular a Boletin</strong></h5>
-				        <input type="submit" name="si" id="postular" value="SI" class="btn btn-success btn-primary">
+				        <h5><strong>Postular carta a Boletin</strong></h5>
+				        <input type="submit" name="si" id="postular" value="           SI           " class="btn btn-primary">
                     </div>	
                     </form>	 
                             
                     <?php elseif($estado == "si"):?>
                             
-                    <form method="POST" action="<?php echo ROOT_URL; ?>leer_carta.php?id=<?php echo $id?>" enctype="multipart/form-data">
+                    <form method="POST" action="<?php echo ROOT_URL; ?>lectura_carta.php?id=<?php echo $id?>" enctype="multipart/form-data">
 			        <div class="form-group" align="center">
-				        <h5><strong>Dejar de Postular a Boletin</strong></h5>
-				        <input type="submit" name="no" id="dejarpostular" value="SI" class="btn btn-success btn-primary" style="'width:70px; height:25px">
+				        <h5><strong>Dejar de Postular carta a Boletin</strong></h5>
+				        <input type="submit" name="no" id="dejarpostular" value="           SI           " class="btn btn-primary"  style="'width:100px; height:25px">
                     </div>	
                     </form>	    
                            
                     <?php endif ; ?>
             </div>	           
 			  <?php endif;?>   
-			        
-			              
-			 <?php
+ <?php if($derivar == 'si'):?>
+    
+     <div  style="float:right">
+            <p class="cartasParrafo"><strong>Asignar Carta</strong></p>
+            <a class="btn btn-info btn-lg" href="<?php echo ROOT_URL; ?>derivar_carta.php?id=<?php echo $id; ?>" role="button" id = "iconos">
+            <img class="imgCarta" src="images/reasignacion.png" class="img-fluid" alt="Responsive image">
+           	</a>
+         </div>
+    <?php endif ;?> 
+                 
+   
+    
+			  
+			  
+		 	  
+			  
+			  	 <?php
     
      if(isset($_POST['no'])){
             require('config/db.php');
@@ -177,20 +176,8 @@
     
     
     ?>
-    
-    
-    <?php if($derivar == 'si'):?>
-    
-     <div  style="float:right">
-            <p class="cartasParrafo"><strong>Asignar Carta</strong></p>
-            <a class="btn btn-info btn-lg" href="<?php echo ROOT_URL; ?>derivar_carta.php?id=<?php echo $id; ?>" role="button" id = "iconos">
-            <img class="imgCarta" src="images/reasignacion.png" class="img-fluid" alt="Responsive image">
-           	</a>
-         </div>
-     
-    <?php endif ;?>        	
- 
-    
-    
+			  
+			  
+   
 </body>
 </html>

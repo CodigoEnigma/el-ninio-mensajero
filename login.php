@@ -76,10 +76,18 @@
                     $_SESSION['nombre'] = $nombreListo;
                     if (strlen($count) == 0) {
                         $_SESSION['roll'] = 'usuario';
-                        setcookie('nombreUsuario', $_SESSION['nombre'], time() + (86400 * 30));
-                        setcookie('roll', $id_esp, time() + (86400 * 30));
-                        setcookie('id_usuario', $ci, time() + (86400 * 30));
-                        header('Location: '.ROOT_URL.'VentanaUsuario.php');
+                        if($id_esp == 'Edit'){
+                            setcookie('nombreUsuario', $_SESSION['nombre'], time() + (86400 * 30));
+                            setcookie('roll', $id_esp, time() + (86400 * 30));
+                            setcookie('id_usuario', $ci, time() + (86400 * 30));
+                            header('Location: '.ROOT_URL.'editor_boletin.php'); // AQUI VIENE EL NOMBRE DE LA VENTANA DEL EDITOR DE BOLETIN
+                            }else{
+                                setcookie('nombreUsuario', $_SESSION['nombre'], time() + (86400 * 30));
+                                setcookie('roll', $id_esp, time() + (86400 * 30));
+                                setcookie('id_usuario', $ci, time() + (86400 * 30));
+                                header('Location: '.ROOT_URL.'VentanaUsuario.php');
+                            }
+
                         } else {
                             $_SESSION['roll'] = 'administrador';
                             setcookie('nombreUsuario', $_SESSION['nombre'], time() + (86400 * 30));
