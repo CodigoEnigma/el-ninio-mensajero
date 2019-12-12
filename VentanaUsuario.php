@@ -84,7 +84,7 @@
                 
                 if($responder == 'si'){
                     $resp = $arreglo['RESPUESTA'] ;
-                    if(isset($resp)){
+                    if(isset($resp) && trim($resp)){
                         echo "<div style='float:center'>
                         <td align='center'><img class='imgCarta' src='images/responder.png' class='img-sluid' alt='Responsive image' style ='width:50px; height:50px;'></td>
                         </div>";

@@ -31,6 +31,7 @@
     $responder = $permisos_obtenidos['RESPONDER'];
     $postular = $permisos_obtenidos['POSTULAR'];
     $derivar= $permisos_obtenidos['DERIVAR'];
+    $nombre_de_especialidad= $permisos_obtenidos['NOMBRE_ESPECIALIDAD'] ;
 	mysqli_close($conn);
     $estado = $carta['POSTULACION_BOLETIN'];
     ?>
@@ -160,17 +161,40 @@
         if(isset($_POST['submit'])){
 		$body = $_POST['TEXTO_CARTA'];
         require('config/db.php');
-        $consulta ="UPDATE `carta_recivida` SET `RESPUESTA` = '$body' WHERE `carta_recivida`.`ID_CARTA_RECIVIDA` = '$id'" ;
+        $obten_respuestas = mysqli_query($conn,"SELECT RESPUESTA FROM carta_recivida WHERE ID_CARTA_RECIVIDA = '$id'");
+        $dato_respuesta = mysqli_fetch_array($obten_respuestas, MYSQL_ASSOC);
+        if($dato_respuesta['RESPUESTA'] != ""){ 
+             $respuesta_concatenar = $dato_respuesta['RESPUESTA'] ;
+              $respuesta_nueva = $respuesta_concatenar. "\n------------------------------------------------------------------\n Respuesta enviada por: ".$nombre." de la especialidad: ".$nombre_de_especialidad."\n".$body;
+                $salto_de_linea = nl2br($respuesta_nueva);
+               $consulta ="UPDATE `carta_recivida` SET `RESPUESTA` = '$salto_de_linea' WHERE `carta_recivida`.`ID_CARTA_RECIVIDA` = '$id'" ;
+              $resultado = mysqli_query($conn, $consulta);
+                if($resultado){
+                                   echo'<script type="text/javascript">
+                                    alert("Respuesta Enviada con exito ");
+                                    window.location.href="VentanaUsuario.php";
+                                    </script>';
+                                    echo "actualizado" ;
+                                 } else {
+                                     echo 'ERROR: '. mysqli_error($conn);}
+                                 mysqli_close($conn);
+
+        }else{
+            
+             $consulta ="UPDATE `carta_recivida` SET `RESPUESTA` = '$body' WHERE `carta_recivida`.`ID_CARTA_RECIVIDA` = '$id'" ;
         $resultado = mysqli_query($conn, $consulta);
         if($resultado){
                                    echo'<script type="text/javascript">
-                                    alert("Respuesta Enviada");
+                                    alert("Respuesta Enviada con exito 2222 ");
                                     window.location.href="VentanaUsuario.php";
                                     </script>';
             echo "actualizado" ;
                                  } else {
                                      echo 'ERROR: '. mysqli_error($conn);}
                                  mysqli_close($conn);
+            
+        }
+       
 
     }
     

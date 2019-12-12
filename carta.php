@@ -85,7 +85,7 @@
                                 $estado = 1;
                                 if(mysqli_query($conn, $query)){
                                     echo'<script type="text/javascript">
-                                    alert("Carta Enviada");
+                                    alert("Tu cartita fue enviada con éxito");
                                     window.location.href="'. ROOT_URL .'index.php";
                                     </script>';
                                  } else {
@@ -146,7 +146,7 @@
                         $estado = 1 ;
                         if(mysqli_query($conn, $query)){
                                     echo'<script type="text/javascript">
-                                    alert("¡Cartita enviada con exito!");
+                                    alert("Tu cartita fue enviada con éxito");
                                     window.location.href="'. ROOT_URL .'index.php";
                                     </script>';
                             } else {echo 'ERROR: '. mysqli_error($conn);}
@@ -156,7 +156,7 @@
             }
              }else{
                     echo'<script type="text/javascript">
-                                    alert("¡Solo se puden añadir imagenes a la cartita!");
+                                    alert("Solo se puden añadir imagenes a la cartita");
                                     window.location.href="'. ROOT_URL .'carta.php?id=chico";
                                     </script>';
                 } //else {echo "Solo se pueden subir imagenes" ;} 
@@ -219,7 +219,7 @@
                                 if(mysqli_query($conn, $query)){
                                     
                                     echo'<script type="text/javascript">
-                                    alert("Carta Enviada");
+                                    alert("Tu cartita fue enviada con éxito");
                                     window.location.href="'.ROOT_URL.'index.php";
                                     </script>';
                                 } else {
@@ -271,7 +271,7 @@
                 if(mysqli_query($conn, $query)){
                                     
                        echo'<script type="text/javascript">
-                            alert("Carta Enviada");
+                            alert("Tu cartita fue enviada con éxito");
                             window.location.href="'.ROOT_URL.'index.php";
                             </script>';
                     } else {echo 'ERROR: '. mysqli_error($conn);}
@@ -282,7 +282,7 @@
             
                           
                        echo'<script type="text/javascript">
-                            alert("Texto vacio, carta no enviada");
+                            alert("Texto vacio, cartita no enviada");
                             window.location.href="'.ROOT_URL.'index.php";
                             </script>';
             
@@ -308,9 +308,7 @@
 			</div>
             <h4><strong>RECUERDA AMIGUITO! Tu seguridad es muy importante para nosotros. Por favor no utilices tus nombres o apellidos, el nombre de tu escuela, el lugar donde vives, el nombre de tus padres o numero de telefono.</strong></h4>
 		</div>
-		    <a href="<?php echo ROOT_URL; ?>avatares.php" role = "button" style="float:left; margin:10px;">
-            <img src="images/boton_volver.gif" class="img-fluid" alt="Responsive image" id="btn-back"  style = 'width:150px; height:50px;'>
-		    </a> 
+		    
          <div  style="float:right">
             <p class="cartasParrafo"><strong><?php extract($_GET);echo $id;?></strong></p>
             <a class="btn btn-info btn-lg"  role="button" id = "iconos">
@@ -321,11 +319,13 @@
             
         <form method="POST" action="<?php $_SERVER['PHP_SELF']; ?>" enctype="multipart/form-data">
 			<div class="form-group" align="center">
+			    <h2><strong>Cuentanos tus aventuras</strong></h2>
 				<textarea name="TEXTO_CARTA" class="form-control" style = 'width:750px; height:350px;'></textarea><br>
 			
 				<input type="file" name="imagen" id="imagen" size="20" class="btn btn-info"> 
 			
 				<input type="submit" name="submit" id="enviar" value="Enviar carta" class="btn">
+               <a class="btn btn-primary" href="<?php echo ROOT_URL; ?>" role="button" id ="crearEspecialidad" style="margin:20px;">Cancelar envio de carta</a>
             </div>	
         </form>		
     </div>	

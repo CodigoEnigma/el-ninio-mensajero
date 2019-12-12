@@ -21,7 +21,7 @@
         <img src="images/boton_volver.gif" class="img-fluid" alt="Responsive image" id="btn-back"  style = 'width:150px; height:50px;'>
     </a> 
     <br><br><br>
-    <h2 style="float:center" align="center"><strong>Seleccione la especialidad para asignar la carta a un empleado de esta.</strong></h2>
+    <h2 style="float:center" align="center"><strong>Seleccione una especialidad.</strong></h2>
     <div class="container">
         <table border='1'; class='table table-dark'>
 			<tr class='warning'>
@@ -32,11 +32,16 @@
 
             <?php
                 while($especs = mysqli_fetch_array($resultEspec)){
-                    echo "<tr class='success'>";
+                    $nombre_esp = $especs[1] ;
+                    if($nombre_esp != "Editor Boletin" && $nombre_esp != "Lector"){
+                        
+                         echo "<tr class='success'>";
                         echo "<td>$especs[0]</td>";
-                        echo "<td>$especs[1]</td>";
-                        echo "<td><a href='". ROOT_URL ."derivar_carta_usr.php?id=$id&esp=$especs[0]'><img class='imgCarta' src='images/ICONO_ACTUALIZAR.png' class='img-sluid' alt='Responsive image' style = 'width:50px; height:50px;'></td>";
+                        echo "<td>$nombre_esp</td>";
+                        echo "<td><a href='". ROOT_URL ."derivar_carta_usr.php?id=$id&esp=$especs[0]'><img class='imgCarta' src='images/usuario.png' class='img-sluid' alt='Responsive image' style = 'width:50px; height:50px;'></td>";
                     echo "</tr>";
+                    }
+                   
                 }
 
             ?>

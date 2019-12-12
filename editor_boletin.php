@@ -26,7 +26,7 @@
     <body>
         <br>
         <div style="float:right">
-                <a class="btn btn-primary" href="<?php echo ROOT_URL; ?>crear_boletin.php" role="button" id ="crearEspecialidad" style="margin:30px;">Crear Boletin</a>
+                <a class="btn btn-primary" href="<?php echo ROOT_URL; ?>edicion_boletinF.php" role="button" id ="crearEspecialidad" style="margin:30px;">Crear Boletin</a>
             </div>
 		<h2 align="left"><strong>Bienvenido: <?php echo $nombre?></strong> </h2>
 		<h2 align="left"><strong>Rol: <?php
@@ -56,7 +56,7 @@
                 echo "<td>".$arreglo['ID_CARTA_RECIVIDA']."</td>";
                  echo "<td>".$arreglo['FECHA_RECEPCION']."</td>";
                  echo "<div style='float:center'>
-                    <td align='center'><a href=".ROOT_URL."lectura_carta.php?id=". $arreglo['ID_CARTA_RECIVIDA']. "><img class='imgCarta' src='images/leer.png' class='img-sluid' alt='Responsive image' style ='width:50px; height:50px;'></td>
+                    <td align='center'><a href=".ROOT_URL."lec_carta.php?id=". $arreglo['ID_CARTA_RECIVIDA']. "><img class='imgCarta' src='images/leer.png' class='img-sluid' alt='Responsive image' style ='width:50px; height:50px;'></td>
                     </div>";
                  echo "</tr>";
              

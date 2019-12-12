@@ -77,22 +77,22 @@
                     if (strlen($count) == 0) {
                         $_SESSION['roll'] = 'usuario';
                         if($id_esp == 'Edit'){
-                            setcookie('nombreUsuario', $_SESSION['nombre'], time() + (86400 * 30));
-                            setcookie('roll', $id_esp, time() + (86400 * 30));
-                            setcookie('id_usuario', $ci, time() + (86400 * 30));
+                            setcookie('nombreUsuario', $_SESSION['nombre']);
+                            setcookie('roll', $id_esp);
+                            setcookie('id_usuario', $ci);
                             header('Location: '.ROOT_URL.'editor_boletin.php'); // AQUI VIENE EL NOMBRE DE LA VENTANA DEL EDITOR DE BOLETIN
                             }else{
-                                setcookie('nombreUsuario', $_SESSION['nombre'], time() + (86400 * 30));
-                                setcookie('roll', $id_esp, time() + (86400 * 30));
-                                setcookie('id_usuario', $ci, time() + (86400 * 30));
+                                setcookie('nombreUsuario', $_SESSION['nombre']);
+                                setcookie('roll', $id_esp);
+                                setcookie('id_usuario', $ci);
                                 header('Location: '.ROOT_URL.'VentanaUsuario.php');
                             }
 
                         } else {
                             $_SESSION['roll'] = 'administrador';
-                            setcookie('nombreUsuario', $_SESSION['nombre'], time() + (86400 * 30));
-                            setcookie('roll', $_SESSION['roll'], time() + (86400 * 30));
-                             setcookie('id_usuario', $ci, time() + (86400 * 30));
+                            setcookie('nombreUsuario', $_SESSION['nombre']);
+                            setcookie('roll', $_SESSION['roll']);
+                             setcookie('id_usuario', $ci);
                             header('Location: '.ROOT_URL.'Administrar.php');
                         }
                 
@@ -131,8 +131,6 @@
             
             <button type="submit" class="btn btn-primary btn-block" name="submit">INGRESAR</button>
             <p style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if(isset($error)) echo $error ?></p>
-            <p>
-      Olvidaste tu contraseña pulse <a href="<?php echo ROOT_URL; ?>recuperar.php">AQUI</a>
-    </p>
+         
         </form>
     </div> 

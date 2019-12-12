@@ -20,7 +20,7 @@
         <img src="images/boton_volver.gif" class="img-fluid" alt="Responsive image" id="btn-back"  style = 'width:150px; height:50px;'>
     </a> 
     <br><br><br>
-     <h2 style="float:center" align="center"><strong>Seleccione El empleado al que desea asignar la carta.</strong></h2>
+     <h2 style="float:center" align="center"><strong>Seleccione el usuario al que asignara la carta.</strong></h2>
     <div class="container">
         <table border='1'; class='table table-dark'>
 			<tr class='warning'>
@@ -36,7 +36,7 @@
                         echo "<td>$usuarios[3]</td>";
                         echo "<td>$usuarios[4]</td>";
                         echo "<td>$usuarios[5]</td>";
-                        echo "<td><a href='". ROOT_URL ."derivar_carta_usr.php?id=$id&esp=$esp&usr=$usuarios[0]&asi=1'><img class='imgCarta' src='images/ICONO_ACTUALIZAR.png' class='img-sluid' alt='Responsive image' style = 'width:50px; height:50px;'></td>";
+                        echo "<td><a href='". ROOT_URL ."derivar_carta_usr.php?id=$id&esp=$esp&usr=$usuarios[0]&asi=1'><img class='imgCarta' src='images/selecion.png' class='img-sluid' alt='Responsive image' style = 'width:50px; height:50px;'></td>";
                     echo "</tr>";
                 }
                 extract($_GET);
@@ -49,7 +49,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">¿Esta seguro de que quiere asignar la carta a este empleado?</h4>
+                    <h4 class="modal-title">¿Esta seguro de que quiere asignar la carta a este usuario?</h4>
                 </div>
                 <div class="modal-footer">
                     <?php echo "<a href='". ROOT_URL ."derivar_carta_usr.php?id=$id&esp=$esp&usr=$usr&asi=2' type='submit' class='btn btn-default'>aceptar</a>"; ?>
