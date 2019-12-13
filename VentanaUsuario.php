@@ -23,10 +23,10 @@
 	<?php include('inc/header.php');
         echo "<br>";
 
-		echo "<h1><strong>Bienvenido: ". $nombre . "</strong> </h1>";
+		echo "<h2><strong>Bienvenido: ". $nombre . "</strong> </h2>";
 		
 		//echo '<h2 style="text-align:right">Alertas:</h2>';
-		echo '<h2 style="text-align:center"><strong>CARTAS ASIGNADAS</strong></h2>'; 
+		
     	require('config/db.php');
 		$sql=("SELECT * FROM carta_recivida WHERE ID_USUARIO='$id'");
 		$query=mysqli_query($conn,$sql);
@@ -36,9 +36,10 @@
         $leer = $permisos_obtenidos['LEER'];
         $responder = $permisos_obtenidos['RESPONDER'];
         $postular = $permisos_obtenidos['POSTULAR'];
-        
+        $name = $permisos_obtenidos['NOMBRE_ESPECIALIDAD'];
+        echo '<h2 ><strong>Rol: '.$name.'</strong></h2>'; 
     
-    
+        echo '<h2 style="text-align:center"><strong>CARTAS ASIGNADAS</strong></h2>'; 
         ?>
          
           
@@ -83,9 +84,9 @@
                 
                 if($responder == 'si'){
                     $resp = $arreglo['RESPUESTA'] ;
-                    if(isset($resp)){
+                    if(isset($resp) && trim($resp)){
                         echo "<div style='float:center'>
-                        <td align='center'><img class='imgCarta' src='images/respuesta.png' class='img-sluid' alt='Responsive image' style ='width:50px; height:50px;'></td>
+                        <td align='center'><img class='imgCarta' src='images/responder.png' class='img-sluid' alt='Responsive image' style ='width:50px; height:50px;'></td>
                         </div>";
                     }else {
                          echo "   <td align='center'><img class='imgCarta' src='images/no.png' class='img-sluid' alt='Responsive image' style ='width:50px; height:50px;'></td>" ;
