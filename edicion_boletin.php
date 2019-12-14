@@ -42,10 +42,9 @@
 			echo "<tr class='success'>";
 				echo "<td>$arreglo[1]</td>";
 				echo "<td>$arreglo[3]</td>";
-				echo "<td><a href='edicion_boletinF.php'><img class='imgCarta' src='images/ICONO_ACTUALIZAR.png' class='img-sluid' alt='Responsive image' style = 'width:50px; height:50px;'></td>";
+				echo "<td><a href='". ROOT_URL ."edicion_boletinF.php?id=".$arreglo['ID_BOLETIN']."'><img class='imgCarta' src='images/ICONO_ACTUALIZAR.png' class='img-sluid' alt='Responsive image' style = 'width:50px; height:50px;'></td>";
                 
                 echo "<td><a href='edicion_boletin.php?id=$arreglo[0]&idborrar=2'><img class='imgCarta' src='images/ICONO_ELIMINAR.png' class='img-sluid' alt='Responsive image' style = 'width:50px; height:50px;'></td>";	
-	
 
 
 			//	echo "<td><a href='actualizar.php?id=$arreglo[0]'><img src='images/actualizar.gif' class='img-rounded'></td>";
@@ -94,6 +93,7 @@
 
 	}	 ?>
 
+
 	</form>
          <button type="button" class="btn btn-default" data-dismiss="modal">cancelar</button>
 
@@ -105,11 +105,16 @@
   
 </div>
 
+			<input type="button" value="Crear Boletin" class="btn btn-success btn-primary" id="btnHome" 
+			onClick="document.location.href='edicion_boletinF.php'" />
+
+
+
 
 
     <?php 
     if(@$idborrar==2){
-    				$sqlborrar="DELETE FROM especialidad WHERE ID_ESPECIALIDAD = $id";
+    				$sqlborrar="DELETE FROM boletin WHERE ID_BOLETIN = $id";
     				$resborrar=mysqli_query($conn,$sqlborrar);
     				echo '<script>alert("ESPECIALIDAD ELIMINADA")</script> ';
     			}
