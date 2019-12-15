@@ -26,7 +26,7 @@
     <body>
         <br>
         <div style="float:right">
-                <a class="btn btn-primary" href="<?php echo ROOT_URL; ?>edicion_boletinF.php" role="button" id ="crearEspecialidad" style="margin:30px;">Crear Boletin</a>
+                <a class="btn btn-primary" href="<?php echo ROOT_URL; ?>edicion_boletin.php" role="button" id ="crearEspecialidad" style="margin:30px;">Administrar boletines</a>
             </div>
 		<h2 align="left"><strong>Bienvenido: <?php echo $nombre?></strong> </h2>
 		<h2 align="left"><strong>Rol: <?php
