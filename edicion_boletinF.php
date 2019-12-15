@@ -21,7 +21,9 @@ if(isset($_POST['submit']))
 	$sql = "INSERT INTO boletin (TEXTO_BOLETIN, AUTORES, FECHA_CREACION) VALUES ('$textareaValue','$nombre', '$fecha')";
 	$rs = mysqli_query($conn, $sql);
 	$affectedRows = mysqli_affected_rows($conn);
-	
+	if( isset($_GET['id'])){
+         $borrar = mysqli_query($conn, "DELETE FROM `boletin` WHERE `boletin`.`ID_BOLETIN` = '$id'");
+    }
 	if($affectedRows == 1)
 	{
 		 echo'<script type="text/javascript">
@@ -35,7 +37,7 @@ if(isset($_POST['submit']))
                 <img src="images/boton_volver.gif" class="img-fluid" alt="Responsive image" id="btn-back"  style = 'width:150px; height:50px;'> </a>
            
            
-		  <br>
+		  <br>    
 
 	<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -78,7 +80,7 @@ if(isset($_POST['submit']))
 						<textarea id="ckeditor" class = "ckeditor" name="content"> 
 							<?php 
 							  //$Laid = $_GET['id'];
-							 if( $id != ""){
+							 if( isset($_GET['id'])){
 							 	
 							     $query = "SELECT * FROM boletin WHERE ID_BOLETIN = '$id'";
    								 $resultado = $conn->query($query);
@@ -89,12 +91,13 @@ if(isset($_POST['submit']))
                                 
         							  }
         							}
-                                 $borrar = mysqli_query($conn, "DELETE FROM `boletin` WHERE `boletin`.`ID_BOLETIN` = '$id'");
+                                
         						}
 							 ?>
 
 						</textarea>
 					</div>
+					 
 					<input type="submit" name="submit" value="Submit"></form>
 					
 				
@@ -102,31 +105,5 @@ if(isset($_POST['submit']))
 
 	</div>
 
-		<?php
-		$sql=("SELECT * FROM carta_recivida WHERE POSTULACION_BOLETIN = 'si' ");
-		$query=mysqli_query($conn,$sql);
-		echo '<div class="cabecera">';
-		echo "<table border='1'; class='table table-dark';>";
-			echo "<tr class='warning'>";
-				echo "<td>Cartas Para Boletin</td>";
-				//echo "<td>Revizar</td>";
-			echo "</tr>";
-		echo '</div>';
-		while($arreglo=mysqli_fetch_array($query)){
-			echo "<tr class='success'>";
-				echo "<td>$arreglo[2]</td>";
-				//echo "<td><a href='edicion_boletinF.php'><img class='imgCarta' src='images/ICONO_ACTUALIZAR.png' class='img-sluid' alt='Responsive image' style = 'width:50px; height:50px;'></td>";
-                
-	
-			//	echo "<td><a href='actualizar.php?id=$arreglo[0]'><img src='images/actualizar.gif' class='img-rounded'></td>";
-			//	echo "<td ><a href='Administrar.php?id=$arreglo[0]&idborrar=2 ' ><img src='images/eliminar.png' class='img-rounded'/></a></td>";	
-	
-			echo "</tr>";
-		}
-		//echo </table>";
 		
-		
-		extract($_GET);
-	?>
-
 </body>
