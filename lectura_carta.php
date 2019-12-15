@@ -171,7 +171,7 @@
               $resultado = mysqli_query($conn, $consulta);
                 if($resultado){
                                    echo'<script type="text/javascript">
-                                    alert("Respuesta Enviada con exito ");
+                                    alert("Respuesta Enviada con éxito ");
                                     window.location.href="VentanaUsuario.php";
                                     </script>';
                                     echo "actualizado" ;
@@ -185,7 +185,7 @@
         $resultado = mysqli_query($conn, $consulta);
         if($resultado){
                                    echo'<script type="text/javascript">
-                                    alert("Respuesta Enviada con exito 2222 ");
+                                    alert("Respuesta Enviada con éxito");
                                     window.location.href="VentanaUsuario.php";
                                     </script>';
             echo "actualizado" ;
