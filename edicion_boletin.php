@@ -65,13 +65,18 @@
 
 ?>
 
+
+
+
+
 <div class="modal" id="myModal" role="dialog">
     <div class="modal-dialog">
     
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Esta seguro de que quiere eliminar</h4>
+          <h4 class="modal-title" style="color:black">Esta seguro que desea eliminar el boletin 
+           </h4>
         </div>
         <div class="modal-body">
 
@@ -81,21 +86,23 @@
         	 <form method="post">
 
 
-          <button type="submit" class="btn btn-default" name = "aceptar">aceptar</button>
-          <?php 	if(isset($_POST["aceptar"]))
- {
- 
-		$sqlborrar="DELETE FROM especialidad WHERE ID_ESPECIALIDAD=$id";
+          <button type="submit" class="btn btn-success btn-primary" name = "aceptar">Aceptar</button>
+          
+          <?php 	if(isset($_POST["aceptar"])){
+          require('config/db.php');
+		$sqlborrar="DELETE FROM `boletin` WHERE `boletin`.`ID_BOLETIN` = '$id'";
 		$resborrar=mysqli_query($conn,$sqlborrar);
-		echo '<script>alert("REGISTRO ELIMINADO")</script> ';
-		echo "<script>location.href='".ROOT_URL."ActualizarEsp.php'</script>";
+        mysqli_close($conn);
+        if($resborrar){
+               echo '<script type="text/javascript">
+                                    alert("BOLETIN ELIMINADO CON ÉXITO");
+                                    window.location.href="'. ROOT_URL .'edicion_boletin.php";
+                                    </script>';
+        }
+        }	 ?>
 
-
-	}	 ?>
-
-
-	</form>
-         <button type="button" class="btn btn-default" data-dismiss="modal">cancelar</button>
+</form>
+         <button type="button" class="btn btn-success btn-primary" data-dismiss="modal">Cancelar</button>
 
         </div>
       </div>
@@ -103,20 +110,16 @@
     </div>
   </div>
   
-</div>
-
-			<input type="button" value="Crear Boletin" class="btn btn-success btn-primary" id="btnHome" 
-			onClick="document.location.href='edicion_boletinF.php'" />
-
 
 
 
 
     <?php 
     if(@$idborrar==2){
-    				$sqlborrar="DELETE FROM boletin WHERE ID_BOLETIN = $id";
-    				$resborrar=mysqli_query($conn,$sqlborrar);
-    				echo '<script>alert("ESPECIALIDAD ELIMINADA")</script> ';
+    				echo'
+                    <script>
+    				$("#myModal").modal("show");
+    				</script>';
     			}
 
     ?>

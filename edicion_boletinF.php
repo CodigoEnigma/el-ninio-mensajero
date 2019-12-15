@@ -4,8 +4,11 @@
     require('config/db.php');
 	session_start();
 	include('inc/header.php');
-	//$editor = $_POST['editor'];
-	//$fecha = $_POST['fecha'];
+    date_default_timezone_set('America/La_Paz');
+    $fecha = date("Y-m-d H:i:s");
+     $nombre = $_COOKIE['nombreUsuario'];
+    extract($_GET);
+ 
 if(!$conn)
 {
 	die(mysqli_error());
@@ -14,18 +17,21 @@ if(!$conn)
 if(isset($_POST['submit']))
 {
 	$textareaValue = trim($_POST['content']);
-	
-	$sql = "INSERT INTO boletin (TEXTO_BOLETIN) VALUES ('$textareaValue')";
+	 
+	$sql = "INSERT INTO boletin (TEXTO_BOLETIN, AUTORES, FECHA_CREACION) VALUES ('$textareaValue','$nombre', '$fecha')";
 	$rs = mysqli_query($conn, $sql);
 	$affectedRows = mysqli_affected_rows($conn);
 	
 	if($affectedRows == 1)
 	{
-		$successMsg = "Record has been saved successfully";
+		 echo'<script type="text/javascript">
+                                    alert("Boletin creado con éxito");
+                                    window.location.href="'.ROOT_URL.'edicion_boletin.php";
+                                    </script>';
 	}
 }
 ?>
-            <a href="<?php echo ROOT_URL; ?>edicion_boletin.php?id=chico" role = "button" style="float:left; margin:10px;">
+            <a href="<?php echo ROOT_URL; ?>edicion_boletin.php" role = "button" style="float:left; margin:10px;">
                 <img src="images/boton_volver.gif" class="img-fluid" alt="Responsive image" id="btn-back"  style = 'width:150px; height:50px;'> </a>
            
            
@@ -65,23 +71,25 @@ if(isset($_POST['submit']))
 	<div class="container">
 
 
-						<form action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
+						<form  method="post">
  
 						<label>Textarea:</label>
 						<div>
 						<textarea id="ckeditor" class = "ckeditor" name="content"> 
 							<?php 
 							  //$Laid = $_GET['id'];
-							 if( isset($_GET['id'])){
-							 	$Laid = $_GET['id'];
-							     $query = "SELECT * FROM boletin WHERE ID_BOLETIN = '$Laid'";
+							 if( $id != ""){
+							 	
+							     $query = "SELECT * FROM boletin WHERE ID_BOLETIN = '$id'";
    								 $resultado = $conn->query($query);
     									  if ($resultado->num_rows > 0) {
         								  while ($row = $resultado -> fetch_assoc()) {
         								  echo $row["TEXTO_BOLETIN"];
         		                # code...
+                                
         							  }
         							}
+                                 $borrar = mysqli_query($conn, "DELETE FROM `boletin` WHERE `boletin`.`ID_BOLETIN` = '$id'");
         						}
 							 ?>
 
