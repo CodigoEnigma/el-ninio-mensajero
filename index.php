@@ -34,7 +34,7 @@
 				</div>
 				<div>
 					<p class="cartasParrafo"><strong>BOLETINES</strong></p>
-            		<a class="btn btn-info btn-lg" href="<?php echo ROOT_URL; ?>boletin.php" role="button" id = "iconos">
+            		<a class="btn btn-info btn-lg" href="<?php echo ROOT_URL; ?>lista_boletin.php" role="button" id = "iconos">
 						<!---->
               			<img class="imgCarta" src="images/boletin.jpg" class="img-fluid" alt="Responsive image">
            			</a>
