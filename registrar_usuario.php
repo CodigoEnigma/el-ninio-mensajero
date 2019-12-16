@@ -137,25 +137,6 @@
                   if (mysqli_query($conn,$queryReg)) {
                     mysqli_close($conn);
 
-                    $toEmail = $emailR;
-                    $sujeto = 'Cuenta creada de  '.$nombreR;
-                    $mensaje = '<p>Le acaban de crear una cuenta de '.$tipoR.'</p>
-                                <p>Ahora puede dirigirse al siguiente enlace: '.ROOT_URL.'</p> 
-                                <p>En donde podra acceder con las siguientes credenciales que le fueron asignadas.</p>';
-                    $credenciales = 'Usuario: '.$ciR.' y contraseña: '.$passR1;
-                    $body = '<h2> Aviso de cuenta </h2>
-                      <h4>Nombre</h4><p>'.$nombreR.'</p>
-                      <h4>Correo electrónico</h4><p>'.$email.'</p>
-                      <h4>Felicidades </h4><p>'.$mensaje.'</p>
-                      <h4>Credenciales</h4><p>'.$credenciales.'</p>
-                    ';
-
-                    $headers = "MIME-Version: 1.0" ."\r\n";
-                    $headers .="Content-Type:text/html;charset=UTF-8" . "\r\n";
-                    $headers .= "From: Admin niño mensajero <shiorishinobu@gmail.com>\r\n";
-
-                    mail($toEmail, $sujeto, $body, $headers);
-
                      echo '<script type="text/javascript">
                                     alert("EL USUARIO FUE REGISTRADO CORRECTAMENTE");
                                     window.location.href="'. ROOT_URL .'Administrar.php";
