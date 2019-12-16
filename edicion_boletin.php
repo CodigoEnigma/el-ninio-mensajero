@@ -8,10 +8,12 @@
 
 <?php include('inc/header.php'); ?>
 
-            <a href="<?php echo ROOT_URL; ?>Administrar.php?id=chico" role = "button" style="float:left; margin:10px;">
+            <a href="<?php echo ROOT_URL; ?>editor_boletin.php" role = "button" style="float:left; margin:10px;">
                 <img src="images/boton_volver.gif" class="img-fluid" alt="Responsive image" id="btn-back"  style = 'width:150px; height:50px;'> </a>
            
-           
+           <div style="float:right">
+                <a class="btn btn-primary" href="<?php echo ROOT_URL; ?>edicion_boletinF.php?id=""" role="button" id ="crearEspecialidad" style="margin:30px;">Crear boletin</a>
+            </div>
 		  <br>
 
 	<?php
@@ -42,10 +44,9 @@
 			echo "<tr class='success'>";
 				echo "<td>$arreglo[1]</td>";
 				echo "<td>$arreglo[3]</td>";
-				echo "<td><a href='edicion_boletinF.php'><img class='imgCarta' src='images/ICONO_ACTUALIZAR.png' class='img-sluid' alt='Responsive image' style = 'width:50px; height:50px;'></td>";
+				echo "<td><a href='". ROOT_URL ."edicion_boletinF.php?id=".$arreglo['ID_BOLETIN']."'><img class='imgCarta' src='images/ICONO_ACTUALIZAR.png' class='img-sluid' alt='Responsive image' style = 'width:50px; height:50px;'></td>";
                 
                 echo "<td><a href='edicion_boletin.php?id=$arreglo[0]&idborrar=2'><img class='imgCarta' src='images/ICONO_ELIMINAR.png' class='img-sluid' alt='Responsive image' style = 'width:50px; height:50px;'></td>";	
-	
 
 
 			//	echo "<td><a href='actualizar.php?id=$arreglo[0]'><img src='images/actualizar.gif' class='img-rounded'></td>";
@@ -66,13 +67,18 @@
 
 ?>
 
+
+
+
+
 <div class="modal" id="myModal" role="dialog">
     <div class="modal-dialog">
     
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Esta seguro de que quiere eliminar</h4>
+          <h4 class="modal-title" style="color:black">Esta seguro que desea eliminar el boletin 
+           </h4>
         </div>
         <div class="modal-body">
 
@@ -82,20 +88,23 @@
         	 <form method="post">
 
 
-          <button type="submit" class="btn btn-default" name = "aceptar">aceptar</button>
-          <?php 	if(isset($_POST["aceptar"]))
- {
- 
-		$sqlborrar="DELETE FROM especialidad WHERE ID_ESPECIALIDAD=$id";
+          <button type="submit" class="btn btn-success btn-primary" name = "aceptar">Aceptar</button>
+          
+          <?php 	if(isset($_POST["aceptar"])){
+          require('config/db.php');
+		$sqlborrar="DELETE FROM `boletin` WHERE `boletin`.`ID_BOLETIN` = '$id'";
 		$resborrar=mysqli_query($conn,$sqlborrar);
-		echo '<script>alert("REGISTRO ELIMINADO")</script> ';
-		echo "<script>location.href='".ROOT_URL."ActualizarEsp.php'</script>";
+        mysqli_close($conn);
+        if($resborrar){
+               echo '<script type="text/javascript">
+                                    alert("BOLETIN ELIMINADO CON ÉXITO");
+                                    window.location.href="'. ROOT_URL .'edicion_boletin.php";
+                                    </script>';
+        }
+        }	 ?>
 
-
-	}	 ?>
-
-	</form>
-         <button type="button" class="btn btn-default" data-dismiss="modal">cancelar</button>
+</form>
+         <button type="button" class="btn btn-success btn-primary" data-dismiss="modal">Cancelar</button>
 
         </div>
       </div>
@@ -103,15 +112,16 @@
     </div>
   </div>
   
-</div>
+
 
 
 
     <?php 
     if(@$idborrar==2){
-    				$sqlborrar="DELETE FROM especialidad WHERE ID_ESPECIALIDAD = $id";
-    				$resborrar=mysqli_query($conn,$sqlborrar);
-    				echo '<script>alert("ESPECIALIDAD ELIMINADA")</script> ';
+    				echo'
+                    <script>
+    				$("#myModal").modal("show");
+    				</script>';
     			}
 
     ?>

@@ -38,7 +38,7 @@ mysqli_close($conn);
    
    
 <?php
-$carpeta_destino=$_SERVER['DOCUMENT_ROOT'].'/xampp/el-ninio-mensajero/palabras/';
+$carpeta_destino=$_SERVER['DOCUMENT_ROOT'].'/palabras/';
      if(isset($_POST['actualizar_especialidad'])){
          if(isset($_POST['actualizar_especialidad'])){
             

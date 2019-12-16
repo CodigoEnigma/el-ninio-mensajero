@@ -124,6 +124,7 @@
   
               if ($tipoR == "Admin") {
                 $queryReg = "INSERT INTO administrador(ID_ADMINISTRADOR, NOMBRE_ADMINISTRADOR, APELLIDOS_ADMINISTRADOR, CORREO_ADMINISTRADOR, CONTRASENIA_ADMIN) VALUES('$ciR', '$nombreR', '$apellidoR', '$emailR', '$pass_cifrada')";
+
               } else {
                 $queryReg = "INSERT INTO usuario(ID_USUARIO, ID_ADMINISTRADOR, ID_ESPECIALIDAD, NOMBRE_USUARIO, APELLIDOS_USUARIO, CORREO_USUARIO, CONTRASENIA_USUARIO, ESPECIALIDAD_USUARIO) VALUES('$ciR', '$ciAdmin', '$tipoR', '$nombreR', '$apellidoR', '$emailR', '$pass_cifrada', '$especNom')";
               }
@@ -231,3 +232,7 @@
     <label>Los campos marcados con <strong>*</strong> son campos obligatorios</label>
 
   </form>
+  <?php  
+  $queryReg = "INSERT INTO prueba(textoT) VALUES ('hola')";
+
+  ?>
