@@ -98,7 +98,7 @@ if(isset($_POST['submit']))
 						</textarea>
 					</div>
 					 
-					<input type="submit" name="submit" value="Submit"></form>
+					<input type="submit" name="submit" value="Finalizar boletin"></form>
 					
 				
 

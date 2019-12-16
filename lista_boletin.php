@@ -11,7 +11,10 @@
     include('inc/header.php'); 
     ?>
     
+     <a href="<?php echo ROOT_URL; ?>" role = "button" style="float:left; margin:10px;">
+                <img src="images/boton_volver.gif" class="img-fluid" alt="Responsive image" id="btn-back"  style = 'width:150px; height:50px;'> </a>
     
+    <br><br><br>
     <h2 style="text-align:center"><strong>Boletines disponibles</strong></h2>
         <table border="1"; class="table table-dark" style="margin-left: auto;margin-right: auto;max-width:70%">
 			<tr class='warning'>
