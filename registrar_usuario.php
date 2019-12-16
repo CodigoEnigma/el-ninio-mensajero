@@ -44,13 +44,13 @@
                     $aux = intval($aux/10);
                   }
                   if (count(array_unique($auxArray)) == 1) {
-                    $errorCiR = "La cédula de identidad proporcionada no existe.";
+                    $errorCiR = "La cédula de identidad proporcionada tiene una secuencia improbable o tiene un caracter invalido.";
                   }
                 } else {
                   $errorCiR = "La cédula de identidad debe tener entre 5 y 10 numeros.";
                 }
               } else {
-                $errorCiR = "Solo se permiten numeros.";
+                $errorCiR = "La cédula de identidad solo permite numeros.";
               }
 
               if (!filter_var($nombreR, FILTER_VALIDATE_EMAIL)) {
