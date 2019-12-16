@@ -29,18 +29,22 @@
             if(strlen($ciR) >= 5 && strlen($ciR) <= 10){
               $aux = $ciR;
               $auxArray = array();
+              $auxArrayOrd = array();
+              unset($auxArray);
+              unset($auxArrayOrd);
               while ($aux != 0) {
                 $auxArray[] = $aux % 10;
                 $aux = intval($aux/10);
               }
-              if (count(array_unique($auxArray)) == 1) {
+              $auxArrayOrd = array_values($auxArray);
+              if (count(array_unique($auxArrayOrd)) == 1 ||  $auxArrayOrd[0] == 0) {
                 $errorCiR = "La cédula de identidad proporcionada no existe.";
               }
             } else {
               $errorCiR = "La cédula de identidad debe tener entre 5 y 10 numeros.";
             }
           } else {
-            $errorCiR = "Solo se permiten numeros.";
+            $errorCiR = "La cédula de identidad solo permite numeros.";
           }
 
           if (!filter_var($nombreR, FILTER_VALIDATE_EMAIL)) {
@@ -48,7 +52,7 @@
               if(strlen($nombreR) < 1 && strlen($nombreR) > 15){
                 $errorNombreR = "El nombre no puede tener mas de 15 caracteres.";
               } else {
-                for ($i=0; $i < strlen($nombreR); $i++) { 
+                  for ($i=0; $i < strlen($nombreR); $i++) { 
                   for ($j=0; $j < count($numeros); $j++) { 
                     if ($nombreR[$i] == $numeros[$j]) {
                       $errorNombreR = "El nombre no puede contener números.";
